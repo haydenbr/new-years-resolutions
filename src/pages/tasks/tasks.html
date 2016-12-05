@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Tasks</ion-title>
+
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addTask()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <ion-item *ngIf="!tasks.length" color="danger">You haven't added any Tasks</ion-item>
+
+    <button ion-item *ngFor="let task of tasks" (click)="goToMilestones(task)">
+      {{task.name}}
+    </button>
+  </ion-list>
+</ion-content>
