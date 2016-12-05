@@ -4,12 +4,14 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
 import { TasksPage, MilestonesPage } from '../pages';
 import { TaskFactory } from '../services';
+import { TaskModal } from '../components';
 
 @NgModule({
   declarations: [
     MyApp,
     TasksPage,
-    MilestonesPage
+    MilestonesPage,
+    TaskModal
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -18,7 +20,8 @@ import { TaskFactory } from '../services';
   entryComponents: [
     MyApp,
     TasksPage,
-    MilestonesPage
+    MilestonesPage,
+    TaskModal
   ],
   providers: [
     TaskFactory,

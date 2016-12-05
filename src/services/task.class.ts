@@ -5,7 +5,7 @@ export class Task {
   readonly createdOn: moment.Moment;
 
   constructor(
-    public name: string, 
+    public name: string = '', 
     public description?: string, 
     public priority?: number, 
     public milestones?: Task[]) {
@@ -14,14 +14,5 @@ export class Task {
     if (!this.milestones) {
       this.milestones = [];
     }
-  }
-
-  public addMilestone(task: Task) {
-    this.milestones.push(task);
-  }
-
-  public setMilestones(milestones: Task[]) {
-    this.milestones.length = 0;
-    this.milestones.push.apply(this.milestones, milestones);
   }
 }

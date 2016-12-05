@@ -1,7 +1,22 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Milestones</ion-title>
+    <ion-title>{{task.name}}</ion-title>
+
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addMilestone()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+	<ion-list>
+    <ion-item *ngIf="!task.milestones.length" color="danger">You haven't added any Milestones</ion-item>
+
+    <ion-item *ngFor="let milestone of task.milestones">
+    	<ion-label>{{milestone.name}}</ion-label>
+    	<ion-checkbox [(ngModel)]="milestone.isComplete"></ion-checkbox>
+    </ion-item>
+  </ion-list>
+</ion-content>

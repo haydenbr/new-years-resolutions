@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { TaskFactory, Task } from '../../services';
 import { MilestonesPage } from '../milestones/milestones';
+import { TaskModal } from '../../components';
 
 @Component({
   selector: 'page-tasks',
@@ -11,13 +12,28 @@ import { MilestonesPage } from '../milestones/milestones';
 export class TasksPage {
   tasks: Task[] = this.taskFactory.tasks;
 
-  constructor(private navCtrl: NavController, private taskFactory: TaskFactory) {}
+  constructor(
+    private navCtrl: NavController, 
+    private modalCtrl: ModalController, 
+    private taskFactory: TaskFactory
+  ) {}
 
   addTask() {
-    this.tasks.push(new Task('New Task'));
+    let taskModal = this.modalCtrl.create(TaskModal);
+
+    taskModal.onDidDismiss(task => {
+      if (task) {
+        this.tasks.push(task);
+        this.goToMilestones(task);
+      }
+    });
+
+    taskModal.present();
   }
 
   goToMilestones(task: Task) {
-    this.navCtrl.push(MilestonesPage);
+    this.navCtrl.push(MilestonesPage, {
+      task: task
+    });
   }
 }
