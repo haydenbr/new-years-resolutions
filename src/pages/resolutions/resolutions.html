@@ -16,7 +16,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content class="dark-background">
+<ion-content [ngClass]="{'dark-background': settings.darkMode}">
   <div class="no-tasks-container" *ngIf="!resolutions.length">
     <div class="no-tasks-content" text-center>
       <p>You haven't added any Resolutions</p>

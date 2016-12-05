@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { TaskModal } from '../../components';
-import { Task } from '../../services';
+import { Task, Settings } from '../../services';
 
 @Component({
   selector: 'page-milestones',
@@ -11,6 +11,7 @@ import { Task } from '../../services';
 })
 export class MilestonesPage {
 	resolution: Task;
+  settings: Settings;
 
   constructor(
   	private navCtrl: NavController, 
@@ -18,11 +19,13 @@ export class MilestonesPage {
   	private modalCtrl: ModalController
   ) {
   	this.resolution = this.navParams.get('resolution');
+    this.settings = this.navParams.get('settings');
   }
 
-  addMilestone() {
+  addMilestone(): void {
   	let milestoneModal = this.modalCtrl.create(TaskModal, {
-  		type: 'Milestone'
+  		type: 'Milestone',
+      settings: this.settings
   	});
 
     milestoneModal.onDidDismiss(milestone => {

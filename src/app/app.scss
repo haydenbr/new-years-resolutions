@@ -24,8 +24,11 @@
 	align-items: center;
 	justify-content: center;
 	height: 100%;
-	color: color($colors, light);
 	font-size: 1.2em;
+
+	.dark-background & {
+		color: color($colors, light);
+	}
 
 	.no-tasks-content {
 		max-width: 100%;

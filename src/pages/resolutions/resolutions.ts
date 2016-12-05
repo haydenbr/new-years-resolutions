@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
-import { TaskFactory, Task } from '../../services';
+import { TaskFactory, Task, Settings, SettingsService } from '../../services';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
 
@@ -12,15 +12,21 @@ import { MilestonesPage } from '../milestones/milestones';
 export class ResolutionsPage {
   resolutions: Task[] = this.taskFactory.tasks;
   editMode: boolean = false;
+  settings: Settings;
 
   constructor(
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
-    private taskFactory: TaskFactory
-  ) {}
+    private taskFactory: TaskFactory,
+    private settingsService: SettingsService
+  ) {
+    this.settings = this.settingsService.settings;
+  }
 
-  addResolution() {
-    let taskModal = this.modalCtrl.create(TaskModal);
+  addResolution(): void {
+    let taskModal = this.modalCtrl.create(TaskModal, {
+      settings: this.settings
+    });
 
     taskModal.onDidDismiss(task => {
       if (task) {
@@ -34,17 +40,18 @@ export class ResolutionsPage {
     taskModal.present();
   }
 
-  goToMilestones(resolution: Task) {
+  goToMilestones(resolution: Task): void {
     this.navCtrl.push(MilestonesPage, {
-      resolution: resolution
+      resolution: resolution,
+      settings: this.settings
     });
   }
 
-  toggleEditMode() {
+  toggleEditMode(): void {
     this.editMode =! this.editMode
   }
 
-  reorderResolutions(index) {
+  reorderResolutions(index): void {
     let task = this.resolutions[index.from];
 
     this.resolutions.splice(index.from, 1);
