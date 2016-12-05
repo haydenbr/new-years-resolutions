@@ -6,11 +6,12 @@ import { MilestonesPage } from '../milestones/milestones';
 import { TaskModal } from '../../components';
 
 @Component({
-  selector: 'page-tasks',
-  templateUrl: 'tasks.html'
+  selector: 'page-resolutions',
+  templateUrl: 'resolutions.html'
 })
-export class TasksPage {
-  tasks: Task[] = this.taskFactory.tasks;
+export class ResolutionsPage {
+  resolutions: Task[] = this.taskFactory.tasks;
+  editMode: boolean = false;
 
   constructor(
     private navCtrl: NavController, 
@@ -18,12 +19,14 @@ export class TasksPage {
     private taskFactory: TaskFactory
   ) {}
 
-  addTask() {
+  addResolution() {
     let taskModal = this.modalCtrl.create(TaskModal);
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        this.tasks.push(task);
+        task.priority = this.resolutions.length;
+
+        this.resolutions.push(task);
         this.goToMilestones(task);
       }
     });
@@ -31,9 +34,20 @@ export class TasksPage {
     taskModal.present();
   }
 
-  goToMilestones(task: Task) {
+  goToMilestones(resolution: Task) {
     this.navCtrl.push(MilestonesPage, {
-      task: task
+      resolution: resolution
     });
+  }
+
+  toggleEditMode() {
+    this.editMode =! this.editMode
+  }
+
+  reorderResolutions(index) {
+    let task = this.resolutions[index.from];
+
+    this.resolutions.splice(index.from, 1);
+    this.resolutions.splice(index.to, 0, task);
   }
 }

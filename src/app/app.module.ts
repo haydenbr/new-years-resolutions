@@ -2,14 +2,14 @@ import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 
 import { MyApp } from './app.component';
-import { TasksPage, MilestonesPage } from '../pages';
+import { ResolutionsPage, MilestonesPage } from '../pages';
 import { TaskFactory } from '../services';
 import { TaskModal } from '../components';
 
 @NgModule({
   declarations: [
     MyApp,
-    TasksPage,
+    ResolutionsPage,
     MilestonesPage,
     TaskModal
   ],
@@ -19,7 +19,7 @@ import { TaskModal } from '../components';
   bootstrap: [ IonicApp ],
   entryComponents: [
     MyApp,
-    TasksPage,
+    ResolutionsPage,
     MilestonesPage,
     TaskModal
   ],

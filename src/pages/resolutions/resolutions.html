@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>Resolutions</ion-title>
+
+    <ion-buttons start>
+      <button ion-button icon-only (click)="addResolution()">
+        <ion-icon name="add"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end *ngIf="resolutions.length">
+      <button ion-button (click)="toggleEditMode()">
+        {{editMode ? 'Done' : 'Edit'}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content class="dark-background">
+  <div class="no-tasks-container" *ngIf="!resolutions.length">
+    <div class="no-tasks-content" text-center>
+      <p>You haven't added any Resolutions</p>
+      <button ion-button (click)="addResolution()">Add a Resolution</button>
+    </div>
+  </div>
+
+  <ion-list *ngIf="resolutions.length" [reorder]="editMode" (ionItemReorder)="reorderResolutions($event)">
+    <button ion-item *ngFor="let resolution of resolutions" (click)="goToMilestones(resolution)">
+      <ion-badge item-left>{{resolution.milestones.length}}</ion-badge>
+      {{resolution.name}}
+    </button>
+  </ion-list>
+</ion-content>

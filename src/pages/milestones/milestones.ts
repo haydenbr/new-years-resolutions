@@ -10,14 +10,14 @@ import { Task } from '../../services';
   templateUrl: 'milestones.html'
 })
 export class MilestonesPage {
-	task: Task;
+	resolution: Task;
 
   constructor(
   	private navCtrl: NavController, 
   	private navParams: NavParams,
   	private modalCtrl: ModalController
   ) {
-  	this.task = this.navParams.get('task');
+  	this.resolution = this.navParams.get('resolution');
   }
 
   addMilestone() {
@@ -27,7 +27,7 @@ export class MilestonesPage {
 
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
-        this.task.milestones.push(milestone);
+        this.resolution.milestones.push(milestone);
       }
     });
 
