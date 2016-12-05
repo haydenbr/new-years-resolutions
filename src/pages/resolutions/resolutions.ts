@@ -2,8 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { TaskFactory, Task } from '../../services';
-import { MilestonesPage } from '../milestones/milestones';
 import { TaskModal } from '../../components';
+import { MilestonesPage } from '../milestones/milestones';
 
 @Component({
   selector: 'page-resolutions',

@@ -7,7 +7,8 @@ export class Task {
   constructor(
     public name: string = '', 
     public description?: string, 
-    public milestones?: Task[]) {
+    public milestones?: Task[]
+  ) {
     this.createdOn = moment();
 
     if (!this.milestones) {

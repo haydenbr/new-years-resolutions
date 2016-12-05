@@ -1,5 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { ResolutionsPage, MilestonesPage } from '../pages';
@@ -24,6 +25,7 @@ import { TaskModal } from '../components';
     TaskModal
   ],
   providers: [
+    Storage,
     TaskFactory,
 
     {
