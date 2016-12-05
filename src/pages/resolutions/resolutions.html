@@ -3,8 +3,8 @@
     <ion-title>Resolutions</ion-title>
 
     <ion-buttons start>
-      <button ion-button icon-only (click)="addResolution()">
-        <ion-icon name="add"></ion-icon>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
 
@@ -31,3 +31,9 @@
     </button>
   </ion-list>
 </ion-content>
+
+<ion-footer *ngIf="resolutions.length">
+  <ion-toolbar color="primary">
+    <button ion-button full clear color="light" (click)="addResolution()">Add a Resolution</button>
+  </ion-toolbar>
+</ion-footer>
