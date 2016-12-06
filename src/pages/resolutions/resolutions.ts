@@ -31,8 +31,6 @@ export class ResolutionsPage {
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        task.priority = this.resolutions.length;
-
         this.taskFactory.add(task);
         this.goToMilestones(task);
       }
