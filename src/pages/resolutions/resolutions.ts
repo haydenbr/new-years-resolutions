@@ -33,7 +33,6 @@ export class ResolutionsPage {
     taskModal.onDidDismiss(task => {
       if (task) {
         this.taskFactory.add(task);
-        this.goToMilestones(task);
       }
     });
 
