@@ -26,6 +26,10 @@
   </ion-list>
 
   <div padding>
-    <button ion-button block (click)="addTask()">Add {{type}}</button>
+    <button ion-button block 
+      (click)="addTask()" 
+      [disabled]="!task.name.length">
+      Add {{type}}
+    </button>
   </div>
 </ion-content>
