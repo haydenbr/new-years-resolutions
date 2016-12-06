@@ -21,4 +21,8 @@ export class MyApp {
 
     this.settings = this.settingsService.settings;
   }
+
+  updateSettings() {
+    this.settingsService.update();
+  }
 }

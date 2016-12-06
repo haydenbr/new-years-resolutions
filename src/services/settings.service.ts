@@ -12,20 +12,24 @@ export class SettingsService {
 		this.defaultSettings();
 
 		this.storage.get(this.key).then(settings => {
-			this.settings = settings;
+			this.settings = Object.assign(this.settings, settings);
 		});
-	}
-
-	set(key: string, value: any): void {
-		this.settings[key] = value;
-		this.storage.set(this.key, this.settings);
 	}
 
 	get(key: string): any {
 		return this.settings[key];
 	}
 
-	private defaultSettings() {
+	set(key: string, value: any): void {
+		this.settings[key] = value;
+		this.update();
+	}
+
+	update(): Promise<any> {
+		return this.storage.set(this.key, this.settings);
+	}
+
+	private defaultSettings(): void {
 		this.settings = {
 			darkMode: false
 		};
