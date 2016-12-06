@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 
-import { TaskFactory, SettingsService, QuoteService } from '../../services';
+import { TaskFactory, SettingsService, QuoteService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';

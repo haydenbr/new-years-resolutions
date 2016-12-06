@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 
 import { Task, Settings } from '../../models';
-import { SettingsService } from '../../services';
+import { SettingsService } from '../../providers';
 
 @Component({
   templateUrl: 'task-modal.html'

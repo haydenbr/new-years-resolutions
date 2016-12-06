@@ -14,7 +14,7 @@ import {
   TaskStore,
   SettingsService, 
   QuoteService
-} from '../services';
+} from '../providers';
 
 import { TaskModal } from '../components';
 

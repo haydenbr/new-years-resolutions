@@ -18,7 +18,7 @@ import {
   TaskFactory,
   SettingsService,
   QuoteService
-} from '../../services';
+} from '../../providers';
 
 @Component({
   selector: 'page-milestones',

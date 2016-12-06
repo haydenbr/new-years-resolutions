@@ -3,7 +3,7 @@ import { Platform } from 'ionic-angular';
 import { StatusBar, Splashscreen } from 'ionic-native';
 
 import { ResolutionsPage } from '../pages';
-import { SettingsService } from '../services';
+import { SettingsService } from '../providers';
 import { Settings } from '../models';
 
 @Component({
