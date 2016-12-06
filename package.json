@@ -1,7 +1,7 @@
 {
-  "name": "ionic-hello-world",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "name": "new-years-resolutions",
+  "author": "Unboxed Technology",
+  "homepage": "http://unboxedtechnology.com/",
   "private": true,
   "scripts": {
     "ionic:build": "ionic-app-scripts build",
@@ -45,5 +45,5 @@
       "locator": "ios"
     }
   ],
-  "description": "personaldev: An Ionic project"
+  "description": "Plan and keep track of your New Years Resolutions"
 }
