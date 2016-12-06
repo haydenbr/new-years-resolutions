@@ -1,8 +1,6 @@
-1. **Make sure you have the latest version of Cordova and Ionic:**
+1. Make sure you have the latest version of Cordova and Ionic:
   ```
-  npm install -g npm
-  npm install -g cordova
-  npm install -g ionic
+  npm install -g cordova ionic
   ```
 
 2. Install the dependencies
