@@ -25,10 +25,22 @@
   </div>
 
   <ion-list *ngIf="resolutions.length" [reorder]="editMode" (ionItemReorder)="reorderResolutions($event)">
-    <button ion-item *ngFor="let resolution of resolutions" (click)="goToMilestones(resolution)">
-      <ion-badge item-left>{{resolution.getIncompleteMilestones()}}</ion-badge>
-      {{resolution.name}}
-    </button>
+    <ion-item-sliding *ngFor="let resolution of resolutions; let i = index" #slidingItem>
+      <button ion-item (click)="goToMilestones(resolution)">
+        <ion-badge item-left *ngIf="!resolution.isComplete">
+          {{resolution.getIncompleteMilestones()}}
+        </ion-badge>
+        <span [ngClass]="{'complete': resolution.isComplete}">{{resolution.name}}</span>
+      </button>
+      <ion-item-options side="right">
+        <button ion-button (click)="complete(resolution, slidingItem)">
+          {{resolution.isComplete ? 'Not Done' : 'Done'}}
+        </button>
+        <button ion-button color="danger" (click)="delete(i, slidingItem)">
+          Delete
+        </button>
+      </ion-item-options>
+    </ion-item-sliding>
   </ion-list>
 </ion-content>
 

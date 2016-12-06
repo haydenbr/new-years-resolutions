@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, ModalController } from 'ionic-angular';
+import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 
 import { TaskFactory, SettingsService } from '../../services';
 import { Task, Settings } from '../../models';
@@ -53,5 +53,18 @@ export class ResolutionsPage {
 
   reorderResolutions(index: any): void {
     this.taskFactory.reorder(index);
+  }
+
+  complete(resolution: Task, slidingItem: ItemSliding): void {
+    resolution.isComplete =! resolution.isComplete;
+    this.taskFactory.update().then(() => {
+      slidingItem.close();
+    });
+  }
+
+  delete(index: number, slidingItem: ItemSliding): void {
+    this.taskFactory.remove(index).then(() => {
+      slidingItem.close();
+    });
   }
 }

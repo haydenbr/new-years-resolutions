@@ -22,6 +22,11 @@ export class TaskFactory {
     this.update();
   }
 
+  remove(index: number): Promise<any> {
+    this.tasks.splice(index, 1);
+    return this.update();
+  }
+
   reorder(index: any): void {
     let task = this.tasks[index.from];
 
