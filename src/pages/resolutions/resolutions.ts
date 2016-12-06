@@ -56,9 +56,8 @@ export class ResolutionsPage {
     this.taskFactory.reorder(index);
   }
 
-  complete(resolution: Task, slidingItem: ItemSliding): void {
-    resolution.isComplete =! resolution.isComplete;
-    this.taskFactory.update().then(() => {
+  toggleComplete(resolution: Task, slidingItem: ItemSliding): void {
+    this.taskFactory.toggleComplete(resolution).then(() => {
       slidingItem.close();
     });
   }

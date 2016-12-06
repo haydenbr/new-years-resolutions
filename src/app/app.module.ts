@@ -3,8 +3,19 @@ import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
 import { MyApp } from './app.component';
-import { ResolutionsPage, MilestonesPage } from '../pages';
-import { TaskFactory, SettingsService, QuoteService } from '../services';
+
+import {
+  ResolutionsPage, 
+  MilestonesPage
+} from '../pages';
+
+import {
+  TaskFactory, 
+  TaskStore,
+  SettingsService, 
+  QuoteService
+} from '../services';
+
 import { TaskModal } from '../components';
 
 @NgModule({
@@ -27,6 +38,7 @@ import { TaskModal } from '../components';
   providers: [
     Storage,
     TaskFactory,
+    TaskStore,
     SettingsService,
     QuoteService,
 

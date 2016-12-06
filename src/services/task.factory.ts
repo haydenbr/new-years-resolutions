@@ -1,27 +1,25 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
+import { TaskStore } from './taskstore.service';
 import { Task } from '../models';
 
 @Injectable()
 export class TaskFactory {
-  public tasks: Task[] = [];
-  private readonly key: string = 'tasks';
+  public tasks: Task[];
   
-  constructor(private storage: Storage) {
-    this.storage.get(this.key).then(tasks => {
-      if (tasks) {
-        this.tasks.push.apply(
-          this.tasks, 
-          tasks.map(task => new Task(task))
-        );
-      }
-    });
+  constructor(private storage: Storage, private taskStore: TaskStore) {
+    this.tasks = this.taskStore.tasks;
   }
 
-  add(task: Task): void {
+  add(task: Task): Promise<any> {
     this.tasks.push(task);
-    this.update();
+    return this.update();
+  }
+
+  addMilestone(task: Task, milestone: Task): Promise<any> {
+    task.milestones.push(milestone);
+    return this.update();
   }
 
   remove(index: number): Promise<any> {
@@ -29,16 +27,26 @@ export class TaskFactory {
     return this.update();
   }
 
-  reorder(index: any): void {
+  reorder(index: any): Promise<any> {
     let task = this.tasks[index.from];
 
     this.tasks.splice(index.from, 1);
     this.tasks.splice(index.to, 0, task);
 
-    this.update();
+    return this.update();
+  }
+
+  reorderMilestone(task: Task, index: any): Promise<any> {
+    task.reorderMilestones(index);
+    return this.update();
+  }
+
+  toggleComplete(task: Task): Promise<any> {
+    task.isComplete =! task.isComplete;
+    return this.update();
   }
 
   update(): Promise<any> {
-    return this.storage.set(this.key, this.tasks);
+    return this.taskStore.update();
   }
 }

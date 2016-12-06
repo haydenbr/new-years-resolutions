@@ -32,7 +32,7 @@
         <span [ngClass]="{'complete': resolution.isComplete}">{{resolution.name}}</span>
       </button>
       <ion-item-options side="right">
-        <button ion-button (click)="complete(resolution, slidingItem)">
+        <button ion-button (click)="toggleComplete(resolution, slidingItem)">
           {{resolution.isComplete ? 'Not Done' : 'Done'}}
         </button>
         <button ion-button color="danger" (click)="delete(i, slidingItem)">

@@ -1,10 +1,24 @@
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from 'ionic-angular';
+
+import {
+  NavController,
+  NavParams,
+  ModalController
+} from 'ionic-angular';
 
 import { TaskModal } from '../../components';
-import { Task, Settings } from '../../models';
-import { TaskFactory, SettingsService, QuoteService } from '../../services';
+
+import {
+  Task,
+  Settings
+} from '../../models';
+
+import {
+  TaskFactory,
+  SettingsService,
+  QuoteService
+} from '../../services';
 
 @Component({
   selector: 'page-milestones',
@@ -36,8 +50,7 @@ export class MilestonesPage {
 
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
-        this.resolution.milestones.push(milestone);
-        this.updateTask();
+        this.taskFactory.addMilestone(this.resolution, milestone);
       }
     });
 
@@ -45,15 +58,14 @@ export class MilestonesPage {
   }
 
   reorderMilestones(index: any) {
-    this.resolution.reorderMilestones(index);
-    this.taskFactory.update();
+    this.taskFactory.reorderMilestone(this.resolution, index);
   }
 
   toggleEditMode(): void {
     this.editMode =! this.editMode
   }
 
-  private updateTask() {
+  update(): void {
     this.taskFactory.update();
   }
 }

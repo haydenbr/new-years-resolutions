@@ -10,7 +10,7 @@ export class QuoteService {
 		this.quotes = new QuoteModel().get();
 	}
 
-	getRandomQuote() {
+	getRandomQuote(): string {
 		return this.quotes[Math.floor(Math.random() * this.quotes.length)];
 	}
 }
