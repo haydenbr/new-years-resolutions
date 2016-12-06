@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      New {{type}}
+      {{action + ' ' + type}}
     </ion-title>
     <ion-buttons start>
       <button ion-button (click)="dismiss()">
@@ -27,9 +27,9 @@
 
   <div padding>
     <button ion-button block 
-      (click)="addTask()" 
+      (click)="submit()" 
       [disabled]="!task.name.length">
-      Add {{type}}
+      {{action + ' ' + type}}
     </button>
   </div>
 </ion-content>

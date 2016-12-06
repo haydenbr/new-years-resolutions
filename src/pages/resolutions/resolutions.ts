@@ -28,9 +28,7 @@ export class ResolutionsPage {
   }
 
   addResolution(): void {
-    let taskModal = this.modalCtrl.create(TaskModal, {
-      settings: this.settings
-    });
+    let taskModal = this.modalCtrl.create(TaskModal);
 
     taskModal.onDidDismiss(task => {
       if (task) {
@@ -60,6 +58,22 @@ export class ResolutionsPage {
     this.taskFactory.toggleComplete(resolution).then(() => {
       slidingItem.close();
     });
+  }
+
+  edit(resolution: Task, slidingItem: ItemSliding): void {
+    let taskModal = this.modalCtrl.create(TaskModal, {
+      action: 'Edit',
+      task: resolution
+    });
+
+    taskModal.onDidDismiss(task => {
+      if (task) {
+        this.taskFactory.update();
+      }
+    });
+
+    slidingItem.close();
+    taskModal.present();
   }
 
   delete(index: number, slidingItem: ItemSliding): void {

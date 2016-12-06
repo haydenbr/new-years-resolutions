@@ -8,8 +8,9 @@ import { SettingsService } from '../../services';
   templateUrl: 'task-modal.html'
 })
 export class TaskModal {
-  task: Task = new Task();
+  task: Task;
   type: String = 'Resolution';
+  action: String = 'Add';
   settings: Settings;
 
   constructor(
@@ -21,6 +22,12 @@ export class TaskModal {
       this.type = this.navParams.get('type');
     }
 
+    if (this.navParams.get('action')) {
+      this.action = this.navParams.get('action');
+    }
+
+    this.task = this.navParams.get('task') ? this.navParams.get('task') : new Task();
+
     this.settings = this.settingsService.settings;
   }
 
@@ -28,7 +35,7 @@ export class TaskModal {
     this.viewCtrl.dismiss();
   }
 
-  addTask(): void {
+  submit(): void {
     this.viewCtrl.dismiss(this.task);
   }
 }
