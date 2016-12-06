@@ -38,6 +38,12 @@
           <ion-checkbox [(ngModel)]="milestone.isComplete" (ionChange)="update()"></ion-checkbox>
         </ion-item>
         <ion-item-options side="right">
+          <button ion-button 
+            color="secondary" 
+            (click)="edit(milestone, slidingItem)"
+            *ngIf="!milestone.isComplete">
+            Edit
+          </button>
           <button ion-button color="danger" (click)="delete(i, slidingItem)">
             Delete
           </button>
