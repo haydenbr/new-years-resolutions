@@ -33,7 +33,7 @@ export class ResolutionsPage {
       if (task) {
         task.priority = this.resolutions.length;
 
-        this.resolutions.push(task);
+        this.taskFactory.add(task);
         this.goToMilestones(task);
       }
     });
@@ -43,8 +43,7 @@ export class ResolutionsPage {
 
   goToMilestones(resolution: Task): void {
     this.navCtrl.push(MilestonesPage, {
-      resolution: resolution,
-      settings: this.settings
+      resolution: resolution
     });
   }
 
@@ -52,10 +51,7 @@ export class ResolutionsPage {
     this.editMode =! this.editMode
   }
 
-  reorderResolutions(index): void {
-    let task = this.resolutions[index.from];
-
-    this.resolutions.splice(index.from, 1);
-    this.resolutions.splice(index.to, 0, task);
+  reorderResolutions(index: any): void {
+    this.taskFactory.reorder(index);
   }
 }
