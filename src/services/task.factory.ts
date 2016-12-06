@@ -10,7 +10,10 @@ export class TaskFactory {
   
   constructor(private storage: Storage) {
     this.storage.get(this.key).then(tasks => {
-      this.tasks.push.apply(this.tasks, tasks);
+      this.tasks.push.apply(
+        this.tasks, 
+        tasks.map(task => new Task(task))
+      );
     });
   }
 

@@ -13,6 +13,7 @@ import { TaskFactory, SettingsService } from '../../services';
 export class MilestonesPage {
 	resolution: Task;
   settings: Settings;
+  editMode: boolean = false;
 
   constructor(
   	private navCtrl: NavController, 
@@ -40,7 +41,16 @@ export class MilestonesPage {
     milestoneModal.present();
   }
 
-  updateTask() {
+  reorderMilestones(index: any) {
+    this.resolution.reorderMilestones(index);
+    this.taskFactory.update();
+  }
+
+  toggleEditMode(): void {
+    this.editMode =! this.editMode
+  }
+
+  private updateTask() {
     this.taskFactory.update();
   }
 }

@@ -26,7 +26,7 @@
 
   <ion-list *ngIf="resolutions.length" [reorder]="editMode" (ionItemReorder)="reorderResolutions($event)">
     <button ion-item *ngFor="let resolution of resolutions" (click)="goToMilestones(resolution)">
-      <ion-badge item-left>{{resolution.milestones.length}}</ion-badge>
+      <ion-badge item-left>{{resolution.getIncompleteMilestones()}}</ion-badge>
       {{resolution.name}}
     </button>
   </ion-list>

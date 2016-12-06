@@ -7,6 +7,12 @@
         <ion-icon name="menu"></ion-icon>
       </button>
     </ion-buttons>
+
+    <ion-buttons end *ngIf="resolution.milestones.length">
+      <button ion-button (click)="toggleEditMode()">
+        {{editMode ? 'Done' : 'Edit'}}
+      </button>
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 
@@ -23,13 +29,15 @@
       {{resolution.description}}
     </ion-item>
 
-    <ion-item *ngFor="let milestone of resolution.milestones">
-  	  <ion-label>
-        {{milestone.name}}
-        <p>{{milestone.description}}</p>
-      </ion-label>
-  	  <ion-checkbox [(ngModel)]="milestone.isComplete" (ionChange)="updateTask()"></ion-checkbox>
-    </ion-item>
+    <ion-item-group [reorder]="editMode" (ionItemReorder)="reorderMilestones($event)">
+      <ion-item *ngFor="let milestone of resolution.milestones">
+    	  <ion-label>
+          {{milestone.name}}
+          <p>{{milestone.description}}</p>
+        </ion-label>
+    	  <ion-checkbox [(ngModel)]="milestone.isComplete" (ionChange)="updateTask()"></ion-checkbox>
+      </ion-item>
+    </ion-item-group>
   </ion-list>
 </ion-content>
 
