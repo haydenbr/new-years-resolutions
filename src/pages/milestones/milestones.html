@@ -23,19 +23,26 @@
     </div>
   </div>
 
-	<ion-list *ngIf="resolution.milestones.length">
+  <ion-list *ngIf="resolution.milestones.length">
     <ion-item [color]="settings.darkMode ? 'dark' : ''" text-wrap *ngIf="resolution.description">
       {{resolution.description}}
     </ion-item>
 
     <ion-item-group [reorder]="editMode" (ionItemReorder)="reorderMilestones($event)">
-      <ion-item *ngFor="let milestone of resolution.milestones">
-    	  <ion-label>
-          {{milestone.name}}
-          <p>{{milestone.description}}</p>
-        </ion-label>
-    	  <ion-checkbox [(ngModel)]="milestone.isComplete" (ionChange)="update()"></ion-checkbox>
-      </ion-item>
+      <ion-item-sliding *ngFor="let milestone of resolution.milestones; let i = index" #slidingItem>
+        <ion-item>
+          <ion-label>
+            {{milestone.name}}
+            <p>{{milestone.description}}</p>
+          </ion-label>
+          <ion-checkbox [(ngModel)]="milestone.isComplete" (ionChange)="update()"></ion-checkbox>
+        </ion-item>
+        <ion-item-options side="right">
+          <button ion-button color="danger" (click)="delete(i, slidingItem)">
+            Delete
+          </button>
+        </ion-item-options>
+      </ion-item-sliding>
     </ion-item-group>
   </ion-list>
 </ion-content>

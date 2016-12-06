@@ -27,6 +27,11 @@ export class TaskFactory {
     return this.update();
   }
 
+  removeMilestone(task: Task, index: number): Promise<any> {
+    task.milestones.splice(index, 1);
+    return this.update();
+  }
+
   reorder(index: any): Promise<any> {
     let task = this.tasks[index.from];
 

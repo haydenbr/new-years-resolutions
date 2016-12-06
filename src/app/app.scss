@@ -16,26 +16,26 @@
 // automatically applied to the <body> element in the app.
 
 .dark-background {
-	background-color: color($colors, dark);
+  background-color: color($colors, dark);
 }
 
 .no-tasks-container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	height: 100%;
-	font-size: 1.2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  font-size: 1.2em;
 
-	.dark-background & {
-		color: color($colors, light);
+  .dark-background & {
+    color: color($colors, light);
 
-		.no-tasks-content {
-			color: #777;
-		}
-	}
+    .no-tasks-content {
+      color: #777;
+    }
+  }
 
-	.no-tasks-content {
-		max-width: 85%;
-		color: #bbb;
-	}
+  .no-tasks-content {
+    max-width: 85%;
+    color: #bbb;
+  }
 }

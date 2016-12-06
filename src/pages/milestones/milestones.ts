@@ -1,10 +1,10 @@
-
 import { Component } from '@angular/core';
 
 import {
   NavController,
   NavParams,
-  ModalController
+  ModalController,
+  ItemSliding
 } from 'ionic-angular';
 
 import { TaskModal } from '../../components';
@@ -25,28 +25,28 @@ import {
   templateUrl: 'milestones.html'
 })
 export class MilestonesPage {
-	resolution: Task;
+  resolution: Task;
   settings: Settings;
   editMode: boolean = false;
   quote: string = '';
 
   constructor(
-  	private navCtrl: NavController, 
-  	private navParams: NavParams,
-  	private modalCtrl: ModalController,
+    private navCtrl: NavController, 
+    private navParams: NavParams,
+    private modalCtrl: ModalController,
     private taskFactory: TaskFactory,
     private settingsService: SettingsService,
     private quoteService: QuoteService
   ) {
-  	this.resolution = this.navParams.get('resolution');
+    this.resolution = this.navParams.get('resolution');
     this.settings = this.settingsService.settings;
     this.quote = this.quoteService.getRandomQuote();
   }
 
   addMilestone(): void {
-  	let milestoneModal = this.modalCtrl.create(TaskModal, {
-  		type: 'Milestone'
-  	});
+    let milestoneModal = this.modalCtrl.create(TaskModal, {
+      type: 'Milestone'
+    });
 
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
@@ -67,5 +67,11 @@ export class MilestonesPage {
 
   update(): void {
     this.taskFactory.update();
+  }
+
+  delete(index: number, slidingItem: ItemSliding): void {
+    this.taskFactory.removeMilestone(this.resolution, index).then(() => {
+      slidingItem.close();
+    });
   }
 }
