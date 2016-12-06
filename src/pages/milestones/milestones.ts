@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { TaskModal } from '../../components';
-import { Task, Settings } from '../../services';
+import { Task, Settings } from '../../models';
 
 @Component({
   selector: 'page-milestones',

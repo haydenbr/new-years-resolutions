@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-import { Settings } from './settings.interface';
+import { Settings } from '../models';
 
 @Injectable()
 export class SettingsService {
