@@ -4,7 +4,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { TaskModal } from '../../components';
 import { Task, Settings } from '../../models';
-import { SettingsService } from '../../services';
+import { TaskFactory, SettingsService } from '../../services';
 
 @Component({
   selector: 'page-milestones',
@@ -18,10 +18,10 @@ export class MilestonesPage {
   	private navCtrl: NavController, 
   	private navParams: NavParams,
   	private modalCtrl: ModalController,
+    private taskFactory: TaskFactory,
     private settingsService: SettingsService
   ) {
   	this.resolution = this.navParams.get('resolution');
-    // this.settings = this.navParams.get('settings');
     this.settings = this.settingsService.settings;
   }
 
@@ -33,9 +33,14 @@ export class MilestonesPage {
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
         this.resolution.milestones.push(milestone);
+        this.updateTask();
       }
     });
 
     milestoneModal.present();
+  }
+
+  updateTask() {
+    this.taskFactory.update();
   }
 }
