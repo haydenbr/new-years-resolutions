@@ -4,7 +4,7 @@ import { NavController, NavParams, ModalController } from 'ionic-angular';
 
 import { TaskModal } from '../../components';
 import { Task, Settings } from '../../models';
-import { TaskFactory, SettingsService } from '../../services';
+import { TaskFactory, SettingsService, QuoteService } from '../../services';
 
 @Component({
   selector: 'page-milestones',
@@ -14,16 +14,19 @@ export class MilestonesPage {
 	resolution: Task;
   settings: Settings;
   editMode: boolean = false;
+  quote: string = '';
 
   constructor(
   	private navCtrl: NavController, 
   	private navParams: NavParams,
   	private modalCtrl: ModalController,
     private taskFactory: TaskFactory,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private quoteService: QuoteService
   ) {
   	this.resolution = this.navParams.get('resolution');
     this.settings = this.settingsService.settings;
+    this.quote = this.quoteService.getRandomQuote();
   }
 
   addMilestone(): void {

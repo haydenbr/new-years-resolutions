@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 
-import { TaskFactory, SettingsService } from '../../services';
+import { TaskFactory, SettingsService, QuoteService } from '../../services';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
@@ -14,14 +14,17 @@ export class ResolutionsPage {
   resolutions: Task[] = this.taskFactory.tasks;
   editMode: boolean = false;
   settings: Settings;
+  quote: string = '';
 
   constructor(
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
     private taskFactory: TaskFactory,
-    private settingsService: SettingsService
+    private settingsService: SettingsService,
+    private quoteService: QuoteService
   ) {
     this.settings = this.settingsService.settings;
+    this.quote = this.quoteService.getRandomQuote();
   }
 
   addResolution(): void {

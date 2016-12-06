@@ -6,7 +6,7 @@ import { Settings } from '../models';
 @Injectable()
 export class SettingsService {
 	public settings: Settings;
-	private key = 'settings';
+	private readonly key = 'settings';
 
 	constructor(private storage: Storage) {
 		this.defaultSettings();

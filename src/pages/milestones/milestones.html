@@ -19,8 +19,7 @@
 <ion-content [ngClass]="{'dark-background': settings.darkMode}">
   <div class="no-tasks-container" *ngIf="!resolution.milestones.length">
     <div class="no-tasks-content" text-center>
-      <p>You haven't added any Milestones</p>
-      <button ion-button (click)="addMilestone()">Add a Milestone</button>
+      {{quote}}
     </div>
   </div>
 
@@ -41,7 +40,7 @@
   </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="resolution.milestones.length">
+<ion-footer>
   <ion-toolbar color="primary">
     <button ion-button full clear color="light" (click)="addMilestone()">Add a Milestone</button>
   </ion-toolbar>

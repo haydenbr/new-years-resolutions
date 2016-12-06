@@ -6,7 +6,7 @@ import { Task } from '../models';
 @Injectable()
 export class TaskFactory {
   public tasks: Task[] = [];
-  private key: string = 'tasks';
+  private readonly key: string = 'tasks';
   
   constructor(private storage: Storage) {
     this.storage.get(this.key).then(tasks => {

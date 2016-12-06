@@ -28,9 +28,14 @@
 
 	.dark-background & {
 		color: color($colors, light);
+
+		.no-tasks-content {
+			color: #777;
+		}
 	}
 
 	.no-tasks-content {
-		max-width: 100%;
+		max-width: 85%;
+		color: #bbb;
 	}
 }

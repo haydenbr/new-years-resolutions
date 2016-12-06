@@ -18,9 +18,8 @@
 
 <ion-content [ngClass]="{'dark-background': settings.darkMode}">
   <div class="no-tasks-container" *ngIf="!resolutions.length">
-    <div class="no-tasks-content" text-center>
-      <p>You haven't added any Resolutions</p>
-      <button ion-button (click)="addResolution()">Add a Resolution</button>
+    <div class="no-tasks-content" text-center color="secondary">
+      {{quote}}
     </div>
   </div>
 
@@ -44,7 +43,7 @@
   </ion-list>
 </ion-content>
 
-<ion-footer *ngIf="resolutions.length">
+<ion-footer>
   <ion-toolbar color="primary">
     <button ion-button full clear color="light" (click)="addResolution()">Add a Resolution</button>
   </ion-toolbar>

@@ -4,7 +4,7 @@ import { Storage } from '@ionic/storage';
 
 import { MyApp } from './app.component';
 import { ResolutionsPage, MilestonesPage } from '../pages';
-import { TaskFactory, SettingsService } from '../services';
+import { TaskFactory, SettingsService, QuoteService } from '../services';
 import { TaskModal } from '../components';
 
 @NgModule({
@@ -28,6 +28,7 @@ import { TaskModal } from '../components';
     Storage,
     TaskFactory,
     SettingsService,
+    QuoteService,
 
     {
       provide: ErrorHandler, 
