@@ -1,30 +1,37 @@
 import { Component } from '@angular/core';
 import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import { TaskFactory, SettingsService, QuoteService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
+import * as reducers from '../../reducers';
+import * as taskCollectionActions from '../../actions/tasks-collection.actions';
 
 @Component({
   selector: 'page-resolutions',
   templateUrl: 'resolutions.html'
 })
 export class ResolutionsPage {
-  resolutions: Task[] = this.taskFactory.tasks;
   editMode: boolean = false;
   settings: Settings;
   quote: string = '';
+  resolutions: Observable<Task[]>;
 
   constructor(
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
     private taskFactory: TaskFactory,
     private settingsService: SettingsService,
+    private store: Store<reducers.State>,
     private quoteService: QuoteService
   ) {
     this.settings = this.settingsService.settings;
     this.quote = this.quoteService.getRandomQuote();
+    this.resolutions = store.select(reducers.getTasks);
   }
 
   addResolution(): void {
@@ -32,7 +39,7 @@ export class ResolutionsPage {
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        this.taskFactory.add(task);
+        this.store.dispatch(new taskCollectionActions.AddTask(task));
       }
     });
 
@@ -46,10 +53,11 @@ export class ResolutionsPage {
   }
 
   toggleEditMode(): void {
-    this.editMode =! this.editMode
+    this.editMode = !this.editMode;
   }
 
   reorderResolutions(index: any): void {
+    console.log(index);
     this.taskFactory.reorder(index);
   }
 
