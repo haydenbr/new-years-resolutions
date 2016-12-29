@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
+import { reorderArray } from 'ionic-angular';
 
 @Injectable()
 export class StorageService {
 	private readonly TASKS: string = 'tasks';
 	// private readonly SETTINGS: string = 'settings';
 
-	constructor(private storage: Storage) {}
+	constructor(private storage: Storage) {
+		// this.killSwitch();
+	}
 
 	// for debugging purposes
 	killSwitch() {
@@ -43,14 +46,19 @@ export class StorageService {
 		return this.getTasks()
 			.then((tasks) => {
 				let idx = tasks.findIndex(task => task.id === updatedTask.id);
-				let updates = [ ...tasks.slice(0, idx), updatedTask, ...tasks.slice(idx+1) ];
-				return updates;
+				return [ ...tasks.slice(0, idx), updatedTask, ...tasks.slice(idx+1) ];
 			})
 			.then(this.update);
 	}
 
+	reorderTasks(index) {
+		return this.getTasks().then((tasks) => {
+			return reorderArray(tasks, index);
+		})
+		.then(this.update)
+	}
+
 	update = (tasks): Promise<any> => {
-		console.log('inside of storage servicee', tasks);
-		return this.setTasks(tasks);
+		return this.setTasks(tasks).then(() => tasks);
 	}
 }

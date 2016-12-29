@@ -4,7 +4,7 @@ import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { TaskFactory, SettingsService, QuoteService, Id, StorageService } from '../../providers';
+import { TaskFactory, SettingsService, QuoteService, Id } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
@@ -24,10 +24,8 @@ export class ResolutionsPage {
   constructor(
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
-    private taskFactory: TaskFactory,
     private settingsService: SettingsService,
     private store: Store<reducers.State>,
-    private storage: StorageService, // should remove this once done with debugging
     private quoteService: QuoteService,
     private id: Id
   ) {

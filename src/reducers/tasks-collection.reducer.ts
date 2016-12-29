@@ -41,17 +41,7 @@ export function reducer(state: State = initialState, action: Action) {
 		}
 
 		case tasksCollection.actions.REORDER_TASK_SUCCESS: {
-			let index = action.payload,
-					reorderedTask = state.tasks[index.from];
-
-			return Object.assign({}, state, {
-				tasks: [
-					...state.tasks.slice(0, index.to),
-					reorderedTask,
-					...state.tasks.slice(index.to, index.from),
-					...state.tasks.slice(index.from+1)
-				]
-			});
+			return Object.assign({}, state, { tasks: action.payload });
 		}
 
 		case tasksCollection.actions.ADD_TASK_SUCCESS: {

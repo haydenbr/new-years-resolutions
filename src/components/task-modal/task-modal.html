@@ -13,22 +13,20 @@
 </ion-header>
 
 <ion-content [ngClass]="{'dark-background': settings.darkMode}">
-  <ion-list>
-    <ion-item [color]="settings.darkMode ? 'dark' : ''">
-      <ion-label floating [color]="settings.darkMode ? 'light' : ''">Name</ion-label>
-      <ion-input [value]="task.name" #taskName></ion-input>
-    </ion-item>
+  <ion-item [color]="settings.darkMode ? 'dark' : ''">
+    <ion-label floating [color]="settings.darkMode ? 'light' : ''">Name</ion-label>
+    <ion-input [value]="task.name" #taskName></ion-input>
+  </ion-item>
 
-    <ion-item [color]="settings.darkMode ? 'dark' : ''">
-      <ion-label floating [color]="settings.darkMode ? 'light' : ''">Description</ion-label>
-      <ion-textarea [value]="task.description" #taskDescription></ion-textarea>
-    </ion-item>
-  </ion-list>
+  <ion-item [color]="settings.darkMode ? 'dark' : ''">
+    <ion-label floating [color]="settings.darkMode ? 'light' : ''">Description</ion-label>
+    <ion-textarea [value]="task.description" #taskDescription></ion-textarea>
+  </ion-item>
 
   <div padding>
     <button ion-button block 
       (click)="submit(taskName, taskDescription)" 
-      [disabled]="!task.name.length">
+      [disabled]="!taskName.value.length">
       {{action + ' ' + type}}
     </button>
   </div>

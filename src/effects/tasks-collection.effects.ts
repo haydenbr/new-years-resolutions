@@ -68,17 +68,17 @@ export class TasksCollectionEffects {
 		reorderTask: Observable<Action> = this.actions
 			.ofType(tasksCollection.actions.REORDER_TASK)
 			.map((action: Action) => {
-				return action.payload
+				return action.payload;
 			})
-			.mergeMap((tasks) => {
-				return Observable.fromPromise(this.storage.setTasks(tasks))
-					.map(() => {
+			.mergeMap((index: { from: number, to: number }) => {
+				return Observable.fromPromise(this.storage.reorderTasks(index))
+					.map((tasks: Task[]) => {
 						return new tasksCollection.ReorderTaskSuccess(tasks);
 					})
-					.catch(() => {
+					.catch((tasks) => {
 						return of(new tasksCollection.ReorderTaskFail(tasks));
-					})
-			})
+					});
+			});
 
 		@Effect()
 		editTask: Observable<Action> = this.actions

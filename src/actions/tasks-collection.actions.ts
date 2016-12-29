@@ -94,7 +94,7 @@ export class ReorderTaskSuccess implements Action {
 export class ReorderTaskFail implements Action {
 	type = actions.REORDER_TASK_FAIL;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: Task[]) {}
 }
 
 // load tasks
