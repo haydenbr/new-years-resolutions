@@ -43,7 +43,8 @@ export class StorageService {
 		return this.getTasks()
 			.then((tasks) => {
 				let idx = tasks.findIndex(task => task.id === updatedTask.id);
-				return [ ...tasks.slice(0, idx), updatedTask, ...tasks.slice(idx+1) ];
+				let updates = [ ...tasks.slice(0, idx), updatedTask, ...tasks.slice(idx+1) ];
+				return updates;
 			})
 			.then(this.update);
 	}

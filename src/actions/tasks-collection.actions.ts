@@ -61,19 +61,19 @@ export class RemoveTaskFail implements Action {
 
 // edit a task
 export class EditTask implements Action {
-	type = actions.REMOVE_TASK;
+	type = actions.EDIT_TASK;
 
 	constructor(public payload: Task) {}
 }
 
 export class EditTaskSuccess implements Action {
-	type = actions.REMOVE_TASK_SUCCESS;
+	type = actions.EDIT_TASK_SUCCESS;
 
 	constructor(public payload: Task) {}
 }
 
 export class EditTaskFail implements Action {
-	type = actions.REMOVE_TASK_FAIL;
+	type = actions.EDIT_TASK_FAIL;
 
 	constructor(public payload: Task) {}
 }

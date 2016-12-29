@@ -16,15 +16,12 @@ const initialState: State = {
 }
 
 export function reducer(state: State = initialState, action: Action) {
-	console.log('called the reducer');
-
 	switch (action.type) {
 		case tasksCollection.actions.LOAD: {
 			return Object.assign({}, state, { loading: true });
 		}
 
 		case tasksCollection.actions.LOAD_SUCCESS: {
-			console.log('action in reducer', action);
 			return { loading: false, loaded: true, tasks: action.payload };
 		}
 
@@ -70,7 +67,4 @@ export function reducer(state: State = initialState, action: Action) {
 
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
-export const getTasks = (state: State) => {
-	console.log('get tasks selector');
-	return state.tasks;
-};
+export const getTasks = (state: State) => state.tasks;

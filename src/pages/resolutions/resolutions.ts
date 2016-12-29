@@ -65,7 +65,7 @@ export class ResolutionsPage {
   }
 
   onEdit(task: Task) {
-    let taskModal = this.modalCtrl.create(TaskModal, task);
+    let taskModal = this.modalCtrl.create(TaskModal, { task: task, action: 'Edit' });
 
     taskModal.onDidDismiss(task => {
       if (task) {
