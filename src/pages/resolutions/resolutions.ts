@@ -4,7 +4,7 @@ import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { TaskFactory, SettingsService, QuoteService } from '../../providers';
+import { TaskFactory, SettingsService, QuoteService, Id, StorageService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
@@ -27,23 +27,13 @@ export class ResolutionsPage {
     private taskFactory: TaskFactory,
     private settingsService: SettingsService,
     private store: Store<reducers.State>,
-    private quoteService: QuoteService
+    private storage: StorageService, // should remove this once done with debugging
+    private quoteService: QuoteService,
+    private id: Id
   ) {
     this.settings = this.settingsService.settings;
     this.quote = this.quoteService.getRandomQuote();
     this.resolutions = store.select(reducers.getTasks);
-  }
-
-  addResolution(): void {
-    let taskModal = this.modalCtrl.create(TaskModal);
-
-    taskModal.onDidDismiss(task => {
-      if (task) {
-        this.store.dispatch(new taskCollectionActions.AddTask(task));
-      }
-    });
-
-    taskModal.present();
   }
 
   goToMilestones(resolution: Task): void {
@@ -56,36 +46,41 @@ export class ResolutionsPage {
     this.editMode = !this.editMode;
   }
 
-  reorderResolutions(index: any): void {
-    console.log(index);
-    this.taskFactory.reorder(index);
-  }
-
-  toggleComplete(resolution: Task, slidingItem: ItemSliding): void {
-    this.taskFactory.toggleComplete(resolution).then(() => {
-      slidingItem.close();
-    });
-  }
-
-  edit(resolution: Task, slidingItem: ItemSliding): void {
-    let taskModal = this.modalCtrl.create(TaskModal, {
-      action: 'Edit',
-      task: resolution
-    });
+  addResolution(): void {
+    let taskModal = this.modalCtrl.create(TaskModal);
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        this.taskFactory.update();
+        task.id = this.id.id();
+        this.store.dispatch(new taskCollectionActions.AddTask(task));
       }
     });
 
-    slidingItem.close();
     taskModal.present();
   }
 
-  delete(index: number, slidingItem: ItemSliding): void {
-    this.taskFactory.remove(index).then(() => {
-      slidingItem.close();
+  onToggle(task: Task) {
+    task.isComplete = !task.isComplete;
+    this.store.dispatch(new taskCollectionActions.EditTask(task));
+  }
+
+  onEdit(task: Task) {
+    let taskModal = this.modalCtrl.create(TaskModal, task);
+
+    taskModal.onDidDismiss(task => {
+      if (task) {
+        this.store.dispatch(new taskCollectionActions.EditTask(task));
+      }
     });
+
+    taskModal.present();
+  }
+
+  onDelete(task: Task) {
+    this.store.dispatch(new taskCollectionActions.RemoveTask(task));
+  }
+
+  onReorder(index: { from: number, to: number }) {
+    this.store.dispatch(new taskCollectionActions.ReorderTask(index));
   }
 }

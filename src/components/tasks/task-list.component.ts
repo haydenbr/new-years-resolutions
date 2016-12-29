@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { ItemSliding } from 'ionic-angular'
 
 import { Task } from '../../models';
 
@@ -6,12 +7,30 @@ import { Task } from '../../models';
 	selector: 'task-list',
 	templateUrl: './task-list.component.html'
 })
-export class TaskListComponent implements OnInit {
+export class TaskListComponent {
+	@Input() editMode: boolean = false;
 	@Input() tasks: Task[] = [];
-	
-	constructor() { }
+	@Output() edit = new EventEmitter();
+	@Output() delete = new EventEmitter();
+	@Output() toggle = new EventEmitter();
+	@Output() reorder = new EventEmitter();
 
-	ngOnInit() {
-		
+	toggleTask(task: Task, slidingItem: ItemSliding): void {
+		this.toggle.emit(task)
+    slidingItem.close();
+  }
+
+  editTask(task: Task, slidingItem: ItemSliding): void {
+		this.edit.emit(task);
+    slidingItem.close();
+  }
+
+  deleteTask(task: Task, slidingItem: ItemSliding): void {
+    this.delete.emit(task);
+    slidingItem.close();
+  }
+
+	reorderTasks(index: { from: number, to: number }): void {
+		this.reorder.emit(index);
 	}
 }

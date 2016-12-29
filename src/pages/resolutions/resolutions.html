@@ -17,37 +17,17 @@
 </ion-header>
 
 <ion-content [ngClass]="{'dark-background': settings.darkMode}">
-  <!--<div class="no-tasks-container" *ngIf="!resolutions.length">
+  <div class="no-tasks-container" *ngIf="!(resolutions | async)?.length">
     <div class="no-tasks-content" text-center color="secondary">
       {{quote}}
     </div>
-  </div>-->
+  </div>
 
-  <task-list [tasks]="resolutions | async"></task-list>
-
-  <!--<ion-list *ngIf="resolutions.length" [reorder]="editMode" (ionItemReorder)="reorderResolutions($event)">
-    <ion-item-sliding *ngFor="let resolution of resolutions" #slidingItem>
-      <button ion-item (click)="goToMilestones(resolution)">
-        <ion-badge item-left *ngIf="!resolution.isComplete">
-        </ion-badge>
-        <span [ngClass]="{'complete': resolution.isComplete}">{{resolution.name}}</span>
-      </button>
-      <ion-item-options side="right" (ionSwipe)="toggleComplete(resolution, slidingItem)">
-        <button ion-button 
-          color="secondary" 
-          (click)="edit(resolution, slidingItem)"
-          *ngIf="!resolution.isComplete">
-          Edit
-        </button>
-        <button ion-button color="danger">
-          Delete
-        </button>
-        <button ion-button expandable (click)="toggleComplete(resolution, slidingItem)">
-          {{resolution.isComplete ? 'Not Done' : 'Done'}}
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>-->
+  <task-list
+    [tasks]="resolutions | async" [editMode]="editMode"
+    (toggle)="onToggle($event)" (edit)="onEdit($event)"
+    (delete)="onDelete($event)" (reorder)="onReorder($event)"
+  ></task-list>
 </ion-content>
 
 <ion-footer>

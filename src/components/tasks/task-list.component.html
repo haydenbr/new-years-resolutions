@@ -1,23 +1,20 @@
-  <ion-list> <!-- [reorder]="editMode" (ionItemReorder)="reorderResolutions($event)" -->
-    <ion-item-sliding *ngFor="let resolution of tasks" #slidingItem>
-      <button ion-item> <!-- (click)="goToMilestones(resolution)" -->
-        <ion-badge item-left *ngIf="!resolution.isComplete">
-          <!--{{resolution.getIncompleteMilestones()}}  should use a pipe for this -->
+  <ion-list [reorder]="editMode" (ionItemReorder)="reorderTasks($event)">
+    <ion-item-sliding *ngFor="let task of tasks" #slidingItem>
+      <button ion-item> <!-- (click)="goToMilestones(task)" -->
+        <ion-badge item-left *ngIf="!task.isComplete">
+          <!--{{task.getIncompleteMilestones()}}  should use a pipe for this -->
         </ion-badge>
-        <span [ngClass]="{'complete': resolution.isComplete}">{{resolution.name}}</span>
+        <span [ngClass]="{'complete': task.isComplete}">{{task.name}}</span>
       </button>
-      <ion-item-options side="right" (ionSwipe)="toggleComplete(resolution, slidingItem)">
-        <button ion-button 
-          color="secondary" 
-          (click)="edit(resolution, slidingItem)"
-          *ngIf="!resolution.isComplete">
+      <ion-item-options side="right" (ionSwipe)="toggleTask(task, slidingItem)">
+        <button ion-button color="secondary" (click)="editTask(task, slidingItem)" *ngIf="!task.isComplete">
           Edit
         </button>
-        <button ion-button color="danger" (click)="delete(resolution, slidingItem)">
+        <button ion-button color="danger" (click)="deleteTask(task, slidingItem)">
           Delete
         </button>
-        <button ion-button expandable (click)="toggleComplete(resolution, slidingItem)">
-          {{resolution.isComplete ? 'Not Done' : 'Done'}}
+        <button ion-button expandable (click)="toggleTask(task, slidingItem)">
+          {{task.isComplete ? 'Not Done' : 'Done'}}
         </button>
       </ion-item-options>
     </ion-item-sliding>

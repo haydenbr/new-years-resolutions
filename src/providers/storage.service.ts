@@ -6,8 +6,11 @@ export class StorageService {
 	private readonly TASKS: string = 'tasks';
 	// private readonly SETTINGS: string = 'settings';
 
-	constructor(private storage: Storage) {
-		// this.storage.set(this.TASKS, []);
+	constructor(private storage: Storage) {}
+
+	// for debugging purposes
+	killSwitch() {
+		this.storage.set(this.TASKS, []);
 	}
 
 	getTasks() {
@@ -29,7 +32,9 @@ export class StorageService {
 	removeTask(removeTask) {
 		return this.getTasks()
 			.then((tasks) => {
-				return tasks.filter(task => task.id === removeTask.id);
+				console.log('all tasks', tasks);
+				console.log('remove this one', removeTask);
+				return tasks.filter(task => task.id !== removeTask.id);
 			})
 			.then(this.update);
 	}
@@ -44,6 +49,7 @@ export class StorageService {
 	}
 
 	update = (tasks): Promise<any> => {
+		console.log('inside of storage servicee', tasks);
 		return this.setTasks(tasks);
 	}
 }

@@ -40,7 +40,7 @@ export class TasksCollectionEffects {
 		.mergeMap((task) => {
 			return Observable.fromPromise(this.storage.addTask(task))
 				.map(() => {
-					console.log('new task adding', task);
+					console.log('adding new task', task);
 					return new tasksCollection.AddTaskSuccess(task);
 				})
 				.catch(() => {
