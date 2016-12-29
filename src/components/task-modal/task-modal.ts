@@ -35,7 +35,7 @@ export class TaskModal {
     this.viewCtrl.dismiss();
   }
 
-  submit(): void {
-    this.viewCtrl.dismiss(this.task);
+  submit(taskName, taskDescription): void {
+    this.viewCtrl.dismiss(Object.assign(this.task, { name: taskName.value, description: taskDescription.value }));
   }
 }
