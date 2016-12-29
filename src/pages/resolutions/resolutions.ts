@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy } from '@angular/core';
 import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
@@ -9,11 +9,12 @@ import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
 import * as reducers from '../../reducers';
-import * as taskCollectionActions from '../../actions/tasks-collection.actions';
+import * as taskCollectionActions from '../../actions/task.actions'
 
 @Component({
   selector: 'page-resolutions',
-  templateUrl: 'resolutions.html'
+  templateUrl: 'resolutions.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ResolutionsPage {
   editMode: boolean = false;

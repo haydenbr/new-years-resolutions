@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { MyApp } from './app.component';
 import { reducer } from '../reducers';
-import { TasksCollectionEffects } from '../effects/tasks-collection.effects';
+import { TaskEffects } from '../effects/tasks-collection.effects';
 
 import {
   ResolutionsPage, 
@@ -36,7 +36,7 @@ import { TaskModal, TaskListComponent } from '../components';
   imports: [
     IonicModule.forRoot(MyApp),
     StoreModule.provideStore(reducer), // should we also pass in initial state?
-    EffectsModule.run(TasksCollectionEffects)
+    EffectsModule.run(TaskEffects)
   ],
   bootstrap: [ IonicApp ],
   entryComponents: [

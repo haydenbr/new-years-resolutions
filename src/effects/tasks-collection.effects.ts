@@ -5,35 +5,35 @@ import { of } from 'rxjs/observable/of';
 import { Action } from '@ngrx/store';
 import { Actions, Effect } from '@ngrx/effects';
 
-import * as tasksCollection from '../actions/tasks-collection.actions';
+import * as taskActions from '../actions/task.actions';
 import { Task } from'../models';
 import { StorageService } from '../providers';
 
 @Injectable()
-export class TasksCollectionEffects {
+export class TaskEffects {
 	constructor(
 		private actions: Actions,
 		private storage: StorageService
 	) {}
 
 	@Effect()
-	loadTasksCollection: Observable<Action> = this.actions
-		.ofType(tasksCollection.actions.LOAD)
-		.startWith(new tasksCollection.LoadTasks())
+	loadTasks: Observable<Action> = this.actions
+		.ofType(taskActions.actions.LOAD)
+		.startWith(new taskActions.LoadTasks())
 		.switchMap(() => {
 			return Observable.fromPromise(this.storage.getTasks())
 				.map((tasks: Task[]) => {
 					console.log('tasks', tasks);
-					return new tasksCollection.LoadTaskSuccess(tasks);
+					return new taskActions.LoadTaskSuccess(tasks);
 				})
 				.catch((error) => {
-					return of(new tasksCollection.LoadTaskFail(error));
+					return of(new taskActions.LoadTaskFail(error));
 				});
 		});
 
 	@Effect()
-	addTaskToCollection: Observable<Action> = this.actions
-		.ofType(tasksCollection.actions.ADD_TASK)
+	addTask: Observable<Action> = this.actions
+		.ofType(taskActions.actions.ADD_TASK)
 		.map((action: Action) => {
 			return action.payload;
 		})
@@ -41,58 +41,58 @@ export class TasksCollectionEffects {
 			return Observable.fromPromise(this.storage.addTask(task))
 				.map(() => {
 					console.log('adding new task', task);
-					return new tasksCollection.AddTaskSuccess(task);
+					return new taskActions.AddTaskSuccess(task);
 				})
 				.catch(() => {
-					return of(new tasksCollection.AddTaskFail(task));
+					return of(new taskActions.AddTaskFail(task));
 				});
 		});
 
 	@Effect()
-	removeTaskFromCollection: Observable<Action> = this.actions
-		.ofType(tasksCollection.actions.REMOVE_TASK)
+	removeTask: Observable<Action> = this.actions
+		.ofType(taskActions.actions.REMOVE_TASK)
 		.map((action: Action) => {
 			return action.payload;
 		})
 		.mergeMap((task) => {
 			return Observable.fromPromise(this.storage.removeTask(task))
 				.map(() => {
-					return new tasksCollection.RemoveTaskSuccess(task);
+					return new taskActions.RemoveTaskSuccess(task);
 				})
 				.catch(() => {
-					return of(new tasksCollection.RemoveTaskFail(task));
+					return of(new taskActions.RemoveTaskFail(task));
 				});
 		});
 
 		@Effect()
 		reorderTask: Observable<Action> = this.actions
-			.ofType(tasksCollection.actions.REORDER_TASK)
+			.ofType(taskActions.actions.REORDER_TASK)
 			.map((action: Action) => {
 				return action.payload;
 			})
 			.mergeMap((index: { from: number, to: number }) => {
 				return Observable.fromPromise(this.storage.reorderTasks(index))
 					.map((tasks: Task[]) => {
-						return new tasksCollection.ReorderTaskSuccess(tasks);
+						return new taskActions.ReorderTaskSuccess(tasks);
 					})
 					.catch((tasks) => {
-						return of(new tasksCollection.ReorderTaskFail(tasks));
+						return of(new taskActions.ReorderTaskFail(tasks));
 					});
 			});
 
 		@Effect()
 		editTask: Observable<Action> = this.actions
-			.ofType(tasksCollection.actions.EDIT_TASK)
+			.ofType(taskActions.actions.EDIT_TASK)
 			.map((action: Action) => {
 				return action.payload
 			})
 			.mergeMap((task) => {
 				return Observable.fromPromise(this.storage.updateTask(task))
 					.map(() => {
-						return new tasksCollection.EditTaskSuccess(task);
+						return new taskActions.EditTaskSuccess(task);
 					})
 					.catch(() => {
-						return of(new tasksCollection.EditTaskFail(task));
+						return of(new taskActions.EditTaskFail(task));
 					});
 			});
 }

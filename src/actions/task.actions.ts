@@ -4,67 +4,116 @@ import { Task } from '../models';
 import { actionType } from '../util';
 
 export const actions = {
-	EDIT: 										actionType('[Task] Edit'),
-	EDIT_SUCCESS:							actionType('[Task] Edit Success'),
-	SEARCH: 									actionType('[Task] Seach'),
-	SEARCH_SUCCESS: 					actionType('[Task] Seach Success'),
-	ADD_MILESTONE: 						actionType('[Task] Add Milestone'),
-	ADD_MILESTONE_SUCCESS: 		actionType('[Task] Add Milestone Success'),
-	REMOVE_MILESTONE: 				actionType('[Task] Remove Milestone'),
-	REMOVE_MILESTONE_SUCCESS: actionType('[Task] Remove Milestone Success'),
-	TOGGLE_COMPLETE_STATUS:		actionType('[Task] Toggle Complete Status')
+	ADD_TASK:             actionType('[Task Collection] Add Task'),
+  ADD_TASK_SUCCESS:     actionType('[Task Collection] Add Task Success'),
+  ADD_TASK_FAIL:        actionType('[Task Collection] Add Task Fail'),
+  REMOVE_TASK:          actionType('[Task Collection] Remove Task'),
+  REMOVE_TASK_SUCCESS:  actionType('[Task Collection] Remove Task Success'),
+  REMOVE_TASK_FAIL:     actionType('[Task Collection] Remove Task Fail'),
+	EDIT_TASK:          	actionType('[Task Collection] Edit Task'),
+  EDIT_TASK_SUCCESS:  	actionType('[Task Collection] Edit Task Success'),
+  EDIT_TASK_FAIL:     	actionType('[Task Collection] Edit Task Fail'),
+	REORDER_TASK:					actionType('[Task Collection] Reorder Task'),
+	REORDER_TASK_SUCCESS:	actionType('[Task Collection] Reorder Task Success'),
+	REORDER_TASK_FAIL:		actionType('[Task Collection] Reorder Task Fail'),
+  LOAD:                 actionType('[Task Collection] Load'),
+  LOAD_SUCCESS:         actionType('[Task Collection] Load Success'),
+  LOAD_FAIL:            actionType('[Task Collection] Load Fail'),
 }
 
-export class Edit implements Action {
-	type = actions.EDIT;
+// Add a task
+export class AddTask implements Action {
+	type = actions.ADD_TASK;
 
 	constructor(public payload: Task) {}
 }
 
-export class EditSuccess implements Action {
-	type = actions.EDIT_SUCCESS;
+export class AddTaskSuccess implements Action {
+	type = actions.ADD_TASK_SUCCESS;
 
 	constructor(public payload: Task) {}
 }
 
-export class Search implements Action {
-	type = actions.SEARCH;
+export class AddTaskFail implements Action {
+	type = actions.ADD_TASK_FAIL;
 
-	constructor(public payload: string) {}
+	constructor(public payload: Task) {}
 }
 
-export class SearchSuccess implements Action {
-	type = actions.SEARCH_SUCCESS;
+// remove a task
+export class RemoveTask implements Action {
+	type = actions.REMOVE_TASK;
+
+	constructor(public payload: Task) {}
+}
+
+export class RemoveTaskSuccess implements Action {
+	type = actions.REMOVE_TASK_SUCCESS;
+
+	constructor(public payload: Task) {}
+}
+
+export class RemoveTaskFail implements Action {
+	type = actions.REMOVE_TASK_FAIL;
+
+	constructor(public payload: Task) {}
+}
+
+// edit a task
+export class EditTask implements Action {
+	type = actions.EDIT_TASK;
+
+	constructor(public payload: Task) {}
+}
+
+export class EditTaskSuccess implements Action {
+	type = actions.EDIT_TASK_SUCCESS;
+
+	constructor(public payload: Task) {}
+}
+
+export class EditTaskFail implements Action {
+	type = actions.EDIT_TASK_FAIL;
+
+	constructor(public payload: Task) {}
+}
+
+// reorder task
+export class ReorderTask implements Action {
+	type = actions.REORDER_TASK;
+
+	constructor(public payload: { to: number, from: number }) {}
+}
+
+export class ReorderTaskSuccess implements Action {
+	type = actions.REORDER_TASK_SUCCESS;
 
 	constructor(public payload: Task[]) {}
 }
 
-export class AddMilestone implements Action {
-	type = actions.ADD_MILESTONE;
+export class ReorderTaskFail implements Action {
+	type = actions.REORDER_TASK_FAIL;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: Task[]) {}
 }
 
-export class AddMilestoneSuccess implements Action {
-	type = actions.ADD_MILESTONE_SUCCESS;
+// load tasks
+export class LoadTasks implements Action {
+	type = actions.LOAD;
 
-	constructor(public payload: Task) {}
+	constructor() {}
 }
 
-export class RemoveMilestone implements Action {
-	type = actions.REMOVE_MILESTONE;
+export class LoadTaskSuccess implements Action {
+	type = actions.LOAD_SUCCESS;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: Task[]) {
+		console.log('tasks as payload', payload);
+	}
 }
 
-export class RemoveMilestoneSuccess implements Action {
-	type = actions.REMOVE_MILESTONE_SUCCESS;
+export class LoadTaskFail implements Action {
+	type = actions.LOAD_FAIL;
 
-	constructor(public payload: Task) {}
-}
-
-export class ToggleCompleteStatus implements Action {
-	type = actions.TOGGLE_COMPLETE_STATUS;
-
-	constructor(public payload: Task) {}
+	constructor(public payload: any) {}
 }

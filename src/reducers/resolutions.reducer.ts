@@ -1,6 +1,6 @@
 import { Action } from '@ngrx/store';
 
-import * as tasksCollection from '../actions/tasks-collection.actions';
+import * as taskActions from '../actions/task.actions';
 import { Task } from '../models';
 
 export interface State {
@@ -17,22 +17,22 @@ const initialState: State = {
 
 export function reducer(state: State = initialState, action: Action) {
 	switch (action.type) {
-		case tasksCollection.actions.LOAD: {
+		case taskActions.actions.LOAD: {
 			return Object.assign({}, state, { loading: true });
 		}
 
-		case tasksCollection.actions.LOAD_SUCCESS: {
+		case taskActions.actions.LOAD_SUCCESS: {
 			return { loading: false, loaded: true, tasks: action.payload };
 		}
 
-		case tasksCollection.actions.REMOVE_TASK_SUCCESS: {
+		case taskActions.actions.REMOVE_TASK_SUCCESS: {
 			let removedTask = action.payload as Task;
 			return Object.assign({}, state, {
 				tasks: state.tasks.filter(task => task.id !== removedTask.id)
 			});
 		}
 
-		case tasksCollection.actions.EDIT_TASK_SUCCESS: {
+		case taskActions.actions.EDIT_TASK_SUCCESS: {
 			let editedTask = action.payload as Task,
 					idx = state.tasks.findIndex(task => task.id === editedTask.id);
 			return Object.assign({}, state, {
@@ -40,11 +40,11 @@ export function reducer(state: State = initialState, action: Action) {
 			});
 		}
 
-		case tasksCollection.actions.REORDER_TASK_SUCCESS: {
+		case taskActions.actions.REORDER_TASK_SUCCESS: {
 			return Object.assign({}, state, { tasks: action.payload });
 		}
 
-		case tasksCollection.actions.ADD_TASK_SUCCESS: {
+		case taskActions.actions.ADD_TASK_SUCCESS: {
 			let newTask = action.payload as Task;
 			return Object.assign({}, state, { tasks: state.tasks.concat(newTask)});
 		}
