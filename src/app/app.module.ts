@@ -7,7 +7,7 @@ import { EffectsModule } from '@ngrx/effects';
 
 import { MyApp } from './app.component';
 import { reducer } from '../reducers';
-import { TaskEffects } from '../effects/tasks-collection.effects';
+import { TaskEffects } from '../effects/task.effects';
 
 import {
   ResolutionsPage, 

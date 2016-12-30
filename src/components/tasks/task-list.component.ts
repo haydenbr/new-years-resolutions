@@ -1,20 +1,21 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { ItemSliding } from 'ionic-angular'
 
-import { Task } from '../../models';
+import { Task, Settings } from '../../models';
+// import { State } from '../../reducers';
 
 @Component({
 	selector: 'task-list',
 	templateUrl: './task-list.component.html'
 })
 export class TaskListComponent {
-	@Input() editMode: boolean = false;
+	@Input() settings: Settings;
 	@Input() tasks: Task[] = [];
 	@Output() edit = new EventEmitter();
 	@Output() delete = new EventEmitter();
 	@Output() toggle = new EventEmitter();
 	@Output() reorder = new EventEmitter();
-
+ 
 	toggleTask(task: Task, slidingItem: ItemSliding): void {
 		this.toggle.emit(task)
     slidingItem.close();

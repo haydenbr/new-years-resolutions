@@ -16,7 +16,7 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content [ngClass]="{'dark-background': settings.darkMode}">
+<ion-content> <!-- [ngClass]="{'dark-background': settings.darkMode}" -->
   <div class="no-tasks-container" *ngIf="!(resolutions | async)?.length">
     <div class="no-tasks-content" text-center color="secondary">
       {{quote}}
@@ -24,7 +24,7 @@
   </div>
 
   <task-list
-    [tasks]="resolutions | async" [editMode]="editMode"
+    [tasks]="resolutions | async" [settings]="settings | async"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
   ></task-list>

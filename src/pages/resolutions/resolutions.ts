@@ -9,18 +9,19 @@ import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
 import * as reducers from '../../reducers';
-import * as taskCollectionActions from '../../actions/task.actions'
+import * as taskActions from '../../actions/task.actions';
+import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
   selector: 'page-resolutions',
   templateUrl: 'resolutions.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush // TODO: when this is on, task-list component isn't picking up changes to settings
 })
 export class ResolutionsPage {
   editMode: boolean = false;
-  settings: Settings;
   quote: string = '';
   resolutions: Observable<Task[]>;
+  settings: Observable<Settings>;
 
   constructor(
     private navCtrl: NavController, 
@@ -30,9 +31,9 @@ export class ResolutionsPage {
     private quoteService: QuoteService,
     private id: Id
   ) {
-    this.settings = this.settingsService.settings;
     this.quote = this.quoteService.getRandomQuote();
     this.resolutions = store.select(reducers.getTasks);
+    this.settings = store.select(reducers.getSettingsState);
   }
 
   goToMilestones(resolution: Task): void {
@@ -42,7 +43,7 @@ export class ResolutionsPage {
   }
 
   toggleEditMode(): void {
-    this.editMode = !this.editMode;
+    this.store.dispatch(new settingsActions.ToggleEditMode());
   }
 
   addResolution(): void {
@@ -51,7 +52,7 @@ export class ResolutionsPage {
     taskModal.onDidDismiss(task => {
       if (task) {
         task.id = this.id.id();
-        this.store.dispatch(new taskCollectionActions.AddTask(task));
+        this.store.dispatch(new taskActions.AddTask(task));
       }
     });
 
@@ -60,7 +61,7 @@ export class ResolutionsPage {
 
   onToggle(task: Task) {
     task.isComplete = !task.isComplete;
-    this.store.dispatch(new taskCollectionActions.EditTask(task));
+    this.store.dispatch(new taskActions.EditTask(task));
   }
 
   onEdit(task: Task) {
@@ -68,7 +69,7 @@ export class ResolutionsPage {
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        this.store.dispatch(new taskCollectionActions.EditTask(task));
+        this.store.dispatch(new taskActions.EditTask(task));
       }
     });
 
@@ -76,10 +77,10 @@ export class ResolutionsPage {
   }
 
   onDelete(task: Task) {
-    this.store.dispatch(new taskCollectionActions.RemoveTask(task));
+    this.store.dispatch(new taskActions.RemoveTask(task));
   }
 
   onReorder(index: { from: number, to: number }) {
-    this.store.dispatch(new taskCollectionActions.ReorderTask(index));
+    this.store.dispatch(new taskActions.ReorderTask(index));
   }
 }

@@ -1,6 +1,6 @@
-  <ion-list [reorder]="editMode" (ionItemReorder)="reorderTasks($event)">
+  <ion-list [reorder]="settings.editMode" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks" #slidingItem>
-      <button ion-item> <!-- (click)="goToMilestones(task)" -->
+      <button ion-item> <!--  (click)="editMode()" (click)="goToMilestones(task)" -->
         <ion-badge item-left *ngIf="!task.isComplete">
           <!--{{task.getIncompleteMilestones()}}  should use a pipe for this -->
         </ion-badge>

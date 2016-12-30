@@ -31,7 +31,8 @@ export class SettingsService {
 
   private defaultSettings(): void {
     this.settings = {
-      darkMode: false
+      darkMode: false,
+      editMode: false
     };
   }
 }

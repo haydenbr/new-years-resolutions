@@ -107,9 +107,7 @@ export class LoadTasks implements Action {
 export class LoadTaskSuccess implements Action {
 	type = actions.LOAD_SUCCESS;
 
-	constructor(public payload: Task[]) {
-		console.log('tasks as payload', payload);
-	}
+	constructor(public payload: Task[]) {}
 }
 
 export class LoadTaskFail implements Action {

@@ -5,6 +5,8 @@ import { createSelector } from 'reselect';
 import * as settings from './settings.reducer';
 import * as resolutions from './resolutions.reducer';
 
+// TODO: current resolution
+
 export interface State {
 	settings: settings.State,
 	resolutions: resolutions.State
@@ -24,3 +26,4 @@ export const getTasksLoaded = createSelector(getResolutionsState, resolutions.ge
 
 export const getSettingsState = (state: State) => state.settings;
 export const getDarkMode = createSelector(getSettingsState, settings.getDarkMode);
+export const getEditMode = createSelector(getSettingsState, settings.getEditMode);
