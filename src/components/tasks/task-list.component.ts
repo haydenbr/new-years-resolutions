@@ -39,4 +39,10 @@ export class TaskListComponent {
 	selectTask(task: Task) {
 		this.select.emit(task);
 	}
+
+	countIncompleteMilestones(task: Task) {
+    return task.milestones.filter((milestone: Task) => {
+      return !milestone.isComplete;
+    }).length;
+  }
 }
