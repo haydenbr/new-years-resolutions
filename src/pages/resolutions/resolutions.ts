@@ -4,7 +4,7 @@ import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { TaskFactory, SettingsService, QuoteService } from '../../providers';
+import { SettingsService, QuoteService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';

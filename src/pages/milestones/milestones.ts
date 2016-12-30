@@ -18,7 +18,6 @@ import {
 } from '../../models';
 
 import {
-  TaskFactory,
   SettingsService,
   QuoteService
 } from '../../providers';
@@ -40,7 +39,6 @@ export class MilestonesPage {
     private navCtrl: NavController, 
     private navParams: NavParams,
     private modalCtrl: ModalController,
-    private taskFactory: TaskFactory,
     private settingsService: SettingsService,
     private quoteService: QuoteService,
     private store: Store<reducers.State>

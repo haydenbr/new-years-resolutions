@@ -15,8 +15,6 @@ import {
 } from '../pages';
 
 import {
-  TaskFactory, 
-  TaskStore,
   SettingsService, 
   QuoteService,
   StorageService
@@ -46,8 +44,6 @@ import { TaskModal, TaskListComponent } from '../components';
   ],
   providers: [
     Storage,
-    TaskFactory,
-    TaskStore,
     SettingsService,
     QuoteService,
     StorageService,
