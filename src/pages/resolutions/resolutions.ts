@@ -83,4 +83,9 @@ export class ResolutionsPage {
   onReorder(index: { from: number, to: number }) {
     this.store.dispatch(new taskActions.ReorderTask(index));
   }
+
+  onSelect(task: Task) {
+    this.store.dispatch(new taskActions.SelectTask(task));
+    this.navCtrl.push(MilestonesPage);
+  }
 }

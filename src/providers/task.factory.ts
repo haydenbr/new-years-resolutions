@@ -42,7 +42,7 @@ export class TaskFactory {
   }
 
   reorderMilestone(task: Task, index: any): Promise<any> {
-    task.reorderMilestones(index);
+    // task.reorderMilestones(index);
     return this.update();
   }
 

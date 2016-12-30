@@ -15,6 +15,7 @@ export class TaskListComponent {
 	@Output() delete = new EventEmitter();
 	@Output() toggle = new EventEmitter();
 	@Output() reorder = new EventEmitter();
+	@Output() select = new EventEmitter();
  
 	toggleTask(task: Task, slidingItem: ItemSliding): void {
 		this.toggle.emit(task)
@@ -33,5 +34,9 @@ export class TaskListComponent {
 
 	reorderTasks(index: { from: number, to: number }): void {
 		this.reorder.emit(index);
+	}
+	
+	selectTask(task: Task) {
+		this.select.emit(task);
 	}
 }

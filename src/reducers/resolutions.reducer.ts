@@ -6,13 +6,15 @@ import { Task } from '../models';
 export interface State {
 	loaded: boolean;
 	loading: boolean;
-	tasks: Task[]
+	tasks: Task[],
+	selectedTask: Task
 }
 
 const initialState: State = {
 	loaded: false,
 	loading: false,
-	tasks: []
+	tasks: [],
+	selectedTask: undefined
 }
 
 export function reducer(state: State = initialState, action: Action) {
@@ -33,10 +35,11 @@ export function reducer(state: State = initialState, action: Action) {
 		}
 
 		case taskActions.actions.EDIT_TASK_SUCCESS: {
-			let editedTask = action.payload as Task,
-					idx = state.tasks.findIndex(task => task.id === editedTask.id);
+			let editedTask = action.payload as Task;
 			return Object.assign({}, state, {
-				tasks: [ ...state.tasks.slice(0, idx), editedTask, ...state.tasks.slice(idx+1) ]
+				tasks: state.tasks.map((task) => {
+					return (editedTask.id === task.id) ? editedTask : task;
+				})
 			});
 		}
 
@@ -49,6 +52,10 @@ export function reducer(state: State = initialState, action: Action) {
 			return Object.assign({}, state, { tasks: state.tasks.concat(newTask)});
 		}
 
+		case taskActions.actions.SELECT_TASK: {
+			return Object.assign({}, state, { selectedTask: action.payload });
+		}
+
 		default: {
 			return state;
 		}
@@ -58,3 +65,4 @@ export function reducer(state: State = initialState, action: Action) {
 export const getLoaded = (state: State) => state.loaded;
 export const getLoading = (state: State) => state.loading;
 export const getTasks = (state: State) => state.tasks;
+export const getSelectedTask = (state: State) => state.selectedTask;

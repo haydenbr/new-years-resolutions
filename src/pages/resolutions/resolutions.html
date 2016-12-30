@@ -27,6 +27,7 @@
     [tasks]="resolutions | async" [settings]="settings | async"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
+    (select)="onSelect($event)"
   ></task-list>
 </ion-content>
 

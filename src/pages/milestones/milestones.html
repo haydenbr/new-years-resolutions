@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>{{resolution.name}}</ion-title>
+    <ion-title>{{(resolution | async)?.name}}</ion-title>
 
     <ion-buttons start>
       <button ion-button menuToggle icon-only>
@@ -8,22 +8,29 @@
       </button>
     </ion-buttons>
 
-    <ion-buttons end *ngIf="resolution.milestones.length">
+    <!--<ion-buttons end *ngIf="resolution.milestones.length">
       <button ion-button (click)="toggleEditMode()">
         {{editMode ? 'Done' : 'Edit'}}
       </button>
-    </ion-buttons>
+    </ion-buttons>-->
   </ion-navbar>
 </ion-header>
 
 <ion-content [ngClass]="{'dark-background': settings.darkMode}">
-  <div class="no-tasks-container" *ngIf="!resolution.milestones.length">
+  <!--<div class="no-tasks-container" *ngIf="!resolution.milestones.length">
     <div class="no-tasks-content" text-center>
       {{quote}}
     </div>
-  </div>
+  </div>-->
 
-  <ion-list *ngIf="resolution.milestones.length">
+  <task-list
+    [tasks]="(resolution | async).milestones" [settings]="settings"
+    (toggle)="onToggle($event)" (edit)="onEdit($event)"
+    (delete)="onDelete($event)" (reorder)="onReorder($event)"
+    (select)="onSelect($event)"
+  ></task-list>
+
+  <!--<ion-list *ngIf="resolution.milestones.length">
     <ion-item [color]="settings.darkMode ? 'dark' : ''" text-wrap *ngIf="resolution.description">
       {{resolution.description}}
     </ion-item>
@@ -50,7 +57,7 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-item-group>
-  </ion-list>
+  </ion-list>-->
 </ion-content>
 
 <ion-footer>

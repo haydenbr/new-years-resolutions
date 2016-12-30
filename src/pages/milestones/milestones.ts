@@ -7,6 +7,9 @@ import {
   ItemSliding
 } from 'ionic-angular';
 
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import { TaskModal } from '../../components';
 
 import {
@@ -20,12 +23,14 @@ import {
   QuoteService
 } from '../../providers';
 
+import * as reducers from '../../reducers';
+
 @Component({
   selector: 'page-milestones',
   templateUrl: 'milestones.html'
 })
 export class MilestonesPage {
-  resolution: Task;
+  resolution: Observable<Task>;
   settings: Settings;
   editMode: boolean = false;
   quote: string = '';
@@ -36,9 +41,12 @@ export class MilestonesPage {
     private modalCtrl: ModalController,
     private taskFactory: TaskFactory,
     private settingsService: SettingsService,
-    private quoteService: QuoteService
+    private quoteService: QuoteService,
+    private store: Store<reducers.State>
   ) {
-    this.resolution = this.navParams.get('resolution');
+    // this.resolution = this.navParams.get('resolution');
+    // this.resolution = { id: -1, name: 'stuff', milestones: [], isComplete: false };
+    this.resolution = this.store.select(reducers.getSelectedTask);
     this.settings = this.settingsService.settings;
     this.quote = this.quoteService.getRandomQuote();
   }
@@ -50,7 +58,7 @@ export class MilestonesPage {
 
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
-        this.taskFactory.addMilestone(this.resolution, milestone);
+        // this.taskFactory.addMilestone(this.resolution, milestone);
       }
     });
 
@@ -58,15 +66,11 @@ export class MilestonesPage {
   }
 
   reorderMilestones(index: any) {
-    this.taskFactory.reorderMilestone(this.resolution, index);
+    // this.taskFactory.reorderMilestone(this.resolution, index);
   }
 
   toggleEditMode(): void {
-    this.editMode =! this.editMode
-  }
-
-  update(): void {
-    this.taskFactory.update();
+    // this.editMode =! this.editMode
   }
 
   edit(milestone: Task, slidingItem: ItemSliding): void {
@@ -78,7 +82,7 @@ export class MilestonesPage {
 
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
-        this.taskFactory.update();
+        // this.taskFactory.update();
       }
     });
 
@@ -87,8 +91,8 @@ export class MilestonesPage {
   }
 
   delete(index: number, slidingItem: ItemSliding): void {
-    this.taskFactory.removeMilestone(this.resolution, index).then(() => {
-      slidingItem.close();
-    });
+    // this.taskFactory.removeMilestone(this.resolution, index).then(() => {
+    //   slidingItem.close();
+    // });
   }
 }

@@ -13,17 +13,4 @@ export class Task {
     this.milestones = task && task.milestones || [];
     this.isComplete = task && task.isComplete;
   }
-
-  getIncompleteMilestones() {
-    return this.milestones
-      .filter(milestone => !milestone.isComplete)
-      .length;
-  }
-
-  reorderMilestones(index: any) {
-    let milestone = this.milestones[index.from];
-
-    this.milestones.splice(index.from, 1);
-    this.milestones.splice(index.to, 0, milestone);
-  }
 }
