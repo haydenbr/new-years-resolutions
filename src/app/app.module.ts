@@ -19,8 +19,7 @@ import {
   TaskStore,
   SettingsService, 
   QuoteService,
-  StorageService,
-  Id
+  StorageService
 } from '../providers';
 
 import { TaskModal, TaskListComponent } from '../components';
@@ -52,7 +51,6 @@ import { TaskModal, TaskListComponent } from '../components';
     SettingsService,
     QuoteService,
     StorageService,
-    Id,
     {
       provide: ErrorHandler, 
       useClass: IonicErrorHandler

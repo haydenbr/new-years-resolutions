@@ -3,4 +3,3 @@ export { TaskStore } from './taskstore.service';
 export { SettingsService } from './settings.service';
 export { QuoteService } from './quote.service';
 export { StorageService } from './storage.service';
-export { Id } from './id';

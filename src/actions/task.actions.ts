@@ -4,22 +4,25 @@ import { Task } from '../models';
 import { actionType } from '../util';
 
 export const actions = {
-	ADD_TASK:             actionType('[Task] Add Task'),
-  ADD_TASK_SUCCESS:     actionType('[Task] Add Task Success'),
-  ADD_TASK_FAIL:        actionType('[Task] Add Task Fail'),
-  REMOVE_TASK:          actionType('[Task] Remove Task'),
-  REMOVE_TASK_SUCCESS:  actionType('[Task] Remove Task Success'),
-  REMOVE_TASK_FAIL:     actionType('[Task] Remove Task Fail'),
-	EDIT_TASK:          	actionType('[Task] Edit Task'),
-  EDIT_TASK_SUCCESS:  	actionType('[Task] Edit Task Success'),
-  EDIT_TASK_FAIL:     	actionType('[Task] Edit Task Fail'),
-	REORDER_TASK:					actionType('[Task] Reorder Task'),
-	REORDER_TASK_SUCCESS:	actionType('[Task] Reorder Task Success'),
-	REORDER_TASK_FAIL:		actionType('[Task] Reorder Task Fail'),
-  LOAD:                 actionType('[Task] Load'),
-  LOAD_SUCCESS:         actionType('[Task] Load Success'),
-  LOAD_FAIL:            actionType('[Task] Load Fail'),
-	SELECT_TASK:					actionType('[Task] Select Task')
+	ADD_TASK:             	actionType('[Task] Add Task'),
+  ADD_TASK_SUCCESS:     	actionType('[Task] Add Task Success'),
+  ADD_TASK_FAIL:        	actionType('[Task] Add Task Fail'),
+  REMOVE_TASK:          	actionType('[Task] Remove Task'),
+  REMOVE_TASK_SUCCESS:  	actionType('[Task] Remove Task Success'),
+  REMOVE_TASK_FAIL:     	actionType('[Task] Remove Task Fail'),
+	EDIT_TASK:          		actionType('[Task] Edit Task'),
+  EDIT_TASK_SUCCESS:  		actionType('[Task] Edit Task Success'),
+  EDIT_TASK_FAIL:     		actionType('[Task] Edit Task Fail'),
+	REORDER_TASK:						actionType('[Task] Reorder Task'),
+	REORDER_TASK_SUCCESS:		actionType('[Task] Reorder Task Success'),
+	REORDER_TASK_FAIL:			actionType('[Task] Reorder Task Fail'),
+  LOAD:                 	actionType('[Task] Load'),
+  LOAD_SUCCESS:         	actionType('[Task] Load Success'),
+  LOAD_FAIL:            	actionType('[Task] Load Fail'),
+	SELECT_TASK:						actionType('[Task] Select Task'),
+	ADD_MILESTONE:					actionType('[Task] Add Milestone'),
+	ADD_MILESTONE_SUCCESS:	actionType('[Task] Add Milestone Success'),
+	ADD_MILESTONE_FAIL:			actionType('[Task] Add Milestone Fail')
 }
 
 // Add a task
@@ -116,6 +119,25 @@ export class LoadTaskFail implements Action {
 
 	constructor(public payload: any) {}
 }
+
+// add milestone
+// export class AddMilestone implements Action {
+// 	type = actions.LOAD;
+
+// 	constructor() {}
+// }
+
+// export class LoadTaskSuccess implements Action {
+// 	type = actions.LOAD_SUCCESS;
+
+// 	constructor(public payload: Task[]) {}
+// }
+
+// export class LoadTaskFail implements Action {
+// 	type = actions.LOAD_FAIL;
+
+// 	constructor(public payload: any) {}
+// }
 
 export class SelectTask implements Action {
 	type = actions.SELECT_TASK;

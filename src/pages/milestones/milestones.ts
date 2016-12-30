@@ -24,6 +24,7 @@ import {
 } from '../../providers';
 
 import * as reducers from '../../reducers';
+import * as taskActions from '../../actions/task.actions';
 
 @Component({
   selector: 'page-milestones',
@@ -59,6 +60,7 @@ export class MilestonesPage {
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
         // this.taskFactory.addMilestone(this.resolution, milestone);
+        // this.store.dispatch(new taskActions.EditTask())
       }
     });
 

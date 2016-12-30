@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 import { reorderArray } from 'ionic-angular';
 
+import * as uuid from 'uuid';
+
 @Injectable()
 export class StorageService {
 	private readonly TASKS: string = 'tasks';
@@ -27,6 +29,7 @@ export class StorageService {
 	addTask(task) {
 		return this.getTasks()
 			.then((tasks) => {
+				task.id = uuid.v4();
 				return tasks.concat(task);
 			})
 			.then(this.update);

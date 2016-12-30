@@ -4,7 +4,7 @@ import { NavController, ModalController, ItemSliding } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { TaskFactory, SettingsService, QuoteService, Id } from '../../providers';
+import { TaskFactory, SettingsService, QuoteService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
@@ -28,18 +28,11 @@ export class ResolutionsPage {
     private modalCtrl: ModalController, 
     private settingsService: SettingsService,
     private store: Store<reducers.State>,
-    private quoteService: QuoteService,
-    private id: Id
+    private quoteService: QuoteService
   ) {
     this.quote = this.quoteService.getRandomQuote();
     this.resolutions = store.select(reducers.getTasks);
     this.settings = store.select(reducers.getSettingsState);
-  }
-
-  goToMilestones(resolution: Task): void {
-    this.navCtrl.push(MilestonesPage, {
-      resolution: resolution
-    });
   }
 
   toggleEditMode(): void {
@@ -51,7 +44,6 @@ export class ResolutionsPage {
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        task.id = this.id.id();
         this.store.dispatch(new taskActions.AddTask(task));
       }
     });
