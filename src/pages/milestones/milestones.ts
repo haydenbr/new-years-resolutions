@@ -95,9 +95,7 @@ export class MilestonesPage {
     milestoneModal.present();
   }
 
-  delete(index: number, slidingItem: ItemSliding): void {
-    // this.taskFactory.removeMilestone(this.resolution, index).then(() => {
-    //   slidingItem.close();
-    // });
+  onDelete(milestone: Task) {
+    this.store.dispatch(new milestoneActions.RemoveMilestone({ taskId: this.taskId, milestone }));
   }
 }

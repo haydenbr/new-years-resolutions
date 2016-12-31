@@ -27,7 +27,6 @@
     [tasks]="(resolution | async).milestones" [settings]="settings"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
-    (select)="onSelect($event)"
   ></task-list>
 
   <!--<ion-list *ngIf="resolution.milestones.length">
