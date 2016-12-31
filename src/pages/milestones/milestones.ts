@@ -102,6 +102,11 @@ export class MilestonesPage {
     milestoneModal.present();
   }
 
+  onToggle(milestone: Task) {
+    milestone.isComplete = !milestone.isComplete;
+    this.store.dispatch(new milestoneActions.EditMilestone({ taskId: this.taskId, milestone }));
+  }
+
   onDelete(milestone: Task) {
     this.store.dispatch(new milestoneActions.RemoveMilestone({ taskId: this.taskId, milestone }));
   }
