@@ -6,7 +6,6 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { ResolutionsPage } from '../pages';
-import { SettingsService } from '../providers';
 import { Settings } from '../models';
 import * as reducers from '../reducers';
 import * as settingsActions from '../actions/settings.actions';
@@ -20,7 +19,6 @@ export class MyApp {
 
   constructor(
     platform: Platform,
-    public settingsService: SettingsService,
     private store: Store<reducers.State>
   ) {
     platform.ready().then(() => {

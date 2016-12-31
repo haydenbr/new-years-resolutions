@@ -1,7 +1,6 @@
 import { Action } from '@ngrx/store';
 
 import * as settings from '../actions/settings.actions';
-import { Settings } from '../models';
 
 export interface State {
 	darkMode: boolean,

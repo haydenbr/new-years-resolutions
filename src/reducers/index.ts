@@ -1,5 +1,4 @@
-import { compose } from '@ngrx/core/compose';
-import { ActionReducer, combineReducers } from '@ngrx/store';
+import { combineReducers } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
 import * as settings from './settings.reducer';
