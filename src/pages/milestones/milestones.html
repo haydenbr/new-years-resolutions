@@ -20,7 +20,7 @@
   <quote-bg [tasks]="(resolution | async).milestones"></quote-bg>
 
   <task-list
-    [tasks]="(resolution | async).milestones" [settings]="settings"
+    [tasks]="(resolution | async).milestones" [settings]="settings | async"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
   ></task-list>
