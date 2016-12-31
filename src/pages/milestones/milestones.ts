@@ -18,8 +18,7 @@ import {
 } from '../../models';
 
 import {
-  SettingsService,
-  QuoteService
+  SettingsService
 } from '../../providers';
 
 import * as reducers from '../../reducers';
@@ -33,7 +32,6 @@ export class MilestonesPage {
   resolution: Observable<Task>;
   settings: Observable<Settings>;
   editMode: boolean = false;
-  quote: string = '';
   taskId: string = '';
 
   constructor(
@@ -41,14 +39,10 @@ export class MilestonesPage {
     private navParams: NavParams,
     private modalCtrl: ModalController,
     private settingsService: SettingsService,
-    private quoteService: QuoteService,
     private store: Store<reducers.State>
   ) {
-    // this.resolution = this.navParams.get('resolution');
-    // this.resolution = { id: -1, name: 'stuff', milestones: [], isComplete: false };
     this.resolution = this.store.select(reducers.getSelectedTask);
     this.settings = this.store.select(reducers.getSettingsState);
-    this.quote = this.quoteService.getRandomQuote();
     this.taskId = this.navParams.get('taskId');
   }
 
@@ -84,11 +78,27 @@ export class MilestonesPage {
 
     milestoneModal.onDidDismiss(milestone => {
       if (milestone) {
-        // this.taskFactory.update();
+        
       }
     });
 
     slidingItem.close();
+    milestoneModal.present();
+  }
+
+  onEdit(milestone: Task) {
+    let milestoneModal = this.modalCtrl.create(TaskModal, {
+      action: 'Edit',
+      type: 'Milestone',
+      task: milestone
+    });
+
+    milestoneModal.onDidDismiss((milestone) => {
+      if (milestone) {
+        this.store.dispatch(new milestoneActions.EditMilestone({ taskId: this.taskId, milestone }));
+      }
+    });
+
     milestoneModal.present();
   }
 

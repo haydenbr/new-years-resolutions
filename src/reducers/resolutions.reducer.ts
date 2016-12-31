@@ -37,13 +37,13 @@ export function reducer(state: State = initialState, action: Action): State {
 				taskIds.push(task.id);
 			});
 
-			return Object.assign({ loading: false, loaded: true, tasks, taskIds });
+			return Object.assign({}, state, { loading: false, loaded: true, tasks, taskIds });
 		}
 
 		case taskActions.actions.ADD_TASK_SUCCESS: {
 			let newTask = action.payload as Task;
 			return Object.assign({}, state, {
-				tasks: Object.assign(state.tasks,{ [newTask.id]: newTask, }),
+				tasks: Object.assign({}, state.tasks, { [newTask.id]: newTask, }),
 				taskIds: state.taskIds.concat(newTask.id)
 			});
 		}
@@ -60,7 +60,7 @@ export function reducer(state: State = initialState, action: Action): State {
 		case taskActions.actions.EDIT_TASK_SUCCESS: {
 			let editedTask = action.payload as Task;
 			return Object.assign({}, state, {
-				tasks: Object.assign(state.tasks, { [editedTask.id]: editedTask })
+				tasks: Object.assign({}, state.tasks, { [editedTask.id]: editedTask })
 			});
 		}
 
@@ -79,8 +79,8 @@ export function reducer(state: State = initialState, action: Action): State {
 					task = state.tasks[taskId];
 
 			return Object.assign({}, state, {
-				tasks: Object.assign(state.tasks, {
-					[taskId]: Object.assign(task, {
+				tasks: Object.assign({}, state.tasks, {
+					[taskId]: Object.assign({}, task, {
 						milestones: task.milestones.concat(milesone)
 					})
 				})
@@ -94,14 +94,15 @@ export function reducer(state: State = initialState, action: Action): State {
 					task = state.tasks[taskId];
 
 			return Object.assign({}, state, {
-				tasks: Object.assign(state.tasks, {
-					[taskId]: Object.assign(task, {
+				tasks: Object.assign({}, state.tasks, {
+					[taskId]: Object.assign({}, task, {
 						milestones: task.milestones.filter((m) => m.id !== milesone.id)
 					})
 				})
 			});
 		}
 
+		// I dont like this. This is gross. Should find a better way to handle this
 		case milestoneAction.actions.EDIT_MILESTONE_SUCCESS: {
 			// payload: { taskId, milestone }
 			let taskId = action.payload.taskId,
@@ -109,8 +110,8 @@ export function reducer(state: State = initialState, action: Action): State {
 					task = state.tasks[taskId];
 
 			return Object.assign({}, state, {
-				tasks: Object.assign(state.tasks, {
-					[taskId]: Object.assign(task, {
+				tasks: Object.assign({}, state.tasks, {
+					[taskId]: Object.assign({}, task, {
 						milestones: task.milestones.map((m) => {
 							if (m.id === milesone.id) {
 								return milesone;
@@ -129,8 +130,8 @@ export function reducer(state: State = initialState, action: Action): State {
 					task = state.tasks[taskId];
 
 			return Object.assign({}, state, {
-				tasks: Object.assign(state.tasks, {
-					[taskId]: Object.assign(task, {
+				tasks: Object.assign({}, state.tasks, {
+					[taskId]: Object.assign({}, task, {
 						milestones: reorder(task.milestones, index)
 					})
 				})
