@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
-import * as uuid from 'uuid';
-
 import { Task } from '../models';
 import { reorder } from '../util';
 
@@ -38,7 +36,6 @@ export class StorageService {
 	}
 
 	addTask(task): Promise<Task> {
-		task.id = uuid.v4();
 		return this.getTasks()
 			.then((tasks) => {
 				return tasks.concat(task);
@@ -74,7 +71,7 @@ export class StorageService {
 	}
 
 	addMilestone(taskId: string, milestone: Task): Promise<Task> {
-		milestone.id = uuid.v4();
+		milestone.milestones = undefined;
 		return this.getTasks().then((tasks: Task[]) => {
 			let task = tasks.find((t) => { return t.id === taskId });
 			task.milestones.push(milestone);

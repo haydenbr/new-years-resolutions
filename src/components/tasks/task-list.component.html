@@ -1,7 +1,7 @@
   <ion-list [reorder]="settings.reorderMode" (ionItemReorder)="reorderTasks($event)">
     <ion-item-sliding *ngFor="let task of tasks" #slidingItem>
       <button ion-item (click)="selectTask(task)"> <!--  (click)="editMode()" (click)="goToMilestones(task)" -->
-        <ion-badge item-left *ngIf="!task.isComplete">
+        <ion-badge item-left *ngIf="!task.isComplete && task.milestones">
           {{ countIncompleteMilestones(task) }}
         </ion-badge>
         <span [ngClass]="{'complete': task.isComplete}">{{task.name}}</span>
