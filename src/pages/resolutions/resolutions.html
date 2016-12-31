@@ -1,6 +1,6 @@
 <navbar [settings]="settings | async"></navbar>
 
-<ion-content class="has-header"> <!-- [ngClass]="{'dark-background': settings.darkMode}" -->
+<ion-content class="has-header" [ngClass]="{'dark-background': (settings | async).darkMode}">
   <quote-bg [tasks]="resolutions | async"></quote-bg>
 
   <task-list

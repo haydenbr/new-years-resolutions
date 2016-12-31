@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 
 @Component({
 	selector: 'side-menu',
@@ -6,7 +6,13 @@ import { Component, OnInit, Input } from '@angular/core';
 })
 export class SideMenuComponent implements OnInit {
 	@Input() content: any;
+	@Output() toggleDarkMode = new EventEmitter();
+
 	constructor() { }
 
 	ngOnInit() { }
+
+	toggleDarkModeOutput() {
+		this.toggleDarkMode.emit();
+	}
 }

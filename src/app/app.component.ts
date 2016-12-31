@@ -9,6 +9,7 @@ import { ResolutionsPage } from '../pages';
 import { SettingsService } from '../providers';
 import { Settings } from '../models';
 import * as reducers from '../reducers';
+import * as settingsActions from '../actions/settings.actions';
 
 @Component({
   templateUrl: 'app.html'
@@ -28,5 +29,9 @@ export class MyApp {
     });
 
     this.settings = this.store.select(reducers.getSettingsState);
+  }
+
+  onToggleDarkMode() {
+    this.store.dispatch(new settingsActions.ToggleDarkMode());
   }
 }
