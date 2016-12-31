@@ -28,7 +28,8 @@ export class MilestoneEffects {
 				.map(() => {
 					return new milestoneActions.AddMilestoneSuccess(payload);
 				})
-				.catch(() => {
+				.catch((err) => {
+					console.error('milestone add fail', err);
 					return of(new milestoneActions.AddMilestoneFail(payload));
 				});
 		});

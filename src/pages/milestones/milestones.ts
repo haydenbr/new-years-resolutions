@@ -24,6 +24,7 @@ import {
 
 import * as reducers from '../../reducers';
 import * as taskActions from '../../actions/task.actions';
+import * as milestoneActions from '../../actions/milestone.actions';
 
 @Component({
   selector: 'page-milestones',
@@ -34,6 +35,7 @@ export class MilestonesPage {
   settings: Settings;
   editMode: boolean = false;
   quote: string = '';
+  taskId: string = '';
 
   constructor(
     private navCtrl: NavController, 
@@ -48,6 +50,7 @@ export class MilestonesPage {
     this.resolution = this.store.select(reducers.getSelectedTask);
     this.settings = this.settingsService.settings;
     this.quote = this.quoteService.getRandomQuote();
+    this.taskId = this.navParams.get('taskId');
   }
 
   addMilestone(): void {
@@ -55,8 +58,10 @@ export class MilestonesPage {
       type: 'Milestone'
     });
 
-    milestoneModal.onDidDismiss(milestone => {
+    milestoneModal.onDidDismiss((milestone) => {
       if (milestone) {
+        console.log('milestone', milestone);
+        this.store.dispatch(new milestoneActions.AddMilestone({ taskId: this.taskId, milestone }));
         // this.taskFactory.addMilestone(this.resolution, milestone);
         // this.store.dispatch(new taskActions.EditTask())
       }

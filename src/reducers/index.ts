@@ -24,6 +24,7 @@ export const getTasks = createSelector(getResolutionsState, resolutions.getTasks
 export const getTasksLoading = createSelector(getResolutionsState, resolutions.getLoading);
 export const getTasksLoaded = createSelector(getResolutionsState, resolutions.getLoaded);
 export const getSelectedTask = createSelector(getResolutionsState, resolutions.getSelectedTask);
+export const getMilestones = createSelector(getResolutionsState, resolutions.getMilestones);
 
 export const getSettingsState = (state: State) => state.settings;
 export const getDarkMode = createSelector(getSettingsState, settings.getDarkMode);

@@ -79,6 +79,6 @@ export class ResolutionsPage {
 
   onSelect(task: Task) {
     this.store.dispatch(new taskActions.SelectTask(task));
-    this.navCtrl.push(MilestonesPage);
+    this.navCtrl.push(MilestonesPage, { taskId: task.id });
   }
 }

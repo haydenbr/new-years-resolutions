@@ -56,7 +56,7 @@ export class StorageService {
 			.then(() => { return removedTask; });
 	}
 
-	updateTask(updatedTask): Promise<Task> {
+	updateTask = (updatedTask): Promise<Task> => {
 		return this.getTasks()
 			.then((tasks) => {
 				let idx = tasks.findIndex(task => task.id === updatedTask.id);

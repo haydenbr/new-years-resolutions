@@ -155,3 +155,4 @@ export const getTasks = createSelector(getTasksMap, getTaskIds, (tasks, ids) => 
 export const getSelectedTask = createSelector(getTasksMap, getSelectedTaskId, (tasks, id) => {
 	return tasks[id];
 });
+export const getMilestones = createSelector(getSelectedTask, (task) => { return task.milestones });
