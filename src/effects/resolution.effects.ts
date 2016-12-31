@@ -10,7 +10,7 @@ import { Task } from'../models';
 import { StorageService } from '../providers';
 
 @Injectable()
-export class TaskEffects {
+export class ResolutionEffects {
 	constructor(
 		private actions: Actions,
 		private storage: StorageService
