@@ -65,7 +65,7 @@ export function reducer(state: State = initialState, action: Action): State {
 		}
 
 		case taskActions.actions.REORDER_TASK_SUCCESS: {
-			return Object.assign({}, state, { taskIds: reorderArray(state.taskIds, action.payload) });
+			return Object.assign({}, state, { taskIds: reorderArray(state.taskIds.slice(0), action.payload) });
 		}
 
 		case taskActions.actions.SELECT_TASK: {
