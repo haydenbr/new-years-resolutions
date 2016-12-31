@@ -1,16 +1,16 @@
 import { Action } from '@ngrx/store';
 
 import * as settings from '../actions/settings.actions';
-import { Task } from '../models';
+import { Settings } from '../models';
 
 export interface State {
 	darkMode: boolean,
-	editMode: boolean
+	reorderMode: boolean
 }
 
 const initialState: State = {
 	darkMode: false,
-	editMode: false
+	reorderMode: false
 }
 
 export function reducer(state: State = initialState, action: Action) {
@@ -19,8 +19,8 @@ export function reducer(state: State = initialState, action: Action) {
 			return Object.assign({}, state, { darkMode: !state.darkMode });
 		}
 
-		case settings.actions.TOGGLE_EDIT_MODE: {
-			return Object.assign({}, state, { editMode: !state.editMode });
+		case settings.actions.TOGGLE_REORDER_MODE: {
+			return Object.assign({}, state, { reorderMode: !state.reorderMode });
 		}
 
 		default: {
@@ -30,4 +30,4 @@ export function reducer(state: State = initialState, action: Action) {
 }
 
 export const getDarkMode = (state: State) => state.darkMode;
-export const getEditMode = (state: State) => state.editMode;
+export const getReorderMode = (state: State) => state.reorderMode;

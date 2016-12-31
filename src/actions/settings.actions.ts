@@ -5,7 +5,7 @@ import { actionType } from '../util';
 
 export const actions = {
 	TOGGLE_DARK_MODE: actionType('[Settings] Toggle Dark Mode'),
-	TOGGLE_EDIT_MODE: actionType('[Settings] Toggle Edit Mode')
+	TOGGLE_REORDER_MODE: actionType('[Settings] Toggle Reorder Mode')
 };
 
 export class ToggleDarkMode implements Action {
@@ -14,8 +14,8 @@ export class ToggleDarkMode implements Action {
 	constructor() {}
 }
 
-export class ToggleEditMode implements Action {
-	type = actions.TOGGLE_EDIT_MODE;
+export class ToggleReorderMode implements Action {
+	type = actions.TOGGLE_REORDER_MODE;
 
 	constructor() {}
 }

@@ -28,4 +28,4 @@ export const getMilestones = createSelector(getResolutionsState, resolutions.get
 
 export const getSettingsState = (state: State) => state.settings;
 export const getDarkMode = createSelector(getSettingsState, settings.getDarkMode);
-export const getEditMode = createSelector(getSettingsState, settings.getEditMode);
+export const getReorderMode = createSelector(getSettingsState, settings.getReorderMode);

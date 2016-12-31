@@ -8,11 +8,11 @@
       </button>
     </ion-buttons>
 
-    <!--<ion-buttons end *ngIf="resolution.milestones.length">
+    <ion-buttons end *ngIf="(resolution | async).milestones.length">
       <button ion-button (click)="toggleEditMode()">
         {{editMode ? 'Done' : 'Edit'}}
       </button>
-    </ion-buttons>-->
+    </ion-buttons>
   </ion-navbar>
 </ion-header>
 

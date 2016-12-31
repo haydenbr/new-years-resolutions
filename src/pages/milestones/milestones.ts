@@ -32,7 +32,7 @@ import * as milestoneActions from '../../actions/milestone.actions';
 })
 export class MilestonesPage {
   resolution: Observable<Task>;
-  settings: Settings;
+  settings: Observable<Settings>;
   editMode: boolean = false;
   quote: string = '';
   taskId: string = '';
@@ -48,7 +48,7 @@ export class MilestonesPage {
     // this.resolution = this.navParams.get('resolution');
     // this.resolution = { id: -1, name: 'stuff', milestones: [], isComplete: false };
     this.resolution = this.store.select(reducers.getSelectedTask);
-    this.settings = this.settingsService.settings;
+    this.settings = this.store.select(reducers.getSettingsState);
     this.quote = this.quoteService.getRandomQuote();
     this.taskId = this.navParams.get('taskId');
   }
@@ -62,8 +62,6 @@ export class MilestonesPage {
       if (milestone) {
         console.log('milestone', milestone);
         this.store.dispatch(new milestoneActions.AddMilestone({ taskId: this.taskId, milestone }));
-        // this.taskFactory.addMilestone(this.resolution, milestone);
-        // this.store.dispatch(new taskActions.EditTask())
       }
     });
 
