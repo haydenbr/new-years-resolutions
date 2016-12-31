@@ -1,7 +1,4 @@
-<navbar
-  [settings]="settings | async"
-  (toggleReorderMode)="onToggleReorderMode()"
-></navbar>
+<navbar></navbar>
 
 <ion-content class="has-header" [ngClass]="{'dark-background': settings.darkMode}">
   <quote-bg [tasks]="(resolution | async).milestones"></quote-bg>

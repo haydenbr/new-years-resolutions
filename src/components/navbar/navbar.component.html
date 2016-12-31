@@ -1,6 +1,6 @@
 <ion-header>
   <ion-navbar color="primary">
-    <ion-title>New Years Resolutions</ion-title>
+    <ion-title>{{title}}</ion-title>
 
     <ion-buttons start>
       <button ion-button menuToggle icon-only>
@@ -9,8 +9,8 @@
     </ion-buttons>
 
     <ion-buttons end>
-      <button ion-button (click)="toggleReorderModeOutput()">
-        {{settings.reorderMode ? 'Done' : 'Reorder' }}
+      <button ion-button (click)="toggleReorderMode()">
+        {{(settings | async).reorderMode ? 'Done' : 'Reorder' }}
       </button>
     </ion-buttons>
   </ion-navbar>

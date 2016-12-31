@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 
 import {
   NavController,
@@ -27,9 +27,10 @@ import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
   selector: 'page-milestones',
-  templateUrl: 'milestones.html'
+  templateUrl: './milestones.html',
+  // changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MilestonesPage {
+export class MilestonesPage implements OnInit {
   resolution: Observable<Task>;
   settings: Observable<Settings>;
   editMode: boolean = false;
@@ -41,7 +42,9 @@ export class MilestonesPage {
     private modalCtrl: ModalController,
     private settingsService: SettingsService,
     private store: Store<reducers.State>
-  ) {
+  ) {}
+
+  ngOnInit() {
     this.resolution = this.store.select(reducers.getSelectedTask);
     this.settings = this.store.select(reducers.getSettingsState);
     this.taskId = this.navParams.get('taskId');

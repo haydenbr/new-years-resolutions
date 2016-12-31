@@ -1,21 +1,30 @@
 import { Component, EventEmitter,  Input, OnInit, Output } from '@angular/core';
 
+import { Observable } from 'rxjs';
+import { Store } from '@ngrx/store';
+
 import { Settings } from '../../models';
+import * as reducers from '../../reducers';
+
+import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
 	selector: 'navbar',
 	templateUrl: './navbar.component.html'
 })
 export class NavbarComponent implements OnInit {
-	@Input() 	settings: Settings;
-	@Input() 	title;
-	@Output() toggleReorderMode = new EventEmitter();
+	settings: Observable<Settings>;
+	@Input() 	title: string = 'New Years Resolutions';
 
-	constructor() { }
+	constructor(
+		private store: Store<reducers.State>
+	) {}
 
-	ngOnInit() { }
+	ngOnInit() {
+		this.settings = this.store.select(reducers.getSettingsState);
+	}
 
-	toggleReorderModeOutput() {
-		this.toggleReorderMode.emit();
+	toggleReorderMode() {
+		this.store.dispatch(new settingsActions.ToggleReorderMode());
 	}
 }

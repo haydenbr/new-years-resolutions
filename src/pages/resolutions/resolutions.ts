@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
@@ -14,11 +14,11 @@ import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
   selector: 'page-resolutions',
-  templateUrl: 'resolutions.html',
+  templateUrl: './resolutions.html',
   // changeDetection: ChangeDetectionStrategy.OnPush
    // TODO: Fix: when change detection is set to onPush, task-list component isn't picking up changes to settings
 })
-export class ResolutionsPage {
+export class ResolutionsPage implements OnInit {
   editMode: boolean = false;
   resolutions: Observable<Task[]>;
   settings: Observable<Settings>;
@@ -28,9 +28,11 @@ export class ResolutionsPage {
     private modalCtrl: ModalController, 
     private settingsService: SettingsService,
     private store: Store<reducers.State>,
-  ) {
-    this.resolutions = store.select(reducers.getTasks);
-    this.settings = store.select(reducers.getSettingsState);
+  ) {}
+
+  ngOnInit() {
+    this.resolutions = this.store.select(reducers.getTasks);
+    this.settings = this.store.select(reducers.getSettingsState);
   }
 
   onToggleReorderMode(): void {
