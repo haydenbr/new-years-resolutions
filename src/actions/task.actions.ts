@@ -19,10 +19,7 @@ export const actions = {
   LOAD:                 	actionType('[Task] Load'),
   LOAD_SUCCESS:         	actionType('[Task] Load Success'),
   LOAD_FAIL:            	actionType('[Task] Load Fail'),
-	SELECT_TASK:						actionType('[Task] Select Task'),
-	ADD_MILESTONE:					actionType('[Task] Add Milestone'),
-	ADD_MILESTONE_SUCCESS:	actionType('[Task] Add Milestone Success'),
-	ADD_MILESTONE_FAIL:			actionType('[Task] Add Milestone Fail')
+	SELECT_TASK:						actionType('[Task] Select Task')
 }
 
 // Add a task
@@ -92,13 +89,13 @@ export class ReorderTask implements Action {
 export class ReorderTaskSuccess implements Action {
 	type = actions.REORDER_TASK_SUCCESS;
 
-	constructor(public payload: Task[]) {}
+	constructor(public payload: { to: number, from: number }) {}
 }
 
 export class ReorderTaskFail implements Action {
 	type = actions.REORDER_TASK_FAIL;
 
-	constructor(public payload: Task[]) {}
+	constructor(public payload: { to: number, from: number }) {}
 }
 
 // load tasks
@@ -119,25 +116,6 @@ export class LoadTaskFail implements Action {
 
 	constructor(public payload: any) {}
 }
-
-// add milestone
-// export class AddMilestone implements Action {
-// 	type = actions.LOAD;
-
-// 	constructor() {}
-// }
-
-// export class LoadTaskSuccess implements Action {
-// 	type = actions.LOAD_SUCCESS;
-
-// 	constructor(public payload: Task[]) {}
-// }
-
-// export class LoadTaskFail implements Action {
-// 	type = actions.LOAD_FAIL;
-
-// 	constructor(public payload: any) {}
-// }
 
 export class SelectTask implements Action {
 	type = actions.SELECT_TASK;

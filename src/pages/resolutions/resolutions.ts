@@ -15,7 +15,8 @@ import * as settingsActions from '../../actions/settings.actions';
 @Component({
   selector: 'page-resolutions',
   templateUrl: 'resolutions.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush // TODO: when this is on, task-list component isn't picking up changes to settings
+  // changeDetection: ChangeDetectionStrategy.OnPush
+   // TODO: Fix: when change detection is set to onPush, task-list component isn't picking up changes to settings
 })
 export class ResolutionsPage {
   editMode: boolean = false;

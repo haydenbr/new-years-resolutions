@@ -27,6 +27,7 @@ export class TaskModal {
     }
 
     this.task = this.navParams.get('task') ? this.navParams.get('task') : new Task();
+    console.log('from task modal', this.task);
 
     this.settings = this.settingsService.settings;
   }

@@ -1,7 +1,7 @@
 export class Task {
-  public id: number;
+  public id: string;
   public name: string = '';
-  public description?: string;
-  public milestones?: Task[];
+  public description: string;
+  public milestones: Task[] = [];
   public isComplete: boolean = false;
 }

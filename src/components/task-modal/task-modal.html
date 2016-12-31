@@ -26,7 +26,7 @@
   <div padding>
     <button ion-button block 
       (click)="submit(taskName, taskDescription)" 
-      [disabled]="!taskName.value.length">
+      [disabled]="!taskName.value">
       {{action + ' ' + type}}
     </button>
   </div>

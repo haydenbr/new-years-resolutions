@@ -73,10 +73,10 @@ export class TaskEffects {
 			.mergeMap((index: { from: number, to: number }) => {
 				return Observable.fromPromise(this.storage.reorderTasks(index))
 					.map((tasks: Task[]) => {
-						return new taskActions.ReorderTaskSuccess(tasks);
+						return new taskActions.ReorderTaskSuccess(index);
 					})
 					.catch((tasks) => {
-						return of(new taskActions.ReorderTaskFail(tasks));
+						return of(new taskActions.ReorderTaskFail(index));
 					});
 			});
 
