@@ -1,10 +1,10 @@
 import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { NavController, ModalController, ItemSliding } from 'ionic-angular';
+import { NavController, ModalController } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { SettingsService, QuoteService } from '../../providers';
+import { SettingsService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
@@ -20,7 +20,6 @@ import * as settingsActions from '../../actions/settings.actions';
 })
 export class ResolutionsPage {
   editMode: boolean = false;
-  quote: string = '';
   resolutions: Observable<Task[]>;
   settings: Observable<Settings>;
 
@@ -29,9 +28,7 @@ export class ResolutionsPage {
     private modalCtrl: ModalController, 
     private settingsService: SettingsService,
     private store: Store<reducers.State>,
-    private quoteService: QuoteService
   ) {
-    this.quote = this.quoteService.getRandomQuote();
     this.resolutions = store.select(reducers.getTasks);
     this.settings = store.select(reducers.getSettingsState);
   }

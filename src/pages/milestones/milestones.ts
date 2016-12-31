@@ -23,7 +23,6 @@ import {
 } from '../../providers';
 
 import * as reducers from '../../reducers';
-import * as taskActions from '../../actions/task.actions';
 import * as milestoneActions from '../../actions/milestone.actions';
 
 @Component({
