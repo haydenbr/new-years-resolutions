@@ -14,13 +14,22 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
-
-.has-header {
-  margin-top: 56px;
+.scroll-content {
+  overflow-y: auto; // hides scrollbar when there's nothing to scroll
+  top: $toolbar-md-height; // keeps scroll bar from going underneath navbar
 }
 
 .dark-background {
   background-color: color($colors, dark);
+
+  .list-md ion-item-sliding {
+    background-color: color($colors, dark);
+
+    .item-md {
+      background-color: color($colors, dark);
+      color: color($colors, light);
+    }
+  }
 }
 
 .no-tasks-container {

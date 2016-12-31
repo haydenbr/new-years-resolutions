@@ -14,7 +14,7 @@ import * as settingsActions from '../../actions/settings.actions';
 })
 export class NavbarComponent implements OnInit {
 	settings: Observable<Settings>;
-	@Input() 	title: string = 'New Years Resolutions';
+	@Input() title: string = 'New Years Resolutions';
 
 	constructor(
 		private store: Store<reducers.State>
