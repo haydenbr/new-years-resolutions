@@ -23,6 +23,7 @@ import {
 
 import * as reducers from '../../reducers';
 import * as milestoneActions from '../../actions/milestone.actions';
+import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
   selector: 'page-milestones',
@@ -61,12 +62,12 @@ export class MilestonesPage {
     milestoneModal.present();
   }
 
-  reorderMilestones(index: any) {
-    // this.taskFactory.reorderMilestone(this.resolution, index);
+  onReorder(index: { from: number, to: number }) {
+    this.store.dispatch(new milestoneActions.ReorderMilestone({ taskId: this.taskId, index }));
   }
 
-  toggleEditMode(): void {
-    // this.editMode =! this.editMode
+  onToggleReorderMode(): void {
+    this.store.dispatch(new settingsActions.ToggleReorderMode());
   }
 
   edit(milestone: Task, slidingItem: ItemSliding): void {

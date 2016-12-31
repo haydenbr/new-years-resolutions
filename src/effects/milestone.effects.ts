@@ -63,7 +63,8 @@ export class MilestoneEffects {
 					.map(() => {
 						return new milestoneActions.ReorderMilestoneSuccess(payload);
 					})
-					.catch(() => {
+					.catch((err) => {
+						console.error(err);
 						return of(new milestoneActions.ReorderMilestoneFail(payload));
 					});
 			});

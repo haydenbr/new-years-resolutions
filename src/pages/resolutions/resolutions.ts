@@ -15,7 +15,7 @@ import * as settingsActions from '../../actions/settings.actions';
 @Component({
   selector: 'page-resolutions',
   templateUrl: 'resolutions.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  // changeDetection: ChangeDetectionStrategy.OnPush
    // TODO: Fix: when change detection is set to onPush, task-list component isn't picking up changes to settings
 })
 export class ResolutionsPage {
@@ -33,7 +33,7 @@ export class ResolutionsPage {
     this.settings = store.select(reducers.getSettingsState);
   }
 
-  toggleReorderMode(): void {
+  onToggleReorderMode(): void {
     this.store.dispatch(new settingsActions.ToggleReorderMode());
   }
 

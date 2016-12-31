@@ -107,6 +107,8 @@ export class StorageService {
 		return this.getTasks().then((tasks: Task[]) => {
 			let task = tasks.find((t) => { return t.id === taskId });
 			task.milestones = reorder(task.milestones, index);
+
+			return task;
 		})
 		.then(this.updateTask);
 	}

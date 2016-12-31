@@ -9,13 +9,13 @@ import { Settings } from '../../models';
 export class NavbarComponent implements OnInit {
 	@Input() 	settings: Settings;
 	@Input() 	title;
-	@Output() toggleReorder = new EventEmitter();
+	@Output() toggleReorderMode = new EventEmitter();
 
 	constructor() { }
 
 	ngOnInit() { }
 
-	toggleReorderOutput() {
-		this.toggleReorder.emit();
+	toggleReorderModeOutput() {
+		this.toggleReorderMode.emit();
 	}
 }
