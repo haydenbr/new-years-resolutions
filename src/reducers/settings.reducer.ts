@@ -15,7 +15,11 @@ const initialState: State = {
 
 export function reducer(state: State = initialState, action: Action) {
 	switch (action.type) {
-		case settings.actions.TOGGLE_DARK_MODE: {
+		case settings.actions.LOAD_SETTINGS_SUCCESS: {
+			return Object.assign({}, state, action.payload);
+		};
+
+		case settings.actions.TOGGLE_DARK_MODE_SUCCESS: {
 			return Object.assign({}, state, { darkMode: !state.darkMode });
 		}
 

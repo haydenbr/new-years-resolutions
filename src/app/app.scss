@@ -19,15 +19,23 @@
   top: $toolbar-md-height; // keeps scroll bar from going underneath navbar
 }
 
+ion-menu {
+  top: $toolbar-md-height;
+
+  .scroll-content {
+    top: 0;
+  }
+}
+
 .dark-background {
-  background-color: color($colors, dark);
+  background-color: $dark;
 
   .list-md ion-item-sliding {
-    background-color: color($colors, dark);
+    background-color: $dark;
 
     .item-md {
-      background-color: color($colors, dark);
-      color: color($colors, light);
+      background-color: $dark;
+      color: $light;
     }
   }
 }

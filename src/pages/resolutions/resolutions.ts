@@ -15,7 +15,7 @@ import * as settingsActions from '../../actions/settings.actions';
 @Component({
   selector: 'page-resolutions',
   templateUrl: './resolutions.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush
    // TODO: Fix: when change detection is set to onPush, task-list component isn't picking up changes to settings
 })
 export class ResolutionsPage implements OnInit {
@@ -33,6 +33,10 @@ export class ResolutionsPage implements OnInit {
   ngOnInit() {
     this.resolutions = this.store.select(reducers.getTasks);
     this.settings = this.store.select(reducers.getSettingsState);
+
+    this.store.select(reducers.getSettingsState).subscribe((settings) => {
+      console.log('settings subscription', settings);
+    });
   }
 
   onToggleReorderMode(): void {

@@ -19,14 +19,19 @@
 // colors so you can add, rename and remove colors as needed.
 // The "primary" color is the only required color in the map.
 
-$colors: (
-  primary:    #2EC4B6,
-  secondary:  #FF9F1C,
-  danger:     #E71D36,
-  light:      #FDFFFC,
-  dark:       #011627
-);
+$primary:   #2EC4B6;
+$secondary: #FF9F1C;
+$danger:    #E71D36;
+$light:     #FDFFFC;
+$dark:      #011627;
 
+$colors: (
+  primary:    $primary,
+  secondary:  $secondary,
+  danger:     $danger,
+  light:      $light,
+  dark:       $dark
+);
 
 // App iOS Variables
 // --------------------------------------------------

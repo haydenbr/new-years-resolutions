@@ -8,7 +8,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 
 import { MyApp } from './app.component';
 import { reducer } from '../reducers';
-import { ResolutionEffects, MilestoneEffects } from '../effects';
+import { ResolutionEffects, MilestoneEffects, SettingsEffects } from '../effects';
 
 import {
   ResolutionsPage, 
@@ -39,6 +39,7 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
     StoreModule.provideStore(reducer), // should we also pass in initial state?
     EffectsModule.run(ResolutionEffects),
     EffectsModule.run(MilestoneEffects),
+    EffectsModule.run(SettingsEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   bootstrap: [ IonicApp ],

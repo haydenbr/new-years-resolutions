@@ -7,7 +7,7 @@ import { reorder } from '../util';
 @Injectable()
 export class StorageService {
 	private readonly TASKS: string = 'tasks';
-	// private readonly SETTINGS: string = 'settings';
+	private readonly SETTINGS: string = 'settings';
 
 	constructor(private storage: Storage) {
 		this.initData();
@@ -23,6 +23,12 @@ export class StorageService {
 		this.getTasks().then((tasks) => {
 			if (!tasks) {
 				this.setTasks([]);
+			}
+		});
+
+		this.getSettings().then((settings) => {
+			if (!settings) {
+				this.setSettings({});
 			}
 		});
 	}
@@ -113,7 +119,27 @@ export class StorageService {
 		.then(this.updateTask);
 	}
 
+	getSettings(): Promise<any> {
+		return this.storage.get(this.SETTINGS);
+	}
+
+	setSettings(settings: any): Promise<any> {
+		return this.storage.set(this.SETTINGS, settings);
+	}
+
+	toggleDarkMode() {
+		return this.getSettings().then((settings) => {
+			settings.darkMode = !settings.darkMode;
+			return settings;
+		})
+		.then(this.updateSettings);
+	}
+
 	private updateTasks = (tasks): Promise<Task[]> => {
 		return this.setTasks(tasks).then(() => tasks);
+	}
+
+	private updateSettings = (settings): Promise<any> => {
+		return this.setSettings(settings).then(() => settings);
 	}
 }
