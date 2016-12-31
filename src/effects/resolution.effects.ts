@@ -23,7 +23,6 @@ export class ResolutionEffects {
 		.switchMap(() => {
 			return Observable.fromPromise(this.storage.getTasks())
 				.map((tasks: Task[]) => {
-					console.log('tasks', tasks);
 					return new taskActions.LoadTaskSuccess(tasks);
 				})
 				.catch((error) => {
@@ -40,7 +39,6 @@ export class ResolutionEffects {
 		.mergeMap((task) => {
 			return Observable.fromPromise(this.storage.addTask(task))
 				.map(() => {
-					console.log('adding new task', task);
 					return new taskActions.AddTaskSuccess(task);
 				})
 				.catch(() => {

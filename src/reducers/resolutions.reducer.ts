@@ -1,11 +1,11 @@
-import { reorderArray } from 'ionic-angular';
-
 import { Action } from '@ngrx/store';
 import omit from 'lodash/omit';
 import { createSelector } from 'reselect';
 
 import * as taskActions from '../actions/task.actions';
+import * as milestoneAction from '../actions/milestone.actions';
 import { Task } from '../models';
+import { reorder } from '../util';
 
 export interface State {
 	loaded: boolean;
@@ -65,11 +65,76 @@ export function reducer(state: State = initialState, action: Action): State {
 		}
 
 		case taskActions.actions.REORDER_TASK_SUCCESS: {
-			return Object.assign({}, state, { taskIds: reorderArray(state.taskIds.slice(0), action.payload) });
+			return Object.assign({}, state, { taskIds: reorder(state.taskIds, action.payload) });
 		}
 
 		case taskActions.actions.SELECT_TASK: {
 			return Object.assign({}, state, { selectedTaskId: action.payload.id });
+		}
+
+		case milestoneAction.actions.ADD_MILESTONE_SUCCESS: {
+			// payload: { taskId, milestone }
+			let taskId = action.payload.taskId,
+					milesone = action.payload.milestone,
+					task = state.tasks[taskId];
+
+			return Object.assign({}, state, {
+				tasks: Object.assign(state.tasks, {
+					[taskId]: Object.assign(task, {
+						milestones: task.milestones.concat(milesone)
+					})
+				})
+			});
+		}
+
+		case milestoneAction.actions.REMOVE_MILESTONE_SUCCESS: {
+			// payload: { taskId, milestone }
+			let taskId = action.payload.taskId,
+					milesone = action.payload.milestone,
+					task = state.tasks[taskId];
+
+			return Object.assign({}, state, {
+				tasks: Object.assign(state.tasks, {
+					[taskId]: Object.assign(task, {
+						milestones: task.milestones.filter((m) => m.id !== milesone.id)
+					})
+				})
+			});
+		}
+
+		case milestoneAction.actions.EDIT_MILESTONE_SUCCESS: {
+			// payload: { taskId, milestone }
+			let taskId = action.payload.taskId,
+					milesone = action.payload.milestone,
+					task = state.tasks[taskId];
+
+			return Object.assign({}, state, {
+				tasks: Object.assign(state.tasks, {
+					[taskId]: Object.assign(task, {
+						milestones: task.milestones.map((m) => {
+							if (m.id === milesone.id) {
+								return milesone;
+							}
+							return m;
+						})
+					})
+				})
+			});
+		}
+
+		case milestoneAction.actions.REORDER_MILESTONE_SUCCESS: {
+			// payload: { taskId, milestone }
+			let taskId = action.payload.taskId,
+					index = action.payload.index,
+					task = state.tasks[taskId];
+
+			return Object.assign({}, state, {
+				tasks: Object.assign(state.tasks, {
+					[taskId]: Object.assign(task, {
+						milestones: reorder(task.milestones, index)
+					})
+				})
+			});
 		}
 
 		default: {

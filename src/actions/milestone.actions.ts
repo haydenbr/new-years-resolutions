@@ -22,74 +22,74 @@ export const actions = {
 export class AddMilestone implements Action {
 	type = actions.ADD_MILESTONE;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 export class AddMilestoneSuccess implements Action {
 	type = actions.ADD_MILESTONE_SUCCESS;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 export class AddMilestoneFail implements Action {
 	type = actions.ADD_MILESTONE_FAIL;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 // remove a milestone
 export class RemoveMilestone implements Action {
 	type = actions.REMOVE_MILESTONE;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 export class RemoveMilestoneSuccess implements Action {
 	type = actions.REMOVE_MILESTONE_SUCCESS;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 export class RemoveMilestoneFail implements Action {
 	type = actions.REMOVE_MILESTONE_FAIL;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 // edit a milestone
 export class EditMilestone implements Action {
 	type = actions.EDIT_MILESTONE;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 export class EditMilestoneSuccess implements Action {
 	type = actions.EDIT_MILESTONE_SUCCESS;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 export class EditMilestoneFail implements Action {
 	type = actions.EDIT_MILESTONE_FAIL;
 
-	constructor(public payload: Task) {}
+	constructor(public payload: { taskId: string, milestone: Task }) {}
 }
 
 // reorder milestone
 export class ReorderMilestone implements Action {
 	type = actions.REORDER_MILESTONE;
 
-	constructor(public payload: { to: number, from: number }) {}
+	constructor(public payload: { taskId: string, index: { from: number, to: number } }) {}
 }
 
 export class ReorderMilestoneSuccess implements Action {
 	type = actions.REORDER_MILESTONE_SUCCESS;
 
-	constructor(public payload: { to: number, from: number }) {}
+	constructor(public payload: { taskId: string, index: { from: number, to: number } }) {}
 }
 
 export class ReorderMilestoneFail implements Action {
 	type = actions.REORDER_MILESTONE_FAIL;
 
-	constructor(public payload: { to: number, from: number }) {}
+	constructor(public payload: { taskId: string, index: { from: number, to: number } }) {}
 }

@@ -16,67 +16,71 @@ export class ResolutionEffects {
 		private storage: StorageService
 	) {}
 
+	// payload { taskId, milestone }
 	@Effect()
 	addMilestone: Observable<Action> = this.actions
 		.ofType(milestoneActions.actions.ADD_MILESTONE)
 		.map((action: Action) => {
 			return action.payload;
 		})
-		.mergeMap((milestone) => {
-			return Observable.fromPromise(this.storage.addTask(milestone))
+		.mergeMap((payload: { taskId: string, milestone: Task }) => {
+			return Observable.fromPromise(this.storage.addMilestone(payload.taskId, payload.milestone))
 				.map(() => {
-					return new milestoneActions.AddMilestoneSuccess(milestone);
+					return new milestoneActions.AddMilestoneSuccess(payload);
 				})
 				.catch(() => {
-					return of(new milestoneActions.AddMilestoneFail(milestone));
+					return of(new milestoneActions.AddMilestoneFail(payload));
 				});
 		});
 
+	// payload { taskId, milestone }
 	@Effect()
 	removeMilestone: Observable<Action> = this.actions
 		.ofType(milestoneActions.actions.REMOVE_MILESTONE)
 		.map((action: Action) => {
 			return action.payload;
 		})
-		.mergeMap((milestone) => {
-			return Observable.fromPromise(this.storage.removeTask(milestone))
+		.mergeMap((payload: { taskId: string, milestone: Task }) => {
+			return Observable.fromPromise(this.storage.removeMilestone(payload.taskId, payload.milestone))
 				.map(() => {
-					return new milestoneActions.RemoveMilestoneSuccess(milestone);
+					return new milestoneActions.RemoveMilestoneSuccess(payload);
 				})
 				.catch(() => {
-					return of(new milestoneActions.RemoveMilestoneSuccess(milestone));
+					return of(new milestoneActions.RemoveMilestoneSuccess(payload));
 				});
 		});
 
+		// payload { taskId, index }
 		@Effect()
 		reorderMilestone: Observable<Action> = this.actions
 			.ofType(milestoneActions.actions.REORDER_MILESTONE)
 			.map((action: Action) => {
 				return action.payload;
 			})
-			.mergeMap((index: { from: number, to: number }) => {
-				return Observable.fromPromise(this.storage.reorderTasks(index))
-					.map((milestones: Task[]) => {
-						return new milestoneActions.ReorderMilestoneSuccess(index);
+			.mergeMap((payload: { taskId: string, index: { from: number, to: number } }) => {
+				return Observable.fromPromise(this.storage.reorderMilestone(payload.taskId, payload.index))
+					.map(() => {
+						return new milestoneActions.ReorderMilestoneSuccess(payload);
 					})
-					.catch((tasks) => {
-						return of(new milestoneActions.ReorderMilestoneFail(index));
+					.catch(() => {
+						return of(new milestoneActions.ReorderMilestoneFail(payload));
 					});
 			});
 
+		// payload { taskId, milestone }
 		@Effect()
 		editMilestone: Observable<Action> = this.actions
 			.ofType(milestoneActions.actions.EDIT_MILESTONE)
 			.map((action: Action) => {
 				return action.payload
 			})
-			.mergeMap((milestone) => {
-				return Observable.fromPromise(this.storage.updateTask(milestone))
+			.mergeMap((payload: { taskId: string, milestone: Task }) => {
+				return Observable.fromPromise(this.storage.updateMilestone(payload.taskId, payload.milestone))
 					.map(() => {
-						return new milestoneActions.EditMilestoneSuccess(milestone);
+						return new milestoneActions.EditMilestoneSuccess(payload);
 					})
 					.catch(() => {
-						return of(new milestoneActions.EditMilestoneFail(milestone));
+						return of(new milestoneActions.EditMilestoneFail(payload));
 					});
 			});
 }

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
-import { reorderArray } from 'ionic-angular';
 
 import * as uuid from 'uuid';
 
 import { Task } from '../models';
+import { reorder } from '../util';
 
 @Injectable()
 export class StorageService {
@@ -47,13 +47,13 @@ export class StorageService {
 			.then(() => { return task; });
 	}
 
-	removeTask(removeTask): Promise<Task[]> {
+	removeTask(removedTask): Promise<Task[]> {
 		return this.getTasks()
 			.then((tasks) => {
-				return tasks.filter(task => task.id !== removeTask.id);
+				return tasks.filter(task => task.id !== removedTask.id);
 			})
 			.then(this.updateTasks)
-			.then(() => { return removeTask; });
+			.then(() => { return removedTask; });
 	}
 
 	updateTask(updatedTask): Promise<Task> {
@@ -68,9 +68,50 @@ export class StorageService {
 
 	reorderTasks(index: { from: number, to: number }): Promise<Task[]> {
 		return this.getTasks().then((tasks) => {
-			return reorderArray(tasks, index);
+			return reorder(tasks, index);
 		})
 		.then(this.updateTasks)
+	}
+
+	addMilestone(taskId: string, milestone: Task): Promise<Task> {
+		milestone.id = uuid.v4();
+		return this.getTasks().then((tasks: Task[]) => {
+			let task = tasks.find((t) => { return t.id === taskId });
+			task.milestones.push(milestone);
+			return task;
+		})
+		.then(this.updateTask);
+	}
+
+	removeMilestone(taskId: string, removedMilestone: Task) {
+		return this.getTasks().then((tasks: Task[]) => {
+			let task = tasks.find((t) => { return t.id === taskId });
+			task.milestones = task.milestones.filter((m) => { return m.id !== removedMilestone.id })
+			return task;
+		})
+		.then(this.updateTask);
+	}
+
+	updateMilestone(taskId: string, updatedMilestone: Task) {
+		return this.getTasks().then((tasks: Task[]) => {
+			let task = tasks.find((t) => { return t.id === taskId });
+			task.milestones = task.milestones.map((m) => {
+				if (m.id === updatedMilestone.id) {
+					return updatedMilestone;
+				}
+				return m;
+			});
+			return task;
+		})
+		.then(this.updateTask);
+	}
+
+	reorderMilestone(taskId: string, index: { from: number, to: number }) {
+		return this.getTasks().then((tasks: Task[]) => {
+			let task = tasks.find((t) => { return t.id === taskId });
+			task.milestones = reorder(task.milestones, index);
+		})
+		.then(this.updateTask);
 	}
 
 	private updateTasks = (tasks): Promise<Task[]> => {
