@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <ion-title>New Years Resolutions</ion-title>
+
+    <ion-buttons start>
+      <button ion-button menuToggle icon-only>
+        <ion-icon name="menu"></ion-icon>
+      </button>
+    </ion-buttons>
+
+    <ion-buttons end>
+      <button ion-button (click)="toggleReorderOutput()">
+        {{settings.reorderMode ? 'Done' : 'Edit'}}
+      </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>

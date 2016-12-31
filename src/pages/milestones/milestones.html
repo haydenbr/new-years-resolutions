@@ -1,22 +1,6 @@
-<ion-header>
-  <ion-navbar color="primary">
-    <ion-title>{{(resolution | async)?.name}}</ion-title>
+<navbar [settings]="settings | async"></navbar>
 
-    <ion-buttons start>
-      <button ion-button menuToggle icon-only>
-        <ion-icon name="menu"></ion-icon>
-      </button>
-    </ion-buttons>
-
-    <ion-buttons end *ngIf="(resolution | async).milestones.length">
-      <button ion-button (click)="toggleEditMode()">
-        {{editMode ? 'Done' : 'Edit'}}
-      </button>
-    </ion-buttons>
-  </ion-navbar>
-</ion-header>
-
-<ion-content [ngClass]="{'dark-background': settings.darkMode}">
+<ion-content class="has-header" [ngClass]="{'dark-background': settings.darkMode}">
   <quote-bg [tasks]="(resolution | async).milestones"></quote-bg>
 
   <task-list
