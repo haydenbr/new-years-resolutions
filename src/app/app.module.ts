@@ -21,7 +21,7 @@ import {
   StorageService
 } from '../providers';
 
-import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, NavbarComponent } from '../components';
+import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, NavbarComponent, FooterComponent } from '../components';
 
 @NgModule({
   declarations: [
@@ -32,7 +32,8 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
     TaskListComponent,
     QuoteBgComponent,
     SideMenuComponent,
-    NavbarComponent
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     IonicModule.forRoot(MyApp),
