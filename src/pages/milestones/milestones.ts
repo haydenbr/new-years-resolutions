@@ -24,7 +24,8 @@ import * as settingsActions from '../../actions/settings.actions';
 })
 export class MilestonesPage implements OnInit {
   resolution: Observable<Task>;
-  settings: Observable<Settings>;
+  darkMode: Observable<boolean>;
+  reorderMode: Observable<boolean>;
   editMode: boolean = false;
   taskId: string = '';
 
@@ -37,7 +38,8 @@ export class MilestonesPage implements OnInit {
 
   ngOnInit() {
     this.resolution = this.store.select(reducers.getSelectedTask);
-    this.settings = this.store.select(reducers.getSettingsState);
+    this.darkMode = this.store.select(reducers.getDarkMode);
+    this.reorderMode = this.store.select(reducers.getReorderMode);
     this.taskId = this.navParams.get('taskId');
   }
 
