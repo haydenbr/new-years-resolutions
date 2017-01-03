@@ -30,7 +30,6 @@ export class MyApp {
   }
 
   onToggleDarkMode(toggle) {
-    console.log('on toggle dark mode', toggle);
     this.store.dispatch(new settingsActions.ToggleDarkMode(toggle));
   }
 }

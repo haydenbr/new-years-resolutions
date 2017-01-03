@@ -1,10 +1,9 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { SettingsService } from '../../providers';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
@@ -14,29 +13,26 @@ import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
   selector: 'page-resolutions',
-  templateUrl: './resolutions.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
-   // TODO: Fix: when change detection is set to onPush, task-list component isn't picking up changes to settings
+  templateUrl: './resolutions.html'
 })
 export class ResolutionsPage implements OnInit {
   editMode: boolean = false;
   resolutions: Observable<Task[]>;
   settings: Observable<Settings>;
+  darkMode: Observable<boolean>;
+  reorderMode: Observable<boolean>;
 
   constructor(
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
-    private settingsService: SettingsService,
     private store: Store<reducers.State>,
   ) {}
 
   ngOnInit() {
     this.resolutions = this.store.select(reducers.getTasks);
     this.settings = this.store.select(reducers.getSettingsState);
-
-    this.store.select(reducers.getSettingsState).subscribe((settings) => {
-      console.log('settings subscription', settings);
-    });
+    this.darkMode = this.store.select(reducers.getDarkMode);
+    this.reorderMode = this.store.select(reducers.getReorderMode);
   }
 
   onToggleReorderMode(): void {

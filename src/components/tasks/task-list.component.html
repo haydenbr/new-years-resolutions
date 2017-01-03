@@ -1,21 +1,21 @@
-  <ion-list [reorder]="settings.reorderMode" (ionItemReorder)="reorderTasks($event)">
-    <ion-item-sliding *ngFor="let task of tasks" #slidingItem color="dark">
-      <button ion-item (click)="selectTask(task)"> <!--  (click)="editMode()" (click)="goToMilestones(task)" -->
-        <ion-badge item-left *ngIf="!task.isComplete && task.milestones">
-          {{ countIncompleteMilestones(task) }}
-        </ion-badge>
-        <span [ngClass]="{'complete': task.isComplete}">{{task.name}}</span>
+<ion-list [reorder]="reorderMode" (ionItemReorder)="reorderTasks($event)">
+  <ion-item-sliding *ngFor="let task of tasks" #slidingItem>
+    <button ion-item (click)="selectTask(task)">
+      <ion-badge item-left *ngIf="!task.isComplete && task.milestones">
+        {{ countIncompleteMilestones(task) }}
+      </ion-badge>
+      <span [ngClass]="{'complete': task.isComplete}">{{task.name}}</span>
+    </button>
+    <ion-item-options side="right" (ionSwipe)="toggleTask(task, slidingItem)">
+      <button ion-button color="secondary" (click)="editTask(task, slidingItem)" *ngIf="!task.isComplete">
+        Edit
       </button>
-      <ion-item-options side="right" (ionSwipe)="toggleTask(task, slidingItem)">
-        <button ion-button color="secondary" (click)="editTask(task, slidingItem)" *ngIf="!task.isComplete">
-          Edit
-        </button>
-        <button ion-button color="danger" (click)="deleteTask(task, slidingItem)">
-          Delete
-        </button>
-        <button ion-button expandable (click)="toggleTask(task, slidingItem)">
-          {{task.isComplete ? 'Not Done' : 'Done'}}
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+      <button ion-button color="danger" (click)="deleteTask(task, slidingItem)">
+        Delete
+      </button>
+      <button ion-button expandable (click)="toggleTask(task, slidingItem)">
+        {{task.isComplete ? 'Not Done' : 'Done'}}
+      </button>
+    </ion-item-options>
+  </ion-item-sliding>
+</ion-list>

@@ -1,20 +1,14 @@
 <navbar></navbar>
 
-<ion-content class="has-header" [ngClass]="{'dark-background': (settings | async).darkMode}">
+<ion-content class="has-header" [ngClass]="{'dark-background': (darkMode | async) }">
   <quote-bg [tasks]="resolutions | async"></quote-bg>
 
   <task-list
-    [tasks]="resolutions | async" [settings]="settings | async"
+    [tasks]="resolutions | async" [reorderMode]="reorderMode | async"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
     (select)="onSelect($event)"
   ></task-list>
 </ion-content>
-
-<!--<ion-footer>
-  <ion-toolbar color="primary">
-    <button ion-button full clear color="light" (click)="addResolution()">Add a Resolution</button>
-  </ion-toolbar>
-</ion-footer>-->
 
 <footer title="Add a Resolution" (footerClick)="addResolution()"></footer>

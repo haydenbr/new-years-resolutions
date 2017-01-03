@@ -10,18 +10,11 @@ import { MyApp } from './app.component';
 import { reducer } from '../reducers';
 import { ResolutionEffects, MilestoneEffects, SettingsEffects } from '../effects';
 
-import {
-  ResolutionsPage, 
-  MilestonesPage
-} from '../pages';
+import { ResolutionsPage, MilestonesPage } from '../pages';
 
-import {
-  SettingsService, 
-  QuoteService,
-  StorageService
-} from '../providers';
+import { QuoteService, StorageService } from '../providers';
 
-import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, NavbarComponent, FooterComponent } from '../components';
+import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, NavbarComponent, FooterComponent, Foo } from '../components';
 
 @NgModule({
   declarations: [
@@ -33,7 +26,8 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
     QuoteBgComponent,
     SideMenuComponent,
     NavbarComponent,
-    FooterComponent
+    FooterComponent,
+    Foo
   ],
   imports: [
     IonicModule.forRoot(MyApp),
@@ -53,7 +47,6 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
   ],
   providers: [
     Storage,
-    SettingsService,
     QuoteService,
     StorageService,
     {

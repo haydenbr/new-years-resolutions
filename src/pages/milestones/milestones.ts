@@ -12,14 +12,7 @@ import { Store } from '@ngrx/store';
 
 import { TaskModal } from '../../components';
 
-import {
-  Task,
-  Settings
-} from '../../models';
-
-import {
-  SettingsService
-} from '../../providers';
+import { Task, Settings } from '../../models';
 
 import * as reducers from '../../reducers';
 import * as milestoneActions from '../../actions/milestone.actions';
@@ -27,8 +20,7 @@ import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
   selector: 'page-milestones',
-  templateUrl: './milestones.html',
-  // changeDetection: ChangeDetectionStrategy.OnPush
+  templateUrl: './milestones.html'
 })
 export class MilestonesPage implements OnInit {
   resolution: Observable<Task>;
@@ -40,7 +32,6 @@ export class MilestonesPage implements OnInit {
     private navCtrl: NavController, 
     private navParams: NavParams,
     private modalCtrl: ModalController,
-    private settingsService: SettingsService,
     private store: Store<reducers.State>
   ) {}
 
