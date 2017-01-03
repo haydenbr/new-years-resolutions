@@ -19,7 +19,7 @@ export function reducer(state: State = initialState, action: Action) {
 		};
 
 		case settings.actions.TOGGLE_DARK_MODE_SUCCESS: {
-			return Object.assign({}, state, { darkMode: !state.darkMode });
+			return Object.assign({}, state, { darkMode: action.payload });
 		}
 
 		case settings.actions.TOGGLE_REORDER_MODE: {

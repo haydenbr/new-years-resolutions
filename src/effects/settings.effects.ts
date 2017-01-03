@@ -36,10 +36,10 @@ export class SettingsEffects {
 		.map((action: Action) => {
 			return action.payload;
 		})
-		.mergeMap((task) => {
-			return Observable.fromPromise(this.storage.toggleDarkMode())
+		.mergeMap((toggle) => {
+			return Observable.fromPromise(this.storage.toggleDarkMode(toggle))
 				.map((settings) => {
-					return new settingsActions.ToggleDarkModeSuccess();
+					return new settingsActions.ToggleDarkModeSuccess(toggle);
 				})
 				.catch((err) => {
 					console.error(err);

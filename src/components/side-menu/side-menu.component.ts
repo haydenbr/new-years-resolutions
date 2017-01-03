@@ -17,7 +17,7 @@ export class SideMenuComponent implements OnInit {
 		
 	}
 
-	toggleDarkModeOutput() {
-		this.toggleDarkMode.emit();
+	toggleDarkModeOutput($event) {
+		this.toggleDarkMode.emit($event.checked);
 	}
 }

@@ -3,7 +3,7 @@
     <ion-list>
 	    <ion-item>
 			  <ion-label>Enable Dark Mode</ion-label>
-				<ion-toggle (ionChange)="toggleDarkModeOutput()"></ion-toggle>
+				<ion-toggle (ionChange)="toggleDarkModeOutput($event)" [checked]="settings.darkMode"></ion-toggle>
 			</ion-item>
     </ion-list>
   </ion-content>

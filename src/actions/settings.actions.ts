@@ -34,13 +34,13 @@ export class LoadSettingsFail implements Action {
 export class ToggleDarkMode implements Action {
 	type = actions.TOGGLE_DARK_MODE;
 
-	constructor() {}
+	constructor(public payload: boolean) {}
 }
 
 export class ToggleDarkModeSuccess implements Action {
 	type = actions.TOGGLE_DARK_MODE_SUCCESS;
 
-	constructor() {}
+	constructor(public payload: boolean) {}
 }
 
 export class ToggleDarkModeFail implements Action {

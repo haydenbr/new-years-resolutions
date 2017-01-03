@@ -127,9 +127,9 @@ export class StorageService {
 		return this.storage.set(this.SETTINGS, settings);
 	}
 
-	toggleDarkMode() {
+	toggleDarkMode(toggle: boolean) {
 		return this.getSettings().then((settings) => {
-			settings.darkMode = !settings.darkMode;
+			settings.darkMode = toggle;
 			return settings;
 		})
 		.then(this.updateSettings);

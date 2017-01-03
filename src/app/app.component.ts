@@ -29,7 +29,8 @@ export class MyApp {
     this.settings = this.store.select(reducers.getSettingsState);
   }
 
-  onToggleDarkMode() {
-    this.store.dispatch(new settingsActions.ToggleDarkMode());
+  onToggleDarkMode(toggle) {
+    console.log('on toggle dark mode', toggle);
+    this.store.dispatch(new settingsActions.ToggleDarkMode(toggle));
   }
 }
