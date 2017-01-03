@@ -12,6 +12,8 @@ const initialState: State = {
 	reorderMode: false
 }
 
+// ============= REDUCER =============
+
 export function reducer(state: State = initialState, action: Action) {
 	switch (action.type) {
 		case settings.actions.LOAD_SETTINGS_SUCCESS: {
@@ -31,6 +33,25 @@ export function reducer(state: State = initialState, action: Action) {
 		}
 	}
 }
+
+let reducerCases = {};
+
+reducerCases[settings.actions.LOAD_SETTINGS_SUCCESS] =
+	function (state: State, action: Action) {
+		return Object.assign({}, state, action.payload);
+	};
+
+reducerCases[settings.actions.TOGGLE_DARK_MODE_SUCCESS] =
+	function (state: State, action: Action) {
+		return Object.assign({}, state, { darkMode: action.payload });
+	};
+
+reducerCases[settings.actions.TOGGLE_REORDER_MODE] =
+	function (state: State, action: Action) {
+		return Object.assign({}, state, { reorderMode: !state.reorderMode });
+	};
+
+// ============= SELECTORS =============
 
 export const getDarkMode = (state: State) => state.darkMode;
 export const getReorderMode = (state: State) => state.reorderMode;
