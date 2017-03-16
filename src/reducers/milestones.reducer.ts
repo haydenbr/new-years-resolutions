@@ -1,5 +1,4 @@
 import { Action } from '@ngrx/store';
-import omit from 'lodash/omit';
 import { createSelector } from 'reselect';
 
 import { State } from './resolutions.reducer';

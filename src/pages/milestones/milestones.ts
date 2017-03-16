@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 import {
   NavController,
@@ -12,7 +12,7 @@ import { Store } from '@ngrx/store';
 
 import { TaskModal } from '../../components';
 
-import { Task, Settings } from '../../models';
+import { Task } from '../../models';
 
 import * as reducers from '../../reducers';
 import * as milestoneActions from '../../actions/milestone.actions';

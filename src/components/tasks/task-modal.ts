@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { ViewController, NavParams } from 'ionic-angular';
 
-import { Task, Settings } from '../../models';
+import { Task } from '../../models';
 
 @Component({
   templateUrl: 'task-modal.html'
