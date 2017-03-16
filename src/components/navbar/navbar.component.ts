@@ -4,8 +4,8 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import { Settings } from '../../models';
-import * as reducers from '../../reducers';
-
+import { AppState } from '../../reducers/app.state';
+import { getSettingsState } from '../../reducers/settings.reducer';
 import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
@@ -17,11 +17,11 @@ export class NavbarComponent implements OnInit {
 	@Input() title: string = 'New Years Resolutions';
 
 	constructor(
-		private store: Store<reducers.State>
+		private store: Store<AppState>
 	) {}
 
 	ngOnInit() {
-		this.settings = this.store.select(reducers.getSettingsState);
+		this.settings = this.store.select(getSettingsState);
 	}
 
 	toggleReorderMode() {

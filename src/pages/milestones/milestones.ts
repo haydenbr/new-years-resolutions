@@ -14,7 +14,9 @@ import { TaskModal } from '../../components';
 
 import { Task } from '../../models';
 
-import * as reducers from '../../reducers';
+import { AppState } from '../../reducers/app.state';
+import { getDarkMode, getReorderMode } from '../../reducers/settings.reducer';
+import { getCurrentResolution } from '../../reducers/resolutions.reducer';
 import * as milestoneActions from '../../actions/milestone.actions';
 import * as settingsActions from '../../actions/settings.actions';
 
@@ -33,13 +35,13 @@ export class MilestonesPage implements OnInit {
     private navCtrl: NavController, 
     private navParams: NavParams,
     private modalCtrl: ModalController,
-    private store: Store<reducers.State>
+    private store: Store<AppState>
   ) {}
 
   ngOnInit() {
-    this.resolution = this.store.select(reducers.getSelectedTask);
-    this.darkMode = this.store.select(reducers.getDarkMode);
-    this.reorderMode = this.store.select(reducers.getReorderMode);
+    this.resolution = this.store.select(getCurrentResolution);
+    this.darkMode = this.store.select(getDarkMode);
+    this.reorderMode = this.store.select(getReorderMode);
     this.taskId = this.navParams.get('taskId');
   }
 

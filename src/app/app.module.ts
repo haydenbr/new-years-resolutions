@@ -31,10 +31,10 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
   ],
   imports: [
     IonicModule.forRoot(MyApp),
-    StoreModule.provideStore(reducer), // should we also pass in initial state?
-    EffectsModule.run(ResolutionEffects),
-    EffectsModule.run(MilestoneEffects),
-    EffectsModule.run(SettingsEffects),
+    StoreModule.provideStore(reducer),
+    EffectsModule.runAfterBootstrap(ResolutionEffects),
+    EffectsModule.runAfterBootstrap(MilestoneEffects),
+    EffectsModule.runAfterBootstrap(SettingsEffects),
     StoreDevtoolsModule.instrumentOnlyWithExtension()
   ],
   bootstrap: [ IonicApp ],

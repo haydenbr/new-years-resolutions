@@ -1,20 +1,19 @@
 import { Action } from '@ngrx/store';
-import { createSelector } from 'reselect';
 
-import { State } from './resolutions.reducer';
+import { ResolutionsState } from './resolutions.reducer';
 import * as milestoneAction from '../actions/milestone.actions';
 import { Task } from '../models';
 import { reorder } from '../util';
 
-export function reducer(state: State, action: Action): State {
+export function milstonesReducer(state: ResolutionsState, action: Action): ResolutionsState {
 	let reducerHandle = reducerCases[action.type];
 
 	if (reducerHandle) {
 		let taskId = action.payload.taskId,
-				task = state.tasks[taskId];
+				task = state.resolutions[taskId];
 
 		return Object.assign({}, state, {
-			tasks: Object.assign({}, state.tasks, {
+			tasks: Object.assign({}, state.resolutions, {
 				[taskId]: Object.assign({}, task, {
 					milestones: reducerHandle(task, action.payload)
 				})

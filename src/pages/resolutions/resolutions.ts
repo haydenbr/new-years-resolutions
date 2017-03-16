@@ -7,8 +7,10 @@ import { Store } from '@ngrx/store';
 import { Task, Settings } from '../../models';
 import { TaskModal } from '../../components';
 import { MilestonesPage } from '../milestones/milestones';
-import * as reducers from '../../reducers';
-import * as taskActions from '../../actions/task.actions';
+import { AppState } from '../../reducers/app.state';
+import { getDarkMode, getReorderMode } from '../../reducers/settings.reducer';
+import { getResolutions } from '../../reducers/resolutions.reducer';
+import * as resolutionActions from '../../actions/resolutions.actions';
 import * as settingsActions from '../../actions/settings.actions';
 
 @Component({
@@ -25,14 +27,13 @@ export class ResolutionsPage implements OnInit {
   constructor(
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
-    private store: Store<reducers.State>,
+    private store: Store<AppState>,
   ) {}
 
   ngOnInit() {
-    this.resolutions = this.store.select(reducers.getTasks);
-    this.settings = this.store.select(reducers.getSettingsState);
-    this.darkMode = this.store.select(reducers.getDarkMode);
-    this.reorderMode = this.store.select(reducers.getReorderMode);
+    this.resolutions = this.store.select(getResolutions);
+    this.darkMode = this.store.select(getDarkMode);
+    this.reorderMode = this.store.select(getReorderMode);
   }
 
   onToggleReorderMode(): void {
@@ -44,7 +45,7 @@ export class ResolutionsPage implements OnInit {
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        this.store.dispatch(new taskActions.AddTask(task));
+        this.store.dispatch(new resolutionActions.Create(task));
       }
     });
 
@@ -53,7 +54,7 @@ export class ResolutionsPage implements OnInit {
 
   onToggle(task: Task) {
     task.isComplete = !task.isComplete;
-    this.store.dispatch(new taskActions.EditTask(task));
+    this.store.dispatch(new resolutionActions.Update(task));
   }
 
   onEdit(task: Task) {
@@ -61,7 +62,7 @@ export class ResolutionsPage implements OnInit {
 
     taskModal.onDidDismiss(task => {
       if (task) {
-        this.store.dispatch(new taskActions.EditTask(task));
+        this.store.dispatch(new resolutionActions.Update(task));
       }
     });
 
@@ -69,15 +70,15 @@ export class ResolutionsPage implements OnInit {
   }
 
   onDelete(task: Task) {
-    this.store.dispatch(new taskActions.RemoveTask(task));
+    this.store.dispatch(new resolutionActions.Delete(task));
   }
 
   onReorder(index: { from: number, to: number }) {
-    this.store.dispatch(new taskActions.ReorderTask(index));
+    this.store.dispatch(new resolutionActions.Reorder(index));
   }
 
   onSelect(task: Task) {
-    this.store.dispatch(new taskActions.SelectTask(task));
+    this.store.dispatch(new resolutionActions.SetCurrent(task));
     this.navCtrl.push(MilestonesPage, { taskId: task.id });
   }
 }

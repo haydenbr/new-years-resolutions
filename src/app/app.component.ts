@@ -7,7 +7,8 @@ import { Store } from '@ngrx/store';
 
 import { ResolutionsPage } from '../pages';
 import { Settings } from '../models';
-import * as reducers from '../reducers';
+import { AppState } from '../reducers/app.state';
+import { getSettingsState } from '../reducers/settings.reducer';
 import * as settingsActions from '../actions/settings.actions';
 
 @Component({
@@ -19,14 +20,14 @@ export class MyApp {
 
   constructor(
     platform: Platform,
-    private store: Store<reducers.State>
+    private store: Store<AppState>
   ) {
     platform.ready().then(() => {
       StatusBar.styleDefault();
       Splashscreen.hide();
     });
 
-    this.settings = this.store.select(reducers.getSettingsState);
+    this.settings = this.store.select(getSettingsState);
   }
 
   onToggleDarkMode(toggle) {
