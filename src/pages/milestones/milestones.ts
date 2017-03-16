@@ -29,7 +29,7 @@ export class MilestonesPage implements OnInit {
   darkMode: Observable<boolean>;
   reorderMode: Observable<boolean>;
   editMode: boolean = false;
-  taskId: string = '';
+  resolutionId: string = '';
 
   constructor(
     private navCtrl: NavController, 
@@ -42,7 +42,7 @@ export class MilestonesPage implements OnInit {
     this.resolution = this.store.select(getCurrentResolution);
     this.darkMode = this.store.select(getDarkMode);
     this.reorderMode = this.store.select(getReorderMode);
-    this.taskId = this.navParams.get('taskId');
+    this.resolutionId = this.navParams.get('taskId');
   }
 
   addMilestone(): void {
@@ -52,7 +52,7 @@ export class MilestonesPage implements OnInit {
 
     milestoneModal.onDidDismiss((milestone) => {
       if (milestone) {
-        this.store.dispatch(new milestoneActions.AddMilestone({ resolutionId: this.taskId, milestone }));
+        this.store.dispatch(new milestoneActions.AddMilestone({ resolutionId: this.resolutionId, milestone }));
       }
     });
 
@@ -60,7 +60,7 @@ export class MilestonesPage implements OnInit {
   }
 
   onReorder(index: { from: number, to: number }) {
-    this.store.dispatch(new milestoneActions.ReorderMilestone({ resolutionId: this.taskId, index }));
+    this.store.dispatch(new milestoneActions.ReorderMilestone({ resolutionId: this.resolutionId, index }));
   }
 
   onToggleReorderMode(): void {
@@ -93,7 +93,7 @@ export class MilestonesPage implements OnInit {
 
     milestoneModal.onDidDismiss((milestone) => {
       if (milestone) {
-        this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.taskId, milestone }));
+        this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.resolutionId, milestone }));
       }
     });
 
@@ -102,10 +102,10 @@ export class MilestonesPage implements OnInit {
 
   onToggle(milestone: Task) {
     milestone.isComplete = !milestone.isComplete;
-    this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.taskId, milestone }));
+    this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.resolutionId, milestone }));
   }
 
   onDelete(milestone: Task) {
-    this.store.dispatch(new milestoneActions.RemoveMilestone({ resolutionId: this.taskId, milestone }));
+    this.store.dispatch(new milestoneActions.RemoveMilestone({ resolutionId: this.resolutionId, milestone }));
   }
 }

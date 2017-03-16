@@ -4,6 +4,7 @@ import { createSelector } from 'reselect';
 
 import { AppState } from './app.state';
 import * as resolutionActions from '../actions/resolutions.actions';
+import { GetAll } from '../actions/resolutions.actions';
 import { Task } from '../models';
 import { reorder } from '../util';
 import { milstonesReducer } from './milestones.reducer';

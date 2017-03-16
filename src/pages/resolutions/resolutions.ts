@@ -81,4 +81,12 @@ export class ResolutionsPage implements OnInit {
     this.store.dispatch(new resolutionActions.SetCurrent(resolution));
     this.navCtrl.push(MilestonesPage, { taskId: resolution.id });
   }
+
+  search() {
+
+  }
+
+  cancelSearch() {
+    
+  }
 }

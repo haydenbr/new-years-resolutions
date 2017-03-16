@@ -19,7 +19,7 @@ export class ResolutionEffects {
 	@Effect()
 	loadTasks: Observable<Action> = this.actions
 		.ofType(resolutionActions.actions.GET_ALL)
-		.startWith(new resolutionActions.GetAll())
+		.startWith(new resolutionActions.GetAll()) // runs on app start
 		.switchMap(() => {
 			return Observable.fromPromise(this.storage.getTasks())
 				.map((tasks: Task[]) => {
