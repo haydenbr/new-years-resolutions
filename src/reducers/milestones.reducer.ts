@@ -9,13 +9,13 @@ export function milstonesReducer(state: ResolutionsState, action: Action): Resol
 	let reducerHandle = reducerCases[action.type];
 
 	if (reducerHandle) {
-		let taskId = action.payload.taskId,
-				task = state.resolutions[taskId];
+		let resolutionId = action.payload.resolutionId,
+				resolution = state.resolutions[resolutionId];
 
 		return Object.assign({}, state, {
-			tasks: Object.assign({}, state.resolutions, {
-				[taskId]: Object.assign({}, task, {
-					milestones: reducerHandle(task, action.payload)
+			resolutions: Object.assign({}, state.resolutions, {
+				[resolutionId]: Object.assign({}, resolution, {
+					milestones: reducerHandle(resolution, action.payload)
 				})
 			})
 		});
@@ -27,20 +27,22 @@ export function milstonesReducer(state: ResolutionsState, action: Action): Resol
 let reducerCases = {};
 
 reducerCases[milestoneAction.actions.ADD_MILESTONE_SUCCESS] =
-	function (task: Task, payload) {
-		return task.milestones.concat(payload.milestone);
+	function (resolution: Task, payload) {
+		console.log('reso', resolution);
+		console.log(payload);
+		return resolution.milestones.concat(payload.milestone);
 	};
 
 reducerCases[milestoneAction.actions.REMOVE_MILESTONE_SUCCESS] =
-	function (task: Task, payload) {
-		return task.milestones.filter((m) => m.id !== payload.milestone.id);
+	function (resolution: Task, payload) {
+		return resolution.milestones.filter((m) => m.id !== payload.milestone.id);
 	};
 
 reducerCases[milestoneAction.actions.EDIT_MILESTONE_SUCCESS] =
-	function (task: Task, payload) {
+	function (resolution: Task, payload) {
 		let milestone = payload.milestone;
 
-		return task.milestones.map((m) => {
+		return resolution.milestones.map((m) => {
 			if (m.id === milestone.id) {
 				return milestone;
 			}
@@ -49,6 +51,6 @@ reducerCases[milestoneAction.actions.EDIT_MILESTONE_SUCCESS] =
 	};
 
 reducerCases[milestoneAction.actions.REORDER_MILESTONE_SUCCESS] =
-	function (task: Task, payload) {
-		return reorder(task.milestones, payload.index);
+	function (resolution: Task, payload) {
+		return reorder(resolution.milestones, payload.index);
 	};

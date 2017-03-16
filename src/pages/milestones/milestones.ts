@@ -53,7 +53,7 @@ export class MilestonesPage implements OnInit {
     milestoneModal.onDidDismiss((milestone) => {
       if (milestone) {
         console.log('milestone', milestone);
-        this.store.dispatch(new milestoneActions.AddMilestone({ taskId: this.taskId, milestone }));
+        this.store.dispatch(new milestoneActions.AddMilestone({ resolutionId: this.taskId, milestone }));
       }
     });
 
@@ -61,7 +61,7 @@ export class MilestonesPage implements OnInit {
   }
 
   onReorder(index: { from: number, to: number }) {
-    this.store.dispatch(new milestoneActions.ReorderMilestone({ taskId: this.taskId, index }));
+    this.store.dispatch(new milestoneActions.ReorderMilestone({ resolutionId: this.taskId, index }));
   }
 
   onToggleReorderMode(): void {
@@ -94,7 +94,7 @@ export class MilestonesPage implements OnInit {
 
     milestoneModal.onDidDismiss((milestone) => {
       if (milestone) {
-        this.store.dispatch(new milestoneActions.EditMilestone({ taskId: this.taskId, milestone }));
+        this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.taskId, milestone }));
       }
     });
 
@@ -103,10 +103,10 @@ export class MilestonesPage implements OnInit {
 
   onToggle(milestone: Task) {
     milestone.isComplete = !milestone.isComplete;
-    this.store.dispatch(new milestoneActions.EditMilestone({ taskId: this.taskId, milestone }));
+    this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.taskId, milestone }));
   }
 
   onDelete(milestone: Task) {
-    this.store.dispatch(new milestoneActions.RemoveMilestone({ taskId: this.taskId, milestone }));
+    this.store.dispatch(new milestoneActions.RemoveMilestone({ resolutionId: this.taskId, milestone }));
   }
 }

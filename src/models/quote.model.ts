@@ -14,7 +14,8 @@ export class QuoteModel {
     'A creative man is motivated by the desire to achieve, not by the desire to beat others. - Ayn Rand',
     'The secret of getting ahead is getting started. - Mark Twain',
     'Quality is not an act, it is a habit. - Aristotle',
-    'The will to win, the desire to succeed, the urge to reach your full potential... these are the keys that will unlock the door to personal excellence. - Confucius'
+    'The will to win, the desire to succeed, the urge to reach your full potential... these are the keys that will unlock the door to personal excellence. - Confucius',
+    'Bob is cool ... \'nuff said - unknown'
   ];
 
   get() {

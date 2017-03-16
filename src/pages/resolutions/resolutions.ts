@@ -43,42 +43,42 @@ export class ResolutionsPage implements OnInit {
   addResolution(): void {
     let taskModal = this.modalCtrl.create(TaskModal);
 
-    taskModal.onDidDismiss(task => {
-      if (task) {
-        this.store.dispatch(new resolutionActions.Create(task));
+    taskModal.onDidDismiss(resolution => {
+      if (resolution) {
+        this.store.dispatch(new resolutionActions.Create(resolution));
       }
     });
 
     taskModal.present();
   }
 
-  onToggle(task: Task) {
-    task.isComplete = !task.isComplete;
-    this.store.dispatch(new resolutionActions.Update(task));
+  onToggle(resolution: Task) {
+    resolution.isComplete = !resolution.isComplete;
+    this.store.dispatch(new resolutionActions.Update(resolution));
   }
 
-  onEdit(task: Task) {
-    let taskModal = this.modalCtrl.create(TaskModal, { task: task, action: 'Edit' });
+  onEdit(resolution: Task) {
+    let taskModal = this.modalCtrl.create(TaskModal, { task: resolution, action: 'Edit' });
 
-    taskModal.onDidDismiss(task => {
-      if (task) {
-        this.store.dispatch(new resolutionActions.Update(task));
+    taskModal.onDidDismiss(resolution => {
+      if (resolution) {
+        this.store.dispatch(new resolutionActions.Update(resolution));
       }
     });
 
     taskModal.present();
   }
 
-  onDelete(task: Task) {
-    this.store.dispatch(new resolutionActions.Delete(task));
+  onDelete(resolution: Task) {
+    this.store.dispatch(new resolutionActions.Delete(resolution));
   }
 
   onReorder(index: { from: number, to: number }) {
     this.store.dispatch(new resolutionActions.Reorder(index));
   }
 
-  onSelect(task: Task) {
-    this.store.dispatch(new resolutionActions.SetCurrent(task));
-    this.navCtrl.push(MilestonesPage, { taskId: task.id });
+  onSelect(resolution: Task) {
+    this.store.dispatch(new resolutionActions.SetCurrent(resolution));
+    this.navCtrl.push(MilestonesPage, { taskId: resolution.id });
   }
 }
