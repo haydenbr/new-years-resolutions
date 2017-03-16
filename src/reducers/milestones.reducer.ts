@@ -28,8 +28,6 @@ let reducerCases = {};
 
 reducerCases[milestoneAction.actions.ADD_MILESTONE_SUCCESS] =
 	function (resolution: Task, payload) {
-		console.log('reso', resolution);
-		console.log(payload);
 		return resolution.milestones.concat(payload.milestone);
 	};
 

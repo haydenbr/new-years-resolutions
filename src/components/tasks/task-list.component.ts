@@ -17,8 +17,6 @@ export class TaskListComponent {
 	@Output() select = new EventEmitter();
 
 	ngOnChanges(changes) {
-		console.log('list changes', changes);
-
 		if (changes.reorderMode) {
 			this.reorderMode = changes.reorderMode.currentValue;
 		}

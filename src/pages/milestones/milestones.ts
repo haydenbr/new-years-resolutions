@@ -52,7 +52,6 @@ export class MilestonesPage implements OnInit {
 
     milestoneModal.onDidDismiss((milestone) => {
       if (milestone) {
-        console.log('milestone', milestone);
         this.store.dispatch(new milestoneActions.AddMilestone({ resolutionId: this.taskId, milestone }));
       }
     });
