@@ -4,4 +4,3 @@ export * from './quotes/quote-bg.component';
 export * from './side-menu/side-menu.component';
 export * from './navbar/navbar.component';
 export * from './footer/footer.component';
-export * from './foo';
