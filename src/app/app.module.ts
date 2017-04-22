@@ -1,6 +1,6 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
-import { Storage } from '@ionic/storage';
+import { IonicStorageModule } from '@ionic/storage';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -30,6 +30,7 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
   ],
   imports: [
     IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot(),
     StoreModule.provideStore(reducer),
     EffectsModule.runAfterBootstrap(ResolutionEffects),
     EffectsModule.runAfterBootstrap(MilestoneEffects),
@@ -45,7 +46,6 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
     SideMenuComponent
   ],
   providers: [
-    Storage,
     QuoteService,
     StorageService,
     {
