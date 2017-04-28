@@ -21,7 +21,7 @@ export class ResolutionEffects {
 		.ofType(resolutionActions.actions.GET_ALL)
 		.startWith(new resolutionActions.GetAll()) // runs on app start
 		.switchMap(() => {
-			return Observable.fromPromise(this.storage.getTasks())
+			return Observable.fromPromise(this.storage.getResolutions())
 				.map((tasks: Task[]) => {
 					return new resolutionActions.GetAllSuccess(tasks);
 				})
@@ -37,7 +37,7 @@ export class ResolutionEffects {
 			return action.payload;
 		})
 		.mergeMap((task) => {
-			return Observable.fromPromise(this.storage.addTask(task))
+			return Observable.fromPromise(this.storage.addResolution(task))
 				.map(() => {
 					return new resolutionActions.CreateSuccess(task);
 				})
@@ -53,7 +53,7 @@ export class ResolutionEffects {
 			return action.payload;
 		})
 		.mergeMap((task) => {
-			return Observable.fromPromise(this.storage.removeTask(task))
+			return Observable.fromPromise(this.storage.removeResolution(task))
 				.map(() => {
 					return new resolutionActions.DeleteSuccess(task);
 				})
@@ -69,7 +69,7 @@ export class ResolutionEffects {
 				return action.payload;
 			})
 			.mergeMap((index: { from: number, to: number }) => {
-				return Observable.fromPromise(this.storage.reorderTasks(index))
+				return Observable.fromPromise(this.storage.reorderResolutions(index))
 					.map((tasks: Task[]) => {
 						return new resolutionActions.ReorderSuccess(index);
 					})
@@ -85,7 +85,7 @@ export class ResolutionEffects {
 				return action.payload
 			})
 			.mergeMap((task) => {
-				return Observable.fromPromise(this.storage.updateTask(task))
+				return Observable.fromPromise(this.storage.updateResolution(task))
 					.map(() => {
 						return new resolutionActions.UpdateSuccess(task);
 					})

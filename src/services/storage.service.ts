@@ -20,9 +20,9 @@ export class StorageService {
 	}
 
 	initData() {
-		this.getTasks().then((tasks) => {
+		this.getResolutions().then((tasks) => {
 			if (!tasks) {
-				this.setTasks([]);
+				this.setResolutions([]);
 			}
 		});
 
@@ -33,70 +33,70 @@ export class StorageService {
 		});
 	}
 
-	getTasks(): Promise<Task[]> {
+	getResolutions(): Promise<Task[]> {
 		return this.storage.get(this.TASKS);
 	}
 
-	setTasks(tasks): Promise<any> {
-		return this.storage.set(this.TASKS, tasks);
+	setResolutions(tasks): Promise<any> {
+		return this.storage.set(this.TASKS, tasks).then(() => tasks);
 	}
 
-	addTask(task): Promise<Task> {
-		return this.getTasks()
+	addResolution(task): Promise<Task> {
+		return this.getResolutions()
 			.then((tasks) => {
 				return tasks.concat(task);
 			})
-			.then(this.updateTasks)
+			.then(this.setResolutions)
 			.then(() => { return task; });
 	}
 
-	removeTask(removedTask): Promise<Task[]> {
-		return this.getTasks()
+	removeResolution(removedTask): Promise<Task[]> {
+		return this.getResolutions()
 			.then((tasks) => {
 				return tasks.filter(task => task.id !== removedTask.id);
 			})
-			.then(this.updateTasks)
+			.then(this.setResolutions)
 			.then(() => { return removedTask; });
 	}
 
-	updateTask = (updatedTask): Promise<Task> => {
-		return this.getTasks()
+	updateResolution = (updatedTask): Promise<Task> => {
+		return this.getResolutions()
 			.then((tasks) => {
 				let idx = tasks.findIndex(task => task.id === updatedTask.id);
 				return [ ...tasks.slice(0, idx), updatedTask, ...tasks.slice(idx+1) ];
 			})
-			.then(this.updateTasks)
+			.then(this.setResolutions)
 			.then(() => { return updatedTask; });
 	}
 
-	reorderTasks(index: { from: number, to: number }): Promise<Task[]> {
-		return this.getTasks().then((tasks) => {
+	reorderResolutions(index: { from: number, to: number }): Promise<Task[]> {
+		return this.getResolutions().then((tasks) => {
 			return reorder(tasks, index);
 		})
-		.then(this.updateTasks)
+		.then(this.setResolutions)
 	}
 
 	addMilestone(taskId: string, milestone: Task): Promise<Task> {
 		milestone.milestones = undefined;
-		return this.getTasks().then((tasks: Task[]) => {
+		return this.getResolutions().then((tasks: Task[]) => {
 			let task = tasks.find((t) => { return t.id === taskId });
 			task.milestones.push(milestone);
 			return task;
 		})
-		.then(this.updateTask);
+		.then(this.updateResolution);
 	}
 
 	removeMilestone(taskId: string, removedMilestone: Task) {
-		return this.getTasks().then((tasks: Task[]) => {
+		return this.getResolutions().then((tasks: Task[]) => {
 			let task = tasks.find((t) => { return t.id === taskId });
 			task.milestones = task.milestones.filter((m) => { return m.id !== removedMilestone.id })
 			return task;
 		})
-		.then(this.updateTask);
+		.then(this.updateResolution);
 	}
 
 	updateMilestone(taskId: string, updatedMilestone: Task) {
-		return this.getTasks().then((tasks: Task[]) => {
+		return this.getResolutions().then((tasks: Task[]) => {
 			let task = tasks.find((t) => { return t.id === taskId });
 			task.milestones = task.milestones.map((m) => {
 				if (m.id === updatedMilestone.id) {
@@ -106,17 +106,17 @@ export class StorageService {
 			});
 			return task;
 		})
-		.then(this.updateTask);
+		.then(this.updateResolution);
 	}
 
 	reorderMilestone(taskId: string, index: { from: number, to: number }) {
-		return this.getTasks().then((tasks: Task[]) => {
+		return this.getResolutions().then((tasks: Task[]) => {
 			let task = tasks.find((t) => { return t.id === taskId });
 			task.milestones = reorder(task.milestones, index);
 
 			return task;
 		})
-		.then(this.updateTask);
+		.then(this.updateResolution);
 	}
 
 	getSettings(): Promise<any> {
@@ -133,10 +133,6 @@ export class StorageService {
 			return settings;
 		})
 		.then(this.updateSettings);
-	}
-
-	private updateTasks = (tasks): Promise<Task[]> => {
-		return this.setTasks(tasks).then(() => tasks);
 	}
 
 	private updateSettings = (settings): Promise<any> => {
