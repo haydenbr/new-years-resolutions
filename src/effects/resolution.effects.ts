@@ -7,7 +7,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import * as resolutionActions from '../actions/resolutions.actions';
 import { Task } from'../models';
-import { StorageService } from '../providers';
+import { StorageService } from '../services';
 
 @Injectable()
 export class ResolutionEffects {

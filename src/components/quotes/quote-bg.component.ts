@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 
-import { QuoteService } from '../../providers';
+import { QuoteService } from '../../services';
 import { Task } from '../../models';
 
 @Component({

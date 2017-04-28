@@ -7,7 +7,7 @@ import { Actions, Effect } from '@ngrx/effects';
 
 import * as milestoneActions from '../actions/milestone.actions';
 import { Task } from'../models';
-import { StorageService } from '../providers';
+import { StorageService } from '../services';
 
 @Injectable()
 export class MilestoneEffects {
