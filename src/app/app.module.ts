@@ -14,7 +14,7 @@ import { ResolutionEffects, MilestoneEffects, SettingsEffects } from '../effects
 
 import { ResolutionsPage, MilestonesPage } from '../pages';
 
-import { QuoteService, ResolutionService, SettingsService, StorageService } from '../services';
+import { QuoteService, ResolutionService, SettingsService } from '../services';
 
 import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, NavbarComponent, FooterComponent } from '../components';
 
@@ -51,7 +51,6 @@ import { TaskModal, TaskListComponent, QuoteBgComponent, SideMenuComponent, Navb
   ],
   providers: [
     QuoteService,
-    StorageService,
     ResolutionService,
     SettingsService,
     {
