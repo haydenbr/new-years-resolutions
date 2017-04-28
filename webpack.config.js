@@ -18,10 +18,6 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.config$/,
-        loader: 'file-loader?name=../[name].[ext]'
-      },
-      {
         test: /\.json$/,
         loader: 'json-loader'
       },
