@@ -34,10 +34,9 @@ export class AddMilestoneSuccess implements Action {
 export class AddMilestoneFail implements Action {
 	type = actions.ADD_MILESTONE_FAIL;
 
-	constructor(public payload: { resolutionId: string, milestone: Task }) {}
+	constructor(public payload?: any) {}
 }
 
-// remove a milestone
 export class RemoveMilestone implements Action {
 	type = actions.REMOVE_MILESTONE;
 
@@ -53,7 +52,7 @@ export class RemoveMilestoneSuccess implements Action {
 export class RemoveMilestoneFail implements Action {
 	type = actions.REMOVE_MILESTONE_FAIL;
 
-	constructor(public payload: { resolutionId: string, milestone: Task }) {}
+	constructor(public payload?: any) {}
 }
 
 // edit a milestone
@@ -72,7 +71,7 @@ export class EditMilestoneSuccess implements Action {
 export class EditMilestoneFail implements Action {
 	type = actions.EDIT_MILESTONE_FAIL;
 
-	constructor(public payload: { resolutionId: string, milestone: Task }) {}
+	constructor(public payload?: any) {}
 }
 
 // reorder milestone
@@ -91,5 +90,5 @@ export class ReorderMilestoneSuccess implements Action {
 export class ReorderMilestoneFail implements Action {
 	type = actions.REORDER_MILESTONE_FAIL;
 
-	constructor(public payload: { resolutionId: string, index: { from: number, to: number } }) {}
+	constructor(public payload?: any) {}
 }

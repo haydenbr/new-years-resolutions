@@ -34,7 +34,9 @@ export class ResolutionEffects {
 		.switchMap((task) => {
 			return this.resolutionService.addResolution(task)
 				.map(() => new resolutionActions.CreateSuccess(task))
-				.catch((error) => of(new resolutionActions.CreateFail(task)));
+				.catch((error) => {
+					return of(new resolutionActions.CreateFail(error))
+				});
 		});
 
 	@Effect()
@@ -44,7 +46,7 @@ export class ResolutionEffects {
 		.switchMap((task) => {
 			return this.resolutionService.removeResolution(task)
 				.map(() => new resolutionActions.DeleteSuccess(task))
-				.catch((error) => of(new resolutionActions.DeleteFail(task)));
+				.catch((error) => of(new resolutionActions.DeleteFail(error)));
 		});
 
 		@Effect()
@@ -54,7 +56,7 @@ export class ResolutionEffects {
 			.switchMap((index: { from: number, to: number }) => {
 				return this.resolutionService.reorderResolutions(index)
 					.map(() => new resolutionActions.ReorderSuccess(index))
-					.catch((error) => of(new resolutionActions.ReorderFail(index)));
+					.catch((error) => of(new resolutionActions.ReorderFail(error)));
 			});
 
 		@Effect()
@@ -64,6 +66,6 @@ export class ResolutionEffects {
 			.switchMap((task) => {
 				return this.resolutionService.updateResolution(task)
 					.map(() => new resolutionActions.UpdateSuccess(task))
-					.catch((error) => of(new resolutionActions.UpdateFail(task)));
+					.catch((error) => of(new resolutionActions.UpdateFail(error)));
 			});
 }

@@ -29,7 +29,7 @@ export class ResolutionService {
 
 	getResolutions(): Observable<Task[]> {
 		return Observable.fromPromise(this.storage.get(this.DATA_KEY))
-			.take(1);
+			.take(1)
 	}
 
 	getResolution(id: string): Observable<Task> {
@@ -40,20 +40,20 @@ export class ResolutionService {
 	setResolutions(resolutions): Observable<any> {
 		return Observable.fromPromise(this.storage.set(this.DATA_KEY, resolutions))
 			.take(1)
-			.map(() => resolutions);
+			.map(() => resolutions)
 	}
 
 	addResolution(resolution): Observable<Task> {
 		return this.getResolutions()
 			.map(resolutions => resolutions.concat(resolution))
-			.switchMap(this.setResolutions)
+			.switchMap(resolutions => this.setResolutions(resolutions))
 			.map(() => resolution);
 	}
 
 	removeResolution(removedTask): Observable<Task[]> {
 		return this.getResolutions()
 			.map((resolutions) => resolutions.filter(resolution => resolution.id !== removedTask.id))
-			.switchMap(this.setResolutions)
+			.switchMap(resolutions => this.setResolutions(resolutions))
 			.map(() => removedTask);
 	}
 
@@ -63,14 +63,14 @@ export class ResolutionService {
 				let idx = resolutions.findIndex(resolution => resolution.id === updatedTask.id);
 				return [ ...resolutions.slice(0, idx), updatedTask, ...resolutions.slice(idx+1) ];
 			})
-			.switchMap(this.setResolutions)
+			.switchMap(resolutions => this.setResolutions(resolutions))
 			.map(() => updatedTask);
 	}
 
 	reorderResolutions(index: { from: number, to: number }): Observable<Task[]> {
 		return this.getResolutions()
 			.map((resolutions) => reorder(resolutions, index))
-			.switchMap(this.setResolutions);
+			.switchMap(resolutions => this.setResolutions(resolutions))
 	}
 
 	addMilestone(id: string, milestone: Task): Observable<Task> {
@@ -81,7 +81,7 @@ export class ResolutionService {
 				resolution.milestones.push(milestone);
 				return resolution;
 			})
-			.switchMap(this.updateResolution);
+			.switchMap(resolution => this.updateResolution(resolution));
 	}
 
 	removeMilestone(id: string, removedMilestone: Task): Observable<any> {
@@ -90,7 +90,7 @@ export class ResolutionService {
 				resolution.milestones = resolution.milestones.filter((m) => m.id !== removedMilestone.id);
 				return resolution;
 			})
-			.switchMap(this.updateResolution);
+			.switchMap(resolution => this.updateResolution(resolution));
 	}
 
 	updateMilestone(id: string, updatedMilestone: Task): Observable<any> {
@@ -105,7 +105,7 @@ export class ResolutionService {
 
 				return resolution;
 			})
-			.switchMap(this.updateResolution);
+			.switchMap(resolution => this.updateResolution(resolution));
 	}
 
 	reorderMilestone(id: string, index: { from: number, to: number }): Observable<any> {
@@ -115,6 +115,6 @@ export class ResolutionService {
 
 				return resolution;
 			})
-			.switchMap(this.updateResolution)
+			.switchMap(resolution => this.updateResolution(resolution));
 	}
 }

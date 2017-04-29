@@ -22,7 +22,7 @@ export class SettingsEffects {
 		.switchMap(() => {
 			return this.settingsService.getSettings()
 				.map((settings) => new settingsActions.LoadSettingsSuccess(settings))
-				.catch((error) => of(new settingsActions.LoadSettingsFail()));
+				.catch((error) => of(new settingsActions.LoadSettingsFail(error)));
 		});
 
 	@Effect()
@@ -32,6 +32,6 @@ export class SettingsEffects {
 		.switchMap((toggle) => {
 			return this.settingsService.setDarkMode(toggle)
 				.map((settings) => new settingsActions.ToggleDarkModeSuccess(toggle))
-				.catch((error) => of(new settingsActions.ToggleDarkModeFail()));
+				.catch((error) => of(new settingsActions.ToggleDarkModeFail(error)));
 		});
 }

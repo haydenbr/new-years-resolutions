@@ -16,7 +16,7 @@ export const actions = {
 export class LoadSettings implements Action {
 	type = actions.LOAD_SETTINGS;
 
-	constructor() {}
+	constructor(public payload?: any) {}
 }
 
 export class LoadSettingsSuccess implements Action {
@@ -28,7 +28,7 @@ export class LoadSettingsSuccess implements Action {
 export class LoadSettingsFail implements Action {
 	type = actions.LOAD_SETTINGS_FAIL;
 
-	constructor() {}
+	constructor(public payload?: any) {}
 }
 
 export class ToggleDarkMode implements Action {
@@ -46,11 +46,11 @@ export class ToggleDarkModeSuccess implements Action {
 export class ToggleDarkModeFail implements Action {
 	type = actions.TOGGLE_DARK_MODE_FAIL;
 
-	constructor() {}
+	constructor(public payload?: any) {}
 }
 
 export class ToggleReorderMode implements Action {
 	type = actions.TOGGLE_REORDER_MODE;
 
-	constructor() {}
+	constructor(public payload?: any) {}
 }
