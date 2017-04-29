@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+
+import { Subject } from 'rxjs/Subject';
 
 import { Settings } from '../../models';
 
@@ -9,7 +11,7 @@ import { Settings } from '../../models';
 export class SideMenuComponent implements OnInit {
 	@Input() content: any;
 	@Input() settings: Settings;
-	@Output() toggleDarkMode = new EventEmitter();
+	@Output() toggleDarkMode = new Subject();
 
 	constructor() {}
 
@@ -18,6 +20,6 @@ export class SideMenuComponent implements OnInit {
 	}
 
 	toggleDarkModeOutput($event) {
-		this.toggleDarkMode.emit($event.checked);
+		this.toggleDarkMode.next($event.checked);
 	}
 }

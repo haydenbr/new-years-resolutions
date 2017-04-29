@@ -1,4 +1,6 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
+
+import { Subject } from 'rxjs/Subject';
 
 @Component({
 	selector: 'footer',
@@ -6,13 +8,13 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class FooterComponent implements OnInit {
 	@Input() title: string = '';
-	@Output() footerClick = new EventEmitter();
+	@Output() footerClick = new Subject();
 
 	constructor() { }
 
 	ngOnInit() { }
 
 	clickFooter() {
-		this.footerClick.emit();
+		this.footerClick.next();
 	}
 }

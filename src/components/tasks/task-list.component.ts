@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, Output } from '@angular/core';
 import { ItemSliding } from 'ionic-angular'
+
+import { Subject } from 'rxjs/Subject';
 
 import { Task } from '../../models';
 
@@ -10,11 +12,11 @@ import { Task } from '../../models';
 export class TaskListComponent {
 	@Input() reorderMode: boolean;
 	@Input() tasks: Task[] = [];
-	@Output() edit = new EventEmitter();
-	@Output() delete = new EventEmitter();
-	@Output() toggle = new EventEmitter();
-	@Output() reorder = new EventEmitter();
-	@Output() select = new EventEmitter();
+	@Output() edit = new Subject();
+	@Output() delete = new Subject();
+	@Output() toggle = new Subject();
+	@Output() reorder = new Subject();
+	@Output() select = new Subject();
 
 	ngOnChanges(changes) {
 		if (changes.reorderMode) {
@@ -23,26 +25,26 @@ export class TaskListComponent {
 	}
 
 	toggleTask(task: Task, slidingItem: ItemSliding): void {
-		this.toggle.emit(task);
+		this.toggle.next(task);
     slidingItem.close();
   }
 
   editTask(task: Task, slidingItem: ItemSliding): void {
-		this.edit.emit(task);
+		this.edit.next(task);
     slidingItem.close();
   }
 
   deleteTask(task: Task, slidingItem: ItemSliding): void {
-    this.delete.emit(task);
+    this.delete.next(task);
     slidingItem.close();
   }
 
 	reorderTasks(index: { from: number, to: number }): void {
-		this.reorder.emit(index);
+		this.reorder.next(index);
 	}
 
 	selectTask(task: Task) {
-		this.select.emit(task);
+		this.select.next(task);
 	}
 
 	countIncompleteMilestones(task: Task) {
