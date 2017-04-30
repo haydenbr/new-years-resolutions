@@ -11,11 +11,16 @@ import { Settings } from '../../../settings/models';
 export class SideMenuComponent {
 	@Input() content: any;
 	@Input() settings: Settings;
+	@Output() clearData = new Subject();
 	@Output() toggleDarkMode = new Subject();
 
 	constructor() {}
 
-	toggleDarkModeOutput($event) {
+	clear() {
+		this.clearData.next();
+	}
+
+	onToggleDarkMode($event) {
 		this.toggleDarkMode.next($event.checked);
 	}
 }

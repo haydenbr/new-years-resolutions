@@ -5,29 +5,29 @@ import { Settings } from '../settings/models';
 import { actionType } from './action-type';
 
 export const actions = {
-	LOAD_SETTINGS:						actionType('[Settings] Load Settings'),
-	LOAD_SETTINGS_SUCCESS:		actionType('[Settings] Load Settings Success'),
-	LOAD_SETTINGS_FAIL:				actionType('[Settings] Load Settings Fail'),
+	GET_SETTINGS:							actionType('[Settings] Get Settings'),
+	GET_SETTINGS_SUCCESS:			actionType('[Settings] Get Settings Success'),
+	GET_SETTINGS_FAIL:				actionType('[Settings] Get Settings Fail'),
 	TOGGLE_DARK_MODE: 				actionType('[Settings] Toggle Dark Mode'),
 	TOGGLE_DARK_MODE_SUCCESS: actionType('[Settings] Toggle Dark Mode Success'),
 	TOGGLE_DARK_MODE_FAIL: 		actionType('[Settings] Toggle Dark Mode Fail'),
 	TOGGLE_REORDER_MODE: 			actionType('[Settings] Toggle Reorder Mode')
 };
 
-export class LoadSettings implements Action {
-	type = actions.LOAD_SETTINGS;
+export class GetSettings implements Action {
+	type = actions.GET_SETTINGS;
 
 	constructor(public payload?: any) {}
 }
 
-export class LoadSettingsSuccess implements Action {
-	type = actions.LOAD_SETTINGS_SUCCESS;
+export class GetSettingsSuccess implements Action {
+	type = actions.GET_SETTINGS_SUCCESS;
 
 	constructor(public payload: Settings) {}
 }
 
-export class LoadSettingsFail implements Action {
-	type = actions.LOAD_SETTINGS_FAIL;
+export class GetSettingsFail implements Action {
+	type = actions.GET_SETTINGS_FAIL;
 
 	constructor(public payload?: any) {}
 }

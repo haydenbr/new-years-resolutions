@@ -3,7 +3,16 @@
     <ion-list>
 	    <ion-item>
 			  <ion-label>Enable Dark Mode</ion-label>
-				<ion-toggle (ionChange)="toggleDarkModeOutput($event)" [checked]="settings.darkMode"></ion-toggle>
+				<ion-toggle (ionChange)="onToggleDarkMode($event)" [checked]="settings.darkMode"></ion-toggle>
+			</ion-item>
+	    <ion-item>
+			  <ion-label>Clear App Data</ion-label>
+				<button
+          ion-button item-right color="danger"
+          (click)="clear()"
+        >
+          Clear
+        </button>
 			</ion-item>
     </ion-list>
   </ion-content>

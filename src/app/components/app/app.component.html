@@ -1,6 +1,7 @@
 <side-menu
   [content]="main"
   [settings]="settings | async"
+  (clearData)="onClearData()"
   (toggleDarkMode)="onToggleDarkMode($event)"
 ></side-menu>
 

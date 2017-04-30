@@ -28,7 +28,7 @@ export function settingsReducer(state: SettingsState = initialState, action: Act
 
 let reducerCases = {};
 
-reducerCases[settings.actions.LOAD_SETTINGS_SUCCESS] =
+reducerCases[settings.actions.GET_SETTINGS_SUCCESS] =
 	function (state: SettingsState, action: Action) {
 		return Object.assign({}, state, action.payload);
 	};

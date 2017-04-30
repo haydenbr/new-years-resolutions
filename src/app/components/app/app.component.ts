@@ -30,6 +30,10 @@ export class AppComponent {
     this.settings = this.store.select(getSettingsState);
   }
 
+  onClearData() {
+    
+  }
+
   onToggleDarkMode(toggle) {
     this.store.dispatch(new settingsActions.ToggleDarkMode(toggle));
   }

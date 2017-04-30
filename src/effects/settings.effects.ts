@@ -17,12 +17,12 @@ export class SettingsEffects {
 
 	@Effect()
 	loadTasks: Observable<Action> = this.actions
-		.ofType(settingsActions.actions.LOAD_SETTINGS)
-		.startWith(new settingsActions.LoadSettings())
+		.ofType(settingsActions.actions.GET_SETTINGS)
+		.startWith(new settingsActions.GetSettings())
 		.switchMap(() => {
 			return this.settingsService.getSettings()
-				.map((settings) => new settingsActions.LoadSettingsSuccess(settings))
-				.catch((error) => of(new settingsActions.LoadSettingsFail(error)));
+				.map((settings) => new settingsActions.GetSettingsSuccess(settings))
+				.catch((error) => of(new settingsActions.GetSettingsFail(error)));
 		});
 
 	@Effect()
