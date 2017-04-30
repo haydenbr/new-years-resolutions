@@ -1,5 +1,3 @@
-import * as uuid from 'uuid';
-
 export class Task {
   public id: string;
   public name: string = '';
