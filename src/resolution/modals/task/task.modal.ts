@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewController, NavParams } from 'ionic-angular';
 
 import { Task } from '../../models';
@@ -9,7 +9,7 @@ import { Task } from '../../models';
 })
 export class TaskModal {
   action = 'Add';
-  settings = { darkMode: false };
+  settings = { darkMode: false }; // TODO pass settings to modal
   task: Task;
   taskForm: FormGroup;
   type = 'Resolution';
@@ -22,34 +22,31 @@ export class TaskModal {
     this.initForm();
   }
 
-  initForm() {
+  initForm(): void {
     this.taskForm = this.formBuilder.group({
-      taskName: this.task && this.task.name ||  '',
-      taskDescription: this.task && this.task.description || ''
-    })
+      taskName: [this.task && this.task.name || '', Validators.required ],
+      taskDescription: [ this.task && this.task.description || '', Validators.required ]
+    });
   }
 
   ionViewWillEnter() {
-    if (this.navParams.get('type')) {
-      this.type = this.navParams.get('type');
-    }
+    this.type = this.navParams.data.type || this.type;
+    this.action = this.navParams.data.action || this.action;
+    this.task = this.navParams.data.task || new Task();
 
-    if (this.navParams.get('action')) {
-      this.action = this.navParams.get('action');
-    }
-
-    this.task = this.navParams.get('task') ? this.navParams.get('task') : new Task();
+    this.taskForm.setValue({ taskName: this.task.name, taskDescription: this.task.description });
   }
 
-  disabled() {
-    return true;
+  disabled(): boolean {
+    return !this.taskForm.valid;
   }
 
   dismiss(): void {
     this.viewCtrl.dismiss();
   }
 
-  submit(taskName, taskDescription): void {
-    this.viewCtrl.dismiss(Object.assign(this.task, { name: taskName.value, description: taskDescription.value }));
+  onFormSubmit(): void {
+    let formValue = this.taskForm.value;
+    this.viewCtrl.dismiss(Object.assign(this.task, { name: formValue.taskName, description: formValue.taskDescription }));
   }
 }
