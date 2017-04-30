@@ -2,8 +2,8 @@
 
 <ion-content class="has-header" [ngClass]="{'dark-background': darkMode }">
   <ion-searchbar
+    [formControl]="searchFormControl"
     (ionInput)="onSearch()"
-    (ionCancel)="onCancelSearch()"
   ></ion-searchbar>
 
   <quote-bg></quote-bg>

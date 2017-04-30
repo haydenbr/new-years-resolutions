@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { Store } from '@ngrx/store';
@@ -7,7 +8,7 @@ import { Subject } from 'rxjs';
 import * as resolutionActions from '../../../actions/resolution.actions';
 import * as settingsActions from '../../../actions/settings.actions';
 import { AppState } from '../../../reducers/app.state';
-import { getResolutions } from '../../../reducers/resolution.reducer';
+import { getResolutions, searchResolutions } from '../../../reducers/resolution.reducer';
 import { getDarkMode, getReorderMode } from '../../../reducers/settings.reducer';
 import { Settings } from '../../../settings/models';
 
@@ -26,6 +27,7 @@ export class ResolutionPage {
   darkMode: boolean;
   reorderMode: boolean;
   killSubscriptions = new Subject();
+  searchFormControl = new FormControl();
 
   constructor(
     private navCtrl: NavController, 
@@ -98,10 +100,9 @@ export class ResolutionPage {
   }
 
   onSearch() {
-
-  }
-
-  onCancelSearch() {
-    
+    // this takes care of both searching and refreshing after search
+    this.store.select(searchResolutions(this.searchFormControl.value))
+      .take(1)
+      .subscribe(resolutions => this.resolutions = resolutions);
   }
 }

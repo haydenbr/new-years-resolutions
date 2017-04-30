@@ -106,3 +106,8 @@ export const getCurrentResolution = createSelector(getResolutionsMap, getCurrent
 	return resolutions[id];
 });
 export const getMilestones = createSelector(getCurrentResolution, (r) => { return r.milestones });
+export const searchResolutions = (searchTerm: string = '') => {
+	return createSelector(getResolutions, (resolutions) => {
+		return resolutions.filter(r => r.name.includes(searchTerm));
+	});
+};
