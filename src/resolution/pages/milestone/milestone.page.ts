@@ -7,7 +7,7 @@ import {
 } from 'ionic-angular';
 
 import { Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 
 import * as milestoneActions from '../../../actions/milestone.actions';
 import * as settingsActions from '../../../actions/settings.actions';
@@ -24,10 +24,11 @@ import { Task } from '../../models';
 })
 export class MilestonePage implements OnInit {
   resolution: Observable<Task>;
-  darkMode: Observable<boolean>;
+  darkMode: boolean;
   reorderMode: Observable<boolean>;
   editMode: boolean = false;
   resolutionId: string = '';
+  killSubscriptions = new Subject();
 
   constructor(
     private navCtrl: NavController, 
@@ -38,14 +39,21 @@ export class MilestonePage implements OnInit {
 
   ngOnInit() {
     this.resolution = this.store.select(getCurrentResolution);
-    this.darkMode = this.store.select(getDarkMode);
     this.reorderMode = this.store.select(getReorderMode);
     this.resolutionId = this.navParams.data.taskId;
+    this.store.select(getDarkMode)
+      .takeUntil(this.killSubscriptions)
+      .subscribe(darkMode => this.darkMode = darkMode);
+  }
+
+  ionViewWillLeave() {
+    this.killSubscriptions.next();
   }
 
   addMilestone(): void {
     let milestoneModal = this.modalCtrl.create(TaskModal, {
-      type: 'Milestone'
+      type: 'Milestone',
+      darkMode: this.darkMode
     });
 
     milestoneModal.onDidDismiss((milestone) => {
@@ -69,7 +77,8 @@ export class MilestonePage implements OnInit {
     let milestoneModal = this.modalCtrl.create(TaskModal, {
       action: 'Edit',
       type: 'Milestone',
-      task: milestone
+      task: milestone,
+      darkMode: this.darkMode
     });
 
     milestoneModal.onDidDismiss(milestone => {
@@ -86,7 +95,8 @@ export class MilestonePage implements OnInit {
     let milestoneModal = this.modalCtrl.create(TaskModal, {
       action: 'Edit',
       type: 'Milestone',
-      task: milestone
+      task: milestone,
+      darkMode: this.darkMode
     });
 
     milestoneModal.onDidDismiss((milestone) => {

@@ -1,7 +1,7 @@
 <navbar [title]="(resolution | async).name"></navbar>
 
-<ion-content class="has-header" [ngClass]="{'dark-background': darkMode | async }">
-  <quote-bg [tasks]="(resolution | async).milestones"></quote-bg>
+<ion-content class="has-header" [ngClass]="{'dark-background': darkMode }">
+  <quote-bg></quote-bg>
 
   <task-list
     [tasks]="(resolution | async).milestones" [reorderMode]="reorderMode | async"

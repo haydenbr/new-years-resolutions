@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
-import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
+import { Observable, Subject } from 'rxjs';
 
 import * as resolutionActions from '../../../actions/resolution.actions';
 import * as settingsActions from '../../../actions/settings.actions';
@@ -19,12 +19,13 @@ import { MilestonePage } from '../milestone/milestone.page';
   selector: 'resolution',
   templateUrl: 'resolution.page.html'
 })
-export class ResolutionPage implements OnInit {
+export class ResolutionPage {
   editMode: boolean = false;
   resolutions: Observable<Task[]>;
   settings: Observable<Settings>;
-  darkMode: Observable<boolean>;
+  darkMode: boolean;
   reorderMode: Observable<boolean>;
+  killSubscriptions = new Subject();
 
   constructor(
     private navCtrl: NavController, 
@@ -32,10 +33,16 @@ export class ResolutionPage implements OnInit {
     private store: Store<AppState>,
   ) {}
 
-  ngOnInit() {
+  ionViewWillEnter() {
     this.resolutions = this.store.select(getResolutions);
-    this.darkMode = this.store.select(getDarkMode);
     this.reorderMode = this.store.select(getReorderMode);
+    this.store.select(getDarkMode)
+      .takeUntil(this.killSubscriptions)
+      .subscribe(darkMode => this.darkMode = darkMode);
+  }
+
+  ionViewWillLeave() {
+    this.killSubscriptions.next();
   }
 
   onToggleReorderMode(): void {
@@ -43,7 +50,7 @@ export class ResolutionPage implements OnInit {
   }
 
   addResolution(): void {
-    let taskModal = this.modalCtrl.create(TaskModal);
+    let taskModal = this.modalCtrl.create(TaskModal, { darkMode: this.darkMode });
 
     taskModal.onDidDismiss(resolution => {
       if (resolution) {
@@ -60,7 +67,7 @@ export class ResolutionPage implements OnInit {
   }
 
   onEdit(resolution: Task) {
-    let taskModal = this.modalCtrl.create(TaskModal, { task: resolution, action: 'Edit' });
+    let taskModal = this.modalCtrl.create(TaskModal, { task: resolution, action: 'Edit', darkMode: this.darkMode });
 
     taskModal.onDidDismiss(resolution => {
       if (resolution) {
@@ -84,11 +91,11 @@ export class ResolutionPage implements OnInit {
     this.navCtrl.push(MilestonePage, { taskId: resolution.id });
   }
 
-  search() {
+  onSearch() {
 
   }
 
-  cancelSearch() {
+  onCancelSearch() {
     
   }
 }

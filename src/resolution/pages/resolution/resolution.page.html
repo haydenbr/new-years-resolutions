@@ -1,12 +1,12 @@
 <navbar></navbar>
 
-<ion-content class="has-header" [ngClass]="{'dark-background': (darkMode | async) }">
+<ion-content class="has-header" [ngClass]="{'dark-background': darkMode }">
   <ion-searchbar
-    (ionInput)="search()"
-    (ionCancel)="cancelSearch()"
+    (ionInput)="onSearch()"
+    (ionCancel)="onCancelSearch()"
   ></ion-searchbar>
 
-  <quote-bg [tasks]="resolutions | async"></quote-bg>
+  <quote-bg></quote-bg>
 
   <task-list
     [tasks]="resolutions | async" [reorderMode]="reorderMode | async"

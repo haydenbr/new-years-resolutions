@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ViewController, NavParams } from 'ionic-angular';
 
@@ -7,9 +7,9 @@ import { Task } from '../../models';
 @Component({
   templateUrl: 'task.modal.html'
 })
-export class TaskModal {
+export class TaskModal implements OnInit {
   action = 'Add';
-  settings = { darkMode: false }; // TODO pass settings to modal
+  darkMode: boolean = false;
   task: Task;
   taskForm: FormGroup;
   type = 'Resolution';
@@ -18,9 +18,7 @@ export class TaskModal {
     private formBuilder: FormBuilder,
     private viewCtrl: ViewController, 
     private navParams: NavParams,
-  ) {
-    this.initForm();
-  }
+  ) {}
 
   initForm(): void {
     this.taskForm = this.formBuilder.group({
@@ -29,12 +27,13 @@ export class TaskModal {
     });
   }
 
-  ionViewWillEnter() {
+  ngOnInit() {
     this.type = this.navParams.data.type || this.type;
     this.action = this.navParams.data.action || this.action;
     this.task = this.navParams.data.task || new Task();
+    this.darkMode = this.navParams.data.darkMode;
 
-    this.taskForm.setValue({ taskName: this.task.name, taskDescription: this.task.description });
+    this.initForm();
   }
 
   disabled(): boolean {
