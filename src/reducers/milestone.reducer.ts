@@ -1,11 +1,11 @@
 import { Action } from '@ngrx/store';
 
-import { ResolutionsState } from './resolutions.reducer';
+import { ResolutionState } from './resolution.reducer';
 import * as milestoneAction from '../actions/milestone.actions';
 import { Task } from '../resolution/models';
 import { reorder } from '../util';
 
-export function milstonesReducer(state: ResolutionsState, action: Action): ResolutionsState {
+export function milstoneReducer(state: ResolutionState, action: Action): ResolutionState {
 	let reducerHandle = reducerCases[action.type];
 
 	if (reducerHandle) {

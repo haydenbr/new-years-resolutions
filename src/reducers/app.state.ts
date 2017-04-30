@@ -1,7 +1,7 @@
 import { SettingsState } from './settings.reducer';
-import { ResolutionsState } from './resolutions.reducer';
+import { ResolutionState } from './resolution.reducer';
 
 export interface AppState {
 	settings: SettingsState,
-	resolutions: ResolutionsState
+	resolutions: ResolutionState
 }

@@ -5,7 +5,7 @@ import { of } from 'rxjs/observable/of';
 import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 
-import * as resolutionActions from '../actions/resolutions.actions';
+import * as resolutionActions from '../actions/resolution.actions';
 import { ResolutionService } from '../resolution/services';
 
 @Injectable()

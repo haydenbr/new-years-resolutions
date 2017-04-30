@@ -12,17 +12,17 @@ import { Observable } from 'rxjs';
 import * as milestoneActions from '../../../actions/milestone.actions';
 import * as settingsActions from '../../../actions/settings.actions';
 import { AppState } from '../../../reducers/app.state';
-import { getCurrentResolution } from '../../../reducers/resolutions.reducer';
+import { getCurrentResolution } from '../../../reducers/resolution.reducer';
 import { getDarkMode, getReorderMode } from '../../../reducers/settings.reducer';
 
 import { TaskModal } from '../../modals';
 import { Task } from '../../models';
 
 @Component({
-  selector: 'milestones',
-  templateUrl: 'milestones.html'
+  selector: 'milestone',
+  templateUrl: 'milestone.page.html'
 })
-export class MilestonesPage implements OnInit {
+export class MilestonePage implements OnInit {
   resolution: Observable<Task>;
   darkMode: Observable<boolean>;
   reorderMode: Observable<boolean>;

@@ -1,11 +1,11 @@
 import { combineReducers } from '@ngrx/store';
 
 import { settingsReducer } from './settings.reducer';
-import { resolutionsReducer } from './resolutions.reducer';
+import { resolutionReducer } from './resolution.reducer';
 
 const reducers = {
 	settings: settingsReducer,
-	resolutions: resolutionsReducer
+	resolutions: resolutionReducer
 }
 
 export const reducer = combineReducers(reducers);

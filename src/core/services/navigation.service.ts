@@ -20,24 +20,10 @@ export class NavigationService {
     // let needsAssessment = require('../../needs-assessment/pages'),
     //     landing = require('../../landing/pages'),
     //     reporting = require('../../reporting'),
-    //     snapshot = require('../../snapshot'),
-    //     styleguide = require('../../styleguide'),
-    //     reco = require('../../recommendation/pages'),
-    //     security = require('../../security/pages');
 
     // this.pages.BranchLandingPage = landing.BranchLandingPage;
-    // this.pages.BranchLoginPage = security.BranchLoginPage;
-    // this.pages.LoginPage = security.LoginPage;
     // this.pages.PublicGenericLandingPage = landing.PublicGenericLandingPage;
-    // this.pages.PublicRecommendationPage = reco.PublicRecommendationPage;
-    // this.pages.RecentRecommendationsPage = reco.RecentRecommendationsPage;
-    // this.pages.SolutionPage = reco.SolutionPage;
-    // this.pages.AssessmentLandingPage = needsAssessment.AssessmentLandingPage;
-    // this.pages.AssessmentFlowPage = needsAssessment.AssessmentFlowPage;
-    // this.pages.BBSCSnapshotPage = snapshot.BBSCSnapshotPage;
-    // this.pages.UserSnapshotPage = snapshot.UserSnapshotPage;
     // this.pages.ReportingPage = reporting.ReportingPage;
-    // this.pages.StyleguidePage = styleguide.StyleguidePage;
   }
 
   setRoot(page: string, params?: {}) {

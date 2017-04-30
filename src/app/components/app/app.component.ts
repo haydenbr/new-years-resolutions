@@ -5,7 +5,7 @@ import { StatusBar, Splashscreen } from 'ionic-native';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import { ResolutionsPage } from '../../../resolution/pages';
+import { ResolutionPage } from '../../../resolution/pages';
 import { Settings } from '../../../settings/models';
 import { AppState } from '../../../reducers/app.state';
 import { getSettingsState } from '../../../reducers/settings.reducer';
@@ -15,7 +15,7 @@ import * as settingsActions from '../../../actions/settings.actions';
   templateUrl: 'app.component.html'
 })
 export class AppComponent {
-  rootPage = ResolutionsPage;
+  rootPage = ResolutionPage;
   settings: Observable<Settings>;
 
   constructor(

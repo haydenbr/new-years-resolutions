@@ -1,10 +1,10 @@
-import { MilestonesPage } from './milestones/milestones';
-import { ResolutionsPage } from './resolutions/resolutions';
+import { MilestonePage } from './milestone/milestone.page';
+import { ResolutionPage } from './resolution/resolution.page';
 
-export { MilestonesPage } from './milestones/milestones';
-export { ResolutionsPage } from './resolutions/resolutions';
+export { MilestonePage } from './milestone/milestone.page';
+export { ResolutionPage } from './resolution/resolution.page';
 
 export const PAGES = [
-  MilestonesPage,
-  ResolutionsPage
+  MilestonePage,
+  ResolutionPage
 ];

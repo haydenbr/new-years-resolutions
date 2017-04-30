@@ -4,22 +4,22 @@ import { NavController, ModalController } from 'ionic-angular';
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
-import * as resolutionActions from '../../../actions/resolutions.actions';
+import * as resolutionActions from '../../../actions/resolution.actions';
 import * as settingsActions from '../../../actions/settings.actions';
 import { AppState } from '../../../reducers/app.state';
-import { getResolutions } from '../../../reducers/resolutions.reducer';
+import { getResolutions } from '../../../reducers/resolution.reducer';
 import { getDarkMode, getReorderMode } from '../../../reducers/settings.reducer';
 import { Settings } from '../../../settings/models';
 
 import { TaskModal } from '../../modals';
 import { Task } from '../../models';
-import { MilestonesPage } from '../milestones/milestones';
+import { MilestonePage } from '../milestone/milestone.page';
 
 @Component({
-  selector: 'resolutions',
-  templateUrl: 'resolutions.html'
+  selector: 'resolution',
+  templateUrl: 'resolution.page.html'
 })
-export class ResolutionsPage implements OnInit {
+export class ResolutionPage implements OnInit {
   editMode: boolean = false;
   resolutions: Observable<Task[]>;
   settings: Observable<Settings>;
@@ -81,7 +81,7 @@ export class ResolutionsPage implements OnInit {
 
   onSelect(resolution: Task) {
     this.store.dispatch(new resolutionActions.SetCurrent(resolution));
-    this.navCtrl.push(MilestonesPage, { taskId: resolution.id });
+    this.navCtrl.push(MilestonePage, { taskId: resolution.id });
   }
 
   search() {
