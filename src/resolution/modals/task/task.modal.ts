@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { ViewController, NavParams } from 'ionic-angular';
 
 import { Task } from '../../models';
@@ -7,15 +8,28 @@ import { Task } from '../../models';
   templateUrl: 'task.modal.html'
 })
 export class TaskModal {
+  action = 'Add';
+  settings = { darkMode: false };
   task: Task;
-  type: String = 'Resolution';
-  action: String = 'Add';
-  settings = { darkMode: false }
+  taskForm: FormGroup;
+  type = 'Resolution';
 
   constructor(
+    private formBuilder: FormBuilder,
     private viewCtrl: ViewController, 
     private navParams: NavParams,
   ) {
+    this.initForm();
+  }
+
+  initForm() {
+    this.taskForm = this.formBuilder.group({
+      taskName: this.task && this.task.name ||  '',
+      taskDescription: this.task && this.task.description || ''
+    })
+  }
+
+  ionViewWillEnter() {
     if (this.navParams.get('type')) {
       this.type = this.navParams.get('type');
     }
@@ -25,6 +39,10 @@ export class TaskModal {
     }
 
     this.task = this.navParams.get('task') ? this.navParams.get('task') : new Task();
+  }
+
+  disabled() {
+    return true;
   }
 
   dismiss(): void {
