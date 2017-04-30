@@ -6,7 +6,7 @@
     (ionInput)="onSearch()"
   ></ion-searchbar>
 
-  <quote-bg></quote-bg>
+  <quote-bg [showQuotes]="showQuotes()"></quote-bg>
 
   <task-list
     [tasks]="resolutions" [reorderMode]="reorderMode"

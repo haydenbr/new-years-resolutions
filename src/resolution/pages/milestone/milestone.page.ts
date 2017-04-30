@@ -104,4 +104,8 @@ export class MilestonePage implements OnInit {
   onDelete(milestone: Task) {
     this.store.dispatch(new milestoneActions.RemoveMilestone({ resolutionId: this.resolutionId, milestone }));
   }
+
+  showQuotes() {
+    return this.resolution && !this.resolution.milestones.length;
+  }
 }

@@ -105,4 +105,8 @@ export class ResolutionPage {
       .take(1)
       .subscribe(resolutions => this.resolutions = resolutions);
   }
+
+  showQuotes() {
+    return this.resolutions && !this.resolutions.length;
+  }
 }

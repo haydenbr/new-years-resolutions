@@ -1,7 +1,7 @@
 <navbar [title]="resolution.name"></navbar>
 
 <ion-content class="has-header" [ngClass]="{'dark-background': darkMode }">
-  <quote-bg></quote-bg>
+  <quote-bg [showQuotes]="showQuotes()"></quote-bg>
 
   <task-list
     [tasks]="resolution.milestones" [reorderMode]="reorderMode"
