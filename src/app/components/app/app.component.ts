@@ -9,6 +9,7 @@ import { ResolutionPage } from '../../../resolution/pages';
 import { Settings } from '../../../settings/models';
 import { AppState } from '../../../reducers/app.state';
 import { getSettingsState } from '../../../reducers/settings.reducer';
+import * as resolutionActions from '../../../actions/resolution.actions';
 import * as settingsActions from '../../../actions/settings.actions';
 
 @Component({
@@ -31,7 +32,7 @@ export class AppComponent {
   }
 
   onClearData() {
-    
+    this.store.dispatch(new resolutionActions.DeleteAll());
   }
 
   onToggleDarkMode(toggle) {

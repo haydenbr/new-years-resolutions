@@ -48,23 +48,32 @@ export class ResolutionEffects {
 				.catch((error) => of(new resolutionActions.DeleteFail(error)));
 		});
 
-		@Effect()
-		reorderTask: Observable<Action> = this.actions
-			.ofType(resolutionActions.actions.REORDER)
-			.map(toPayload)
-			.switchMap((index: { from: number, to: number }) => {
-				return this.resolutionService.reorderResolutions(index)
-					.map(() => new resolutionActions.ReorderSuccess(index))
-					.catch((error) => of(new resolutionActions.ReorderFail(error)));
-			});
+	@Effect()
+	reorderTask: Observable<Action> = this.actions
+		.ofType(resolutionActions.actions.REORDER)
+		.map(toPayload)
+		.switchMap((index: { from: number, to: number }) => {
+			return this.resolutionService.reorderResolutions(index)
+				.map(() => new resolutionActions.ReorderSuccess(index))
+				.catch((error) => of(new resolutionActions.ReorderFail(error)));
+		});
 
-		@Effect()
-		editTask: Observable<Action> = this.actions
-			.ofType(resolutionActions.actions.UPDATE)
-			.map(toPayload)
-			.switchMap((task) => {
-				return this.resolutionService.updateResolution(task)
-					.map(() => new resolutionActions.UpdateSuccess(task))
-					.catch((error) => of(new resolutionActions.UpdateFail(error)));
-			});
+	@Effect()
+	editTask: Observable<Action> = this.actions
+		.ofType(resolutionActions.actions.UPDATE)
+		.map(toPayload)
+		.switchMap((task) => {
+			return this.resolutionService.updateResolution(task)
+				.map(() => new resolutionActions.UpdateSuccess(task))
+				.catch((error) => of(new resolutionActions.UpdateFail(error)));
+		});
+
+	@Effect()
+	clearResolutions: Observable<Action> = this.actions
+		.ofType(resolutionActions.actions.DELETE_ALL)
+		.switchMap(() => {
+			return this.resolutionService.clearResolutions()
+				.map(() => new resolutionActions.DeleteAllSuccess())
+				.catch((error) => of (new resolutionActions.DeleteAllFail(error)));
+		});
 }

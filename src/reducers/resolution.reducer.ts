@@ -41,7 +41,7 @@ let reducerCases = {};
 reducerCases[resolutionActions.actions.GET_ALL] =
 	function (state: ResolutionState, action: Action) {
 		return Object.assign({}, state, { loading: true });
-	}
+	};
 
 reducerCases[resolutionActions.actions.GET_ALL_SUCCESS] =
 	function (state: ResolutionState, action: Action) {
@@ -53,7 +53,7 @@ reducerCases[resolutionActions.actions.GET_ALL_SUCCESS] =
 		});
 
 		return Object.assign({}, state, { loading: false, loaded: true, resolutions, resolutionIds });
-	}
+	};
 
 reducerCases[resolutionActions.actions.CREATE_SUCCESS] =
 	function (state: ResolutionState, action: Action) {
@@ -62,7 +62,7 @@ reducerCases[resolutionActions.actions.CREATE_SUCCESS] =
 			resolutions: Object.assign({}, state.resolutions, { [newResolution.id]: newResolution, }),
 			resolutionIds: state.resolutionIds.concat(newResolution.id)
 		});
-	}
+	};
 
 reducerCases[resolutionActions.actions.DELETE_SUCCESS] =
 	function (state: ResolutionState, action: Action) {
@@ -71,7 +71,7 @@ reducerCases[resolutionActions.actions.DELETE_SUCCESS] =
 			resolutions: omit(state.resolutions, removedResolution.id),
 			resolutionIds: state.resolutionIds.filter((id) => { return id !== removedResolution.id })
 		});
-	}
+	};
 
 reducerCases[resolutionActions.actions.UPDATE_SUCCESS] =
 	function (state: ResolutionState, action: Action) {
@@ -79,17 +79,22 @@ reducerCases[resolutionActions.actions.UPDATE_SUCCESS] =
 		return Object.assign({}, state, {
 			resolutions: Object.assign({}, state.resolutions, { [editedResolution.id]: editedResolution })
 		});
-	}
+	};
 
 reducerCases[resolutionActions.actions.REORDER_SUCCESS] =
 	function (state: ResolutionState, action: Action) {
 		return Object.assign({}, state, { resolutionIds: reorder(state.resolutionIds, action.payload) });
-	}
+	};
 
 reducerCases[resolutionActions.actions.SET_CURRENT] =
 	function (state: ResolutionState, action: Action) {
 		return Object.assign({}, state, { currentResolutionId: action.payload.id });
-	}
+	};
+
+reducerCases[resolutionActions.actions.DELETE_ALL_SUCCESS] = 
+	function (state: ResolutionState, action: Action) {
+		return Object.assign({}, initialState);
+	};
 
 // ============= SELECTORS =============
 
