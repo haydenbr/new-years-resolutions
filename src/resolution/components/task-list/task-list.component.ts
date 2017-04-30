@@ -47,8 +47,8 @@ export class TaskListComponent {
 		this.select.next(task);
 	}
 
-	countIncompleteMilestones(task: Task) {
-    return task.milestones.filter((milestone: Task) => {
+	countIncompleteMilestones(resolution: Task) {
+    return resolution.milestones.filter((milestone: Task) => {
       return !milestone.isComplete;
     }).length;
   }

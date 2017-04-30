@@ -98,7 +98,6 @@ export class UpdateFail implements Action {
 	constructor(public payload: Task) {}
 }
 
-// reorder task
 export class Reorder implements Action {
 	type = actions.REORDER;
 

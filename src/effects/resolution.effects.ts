@@ -17,39 +17,39 @@ export class ResolutionEffects {
 
 	// startWith operator causes run on app start
 	@Effect()
-	loadTasks: Observable<Action> = this.actions
+	loadResolutions: Observable<Action> = this.actions
 		.ofType(resolutionActions.actions.GET_ALL)
 		.startWith(new resolutionActions.GetAll())
 		.switchMap(() => {
 			return this.resolutionService.getResolutions()
-				.map((tasks) => new resolutionActions.GetAllSuccess(tasks))
+				.map((resolutions) => new resolutionActions.GetAllSuccess(resolutions))
 				.catch((error) => of(new resolutionActions.GetAllFail(error)));
 		});
 
 	@Effect()
-	addTask: Observable<Action> = this.actions
+	addResolution: Observable<Action> = this.actions
 		.ofType(resolutionActions.actions.CREATE)
 		.map(toPayload)
-		.switchMap((task) => {
-			return this.resolutionService.addResolution(task)
-				.map(() => new resolutionActions.CreateSuccess(task))
+		.switchMap((resolution) => {
+			return this.resolutionService.addResolution(resolution)
+				.map(() => new resolutionActions.CreateSuccess(resolution))
 				.catch((error) => {
 					return of(new resolutionActions.CreateFail(error))
 				});
 		});
 
 	@Effect()
-	removeTask: Observable<Action> = this.actions
+	removeResolution: Observable<Action> = this.actions
 		.ofType(resolutionActions.actions.DELETE)
 		.map(toPayload)
-		.switchMap((task) => {
-			return this.resolutionService.removeResolution(task)
-				.map(() => new resolutionActions.DeleteSuccess(task))
+		.switchMap((resolution) => {
+			return this.resolutionService.removeResolution(resolution)
+				.map(() => new resolutionActions.DeleteSuccess(resolution))
 				.catch((error) => of(new resolutionActions.DeleteFail(error)));
 		});
 
 	@Effect()
-	reorderTask: Observable<Action> = this.actions
+	reorderResolution: Observable<Action> = this.actions
 		.ofType(resolutionActions.actions.REORDER)
 		.map(toPayload)
 		.switchMap((index: { from: number, to: number }) => {
@@ -59,12 +59,12 @@ export class ResolutionEffects {
 		});
 
 	@Effect()
-	editTask: Observable<Action> = this.actions
+	editResolution: Observable<Action> = this.actions
 		.ofType(resolutionActions.actions.UPDATE)
 		.map(toPayload)
-		.switchMap((task) => {
-			return this.resolutionService.updateResolution(task)
-				.map(() => new resolutionActions.UpdateSuccess(task))
+		.switchMap((resolution) => {
+			return this.resolutionService.updateResolution(resolution)
+				.map(() => new resolutionActions.UpdateSuccess(resolution))
 				.catch((error) => of(new resolutionActions.UpdateFail(error)));
 		});
 

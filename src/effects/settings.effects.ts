@@ -16,7 +16,7 @@ export class SettingsEffects {
 	) {}
 
 	@Effect()
-	loadTasks: Observable<Action> = this.actions
+	loadResolutions: Observable<Action> = this.actions
 		.ofType(settingsActions.actions.GET_SETTINGS)
 		.startWith(new settingsActions.GetSettings())
 		.switchMap(() => {
