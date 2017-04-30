@@ -1,10 +1,10 @@
-<navbar [title]="(resolution | async).name"></navbar>
+<navbar [title]="resolution.name"></navbar>
 
 <ion-content class="has-header" [ngClass]="{'dark-background': darkMode }">
   <quote-bg></quote-bg>
 
   <task-list
-    [tasks]="(resolution | async).milestones" [reorderMode]="reorderMode | async"
+    [tasks]="resolution.milestones" [reorderMode]="reorderMode"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
   ></task-list>

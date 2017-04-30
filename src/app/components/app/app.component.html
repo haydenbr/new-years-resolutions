@@ -1,2 +1,7 @@
-<side-menu [content]="main" [settings]="settings | async" (toggleDarkMode)="onToggleDarkMode($event)"></side-menu>
+<side-menu
+  [content]="main"
+  [settings]="settings | async"
+  (toggleDarkMode)="onToggleDarkMode($event)"
+></side-menu>
+
 <ion-nav #main [root]="rootPage"></ion-nav>

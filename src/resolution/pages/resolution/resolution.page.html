@@ -9,7 +9,7 @@
   <quote-bg></quote-bg>
 
   <task-list
-    [tasks]="resolutions | async" [reorderMode]="reorderMode | async"
+    [tasks]="resolutions" [reorderMode]="reorderMode"
     (toggle)="onToggle($event)" (edit)="onEdit($event)"
     (delete)="onDelete($event)" (reorder)="onReorder($event)"
     (select)="onSelect($event)"

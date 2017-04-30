@@ -3,11 +3,10 @@ import {
   NavController,
   NavParams,
   ModalController,
-  ItemSliding
 } from 'ionic-angular';
 
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import * as milestoneActions from '../../../actions/milestone.actions';
 import * as settingsActions from '../../../actions/settings.actions';
@@ -23,9 +22,9 @@ import { Task } from '../../models';
   templateUrl: 'milestone.page.html'
 })
 export class MilestonePage implements OnInit {
-  resolution: Observable<Task>;
+  resolution: Task;
   darkMode: boolean;
-  reorderMode: Observable<boolean>;
+  reorderMode: boolean;
   editMode: boolean = false;
   resolutionId: string = '';
   killSubscriptions = new Subject();
@@ -38,9 +37,16 @@ export class MilestonePage implements OnInit {
   ) {}
 
   ngOnInit() {
-    this.resolution = this.store.select(getCurrentResolution);
-    this.reorderMode = this.store.select(getReorderMode);
     this.resolutionId = this.navParams.data.taskId;
+
+    this.store.select(getCurrentResolution)
+      .takeUntil(this.killSubscriptions)
+      .subscribe(resolution => this.resolution = resolution);
+
+    this.store.select(getReorderMode)
+      .takeUntil(this.killSubscriptions)
+      .subscribe(reorderMode => this.reorderMode = reorderMode);
+
     this.store.select(getDarkMode)
       .takeUntil(this.killSubscriptions)
       .subscribe(darkMode => this.darkMode = darkMode);
@@ -56,7 +62,7 @@ export class MilestonePage implements OnInit {
       darkMode: this.darkMode
     });
 
-    milestoneModal.onDidDismiss((milestone) => {
+    milestoneModal.onDidDismiss((milestone: Task) => {
       if (milestone) {
         this.store.dispatch(new milestoneActions.AddMilestone({ resolutionId: this.resolutionId, milestone }));
       }
@@ -81,7 +87,7 @@ export class MilestonePage implements OnInit {
       darkMode: this.darkMode
     });
 
-    milestoneModal.onDidDismiss((milestone) => {
+    milestoneModal.onDidDismiss((milestone: Task) => {
       if (milestone) {
         this.store.dispatch(new milestoneActions.EditMilestone({ resolutionId: this.resolutionId, milestone }));
       }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { Store } from '@ngrx/store';
-import { Observable, Subject } from 'rxjs';
+import { Subject } from 'rxjs';
 
 import * as resolutionActions from '../../../actions/resolution.actions';
 import * as settingsActions from '../../../actions/settings.actions';
@@ -21,10 +21,10 @@ import { MilestonePage } from '../milestone/milestone.page';
 })
 export class ResolutionPage {
   editMode: boolean = false;
-  resolutions: Observable<Task[]>;
-  settings: Observable<Settings>;
+  resolutions: Task[];
+  settings: Settings;
   darkMode: boolean;
-  reorderMode: Observable<boolean>;
+  reorderMode: boolean;
   killSubscriptions = new Subject();
 
   constructor(
@@ -34,8 +34,14 @@ export class ResolutionPage {
   ) {}
 
   ionViewWillEnter() {
-    this.resolutions = this.store.select(getResolutions);
-    this.reorderMode = this.store.select(getReorderMode);
+    this.store.select(getResolutions)
+      .takeUntil(this.killSubscriptions)
+      .subscribe(resolutions => this.resolutions = resolutions);
+
+    this.store.select(getReorderMode)
+      .takeUntil(this.killSubscriptions)
+      .subscribe(reorderMode => this.reorderMode = reorderMode);
+
     this.store.select(getDarkMode)
       .takeUntil(this.killSubscriptions)
       .subscribe(darkMode => this.darkMode = darkMode);
