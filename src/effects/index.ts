@@ -1,3 +1,3 @@
-export * from './milestone.effects';
-export * from './resolution.effects';
-export * from './settings.effects';
+export { MilestoneEffects } from './milestone.effects';
+export { ResolutionEffects } from './resolution.effects';
+export { SettingsEffects } from './settings.effects';

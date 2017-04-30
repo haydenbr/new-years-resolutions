@@ -6,8 +6,8 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 
 import * as resolutionActions from '../actions/resolutions.actions';
-import { Task } from'../models';
-import { ResolutionService } from '../services';
+import { Task } from'../resolution/models';
+import { ResolutionService } from '../resolution/services';
 
 @Injectable()
 export class ResolutionEffects {

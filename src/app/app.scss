@@ -48,7 +48,7 @@ ion-menu {
   font-size: 1.2em;
 
   .dark-background & {
-    color: color($colors, light);
+    color: $light;
 
     .no-tasks-content {
       color: #777;

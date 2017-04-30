@@ -1,7 +1,8 @@
 import { Action } from '@ngrx/store';
 
-import { Task } from '../models';
-import { actionType } from '../util';
+import { Task } from '../resolution/models';
+
+import { actionType } from './actiontype';
 
 export const actions = {
 	ADD_MILESTONE:             	actionType('[Milestone] Add Milestone'),

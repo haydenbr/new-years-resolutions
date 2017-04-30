@@ -6,7 +6,7 @@ import { Action } from '@ngrx/store';
 import { Actions, Effect, toPayload } from '@ngrx/effects';
 
 import * as settingsActions from '../actions/settings.actions';
-import { SettingsService } from '../services';
+import { SettingsService } from '../settings/services';
 
 @Injectable()
 export class SettingsEffects {

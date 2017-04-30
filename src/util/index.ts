@@ -1,2 +1,1 @@
-export * from './actiontype';
-export * from './reorder';
+export { reorder } from './reorder';

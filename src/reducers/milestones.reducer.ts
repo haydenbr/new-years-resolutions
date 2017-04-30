@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { ResolutionsState } from './resolutions.reducer';
 import * as milestoneAction from '../actions/milestone.actions';
-import { Task } from '../models';
+import { Task } from '../resolution/models';
 import { reorder } from '../util';
 
 export function milstonesReducer(state: ResolutionsState, action: Action): ResolutionsState {
