@@ -2,7 +2,7 @@ import { Action } from '@ngrx/store';
 
 import { Settings } from '../settings/models';
 
-import { actionType } from './actiontype';
+import { actionType } from './action-type';
 
 export const actions = {
 	LOAD_SETTINGS:						actionType('[Settings] Load Settings'),
