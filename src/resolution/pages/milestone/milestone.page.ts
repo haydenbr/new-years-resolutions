@@ -73,24 +73,6 @@ export class MilestonePage implements OnInit {
     this.store.dispatch(new settingsActions.ToggleReorderMode());
   }
 
-  edit(milestone: Task, slidingItem: ItemSliding): void {
-    let milestoneModal = this.modalCtrl.create(TaskModal, {
-      action: 'Edit',
-      type: 'Milestone',
-      task: milestone,
-      darkMode: this.darkMode
-    });
-
-    milestoneModal.onDidDismiss(milestone => {
-      if (milestone) {
-        
-      }
-    });
-
-    slidingItem.close();
-    milestoneModal.present();
-  }
-
   onEdit(milestone: Task) {
     let milestoneModal = this.modalCtrl.create(TaskModal, {
       action: 'Edit',
