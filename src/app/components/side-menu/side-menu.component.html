@@ -1,5 +1,5 @@
 <ion-menu [content]="content" [persistent]="true">
-  <ion-content>
+  <ion-content [ngClass]="{'dark-background': settings.darkMode }">
     <ion-list>
 	    <ion-item>
 			  <ion-label>Enable Dark Mode</ion-label>
