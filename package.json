@@ -35,7 +35,7 @@
     "@ngrx/store-devtools": "^3.2.2",
     "angular2-highcharts": "^0.5.5",
     "angular2-moment": "^1.1.0",
-    "ionic-angular": "3.1.0",
+    "ionic-angular": "3.1.1",
     "ionic-native": "^2.9.0",
     "ionic-plugin-keyboard": "^2.2.1",
     "ionicons": "3.0.0",
