@@ -16,8 +16,8 @@ import { Task } from '../../models';
 import { MilestonesPage } from '../milestones/milestones';
 
 @Component({
-  selector: 'page-resolutions',
-  templateUrl: './resolutions.html'
+  selector: 'resolutions',
+  templateUrl: 'resolutions.html'
 })
 export class ResolutionsPage implements OnInit {
   editMode: boolean = false;

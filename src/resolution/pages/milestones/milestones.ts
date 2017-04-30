@@ -19,8 +19,8 @@ import { TaskModal } from '../../modals';
 import { Task } from '../../models';
 
 @Component({
-  selector: 'page-milestones',
-  templateUrl: './milestones.html'
+  selector: 'milestones',
+  templateUrl: 'milestones.html'
 })
 export class MilestonesPage implements OnInit {
   resolution: Observable<Task>;
@@ -40,7 +40,7 @@ export class MilestonesPage implements OnInit {
     this.resolution = this.store.select(getCurrentResolution);
     this.darkMode = this.store.select(getDarkMode);
     this.reorderMode = this.store.select(getReorderMode);
-    this.resolutionId = this.navParams.get('taskId');
+    this.resolutionId = this.navParams.data.taskId;
   }
 
   addMilestone(): void {

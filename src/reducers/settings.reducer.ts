@@ -17,23 +17,13 @@ const initialState: SettingsState = {
 // ============= REDUCER =============
 
 export function settingsReducer(state: SettingsState = initialState, action: Action) {
-	switch (action.type) {
-		case settings.actions.LOAD_SETTINGS_SUCCESS: {
-			return Object.assign({}, state, action.payload);
-		};
+	let reducerHandle = reducerCases[action.type];
 
-		case settings.actions.TOGGLE_DARK_MODE_SUCCESS: {
-			return Object.assign({}, state, { darkMode: action.payload });
-		}
-
-		case settings.actions.TOGGLE_REORDER_MODE: {
-			return Object.assign({}, state, { reorderMode: !state.reorderMode });
-		}
-
-		default: {
-			return state;
-		}
+	if (reducerHandle) {
+		return reducerHandle(state, action);
 	}
+
+	return state;
 }
 
 let reducerCases = {};
