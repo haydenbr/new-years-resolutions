@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Storage } from '@ionic/storage';
 
 import { Observable } from 'rxjs/Observable';
+import * as uuid from 'uuid';
 
 import { Task } from '../models';
 import { reorder } from '../../util';
@@ -43,7 +44,10 @@ export class ResolutionService {
 			.map(() => resolutions)
 	}
 
-	addResolution(resolution): Observable<Task> {
+	addResolution(resolution: Task): Observable<Task> {
+		resolution.id = uuid.v4();
+		resolution.milestones = [];
+
 		return this.getResolutions()
 			.map(resolutions => resolutions.concat(resolution))
 			.switchMap(resolutions => this.setResolutions(resolutions))
@@ -74,7 +78,7 @@ export class ResolutionService {
 	}
 
 	addMilestone(id: string, milestone: Task): Observable<Task> {
-		milestone.milestones = undefined;
+		milestone.id = uuid.v4();
 
 		return this.getResolution(id)
 			.map((resolution) => {
