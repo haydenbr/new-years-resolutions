@@ -23,7 +23,8 @@ export class TaskModal implements OnInit {
   initForm(): void {
     this.taskForm = this.formBuilder.group({
       taskName: [this.task && this.task.name || '', Validators.required ],
-      taskDescription: [ this.task && this.task.description || '', Validators.required ]
+      taskDescription: [ this.task && this.task.description || '', Validators.required ],
+      taskDueDate: [ this.task && this.task.dueDate ]
     });
   }
 
@@ -46,6 +47,11 @@ export class TaskModal implements OnInit {
 
   onFormSubmit(): void {
     let formValue = this.taskForm.value;
-    this.viewCtrl.dismiss(Object.assign(this.task, { name: formValue.taskName, description: formValue.taskDescription }));
+
+    this.viewCtrl.dismiss(Object.assign(this.task, {
+      name: formValue.taskName,
+      description: formValue.taskDescription,
+      dueDate: formValue.taskDueDate
+    }));
   }
 }

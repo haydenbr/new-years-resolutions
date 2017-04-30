@@ -14,14 +14,19 @@
 
 <ion-content [ngClass]="{'dark-background': darkMode}">
   <form [formGroup]="taskForm" (ngSubmit)="onFormSubmit()">
-    <ion-item [color]="darkMode ? 'dark' : ''">
-      <ion-label floating [color]="darkMode ? 'light' : ''">Name</ion-label>
+    <ion-item>
+      <ion-label floating>Name</ion-label>
       <ion-input formControlName="taskName"></ion-input>
     </ion-item>
 
-    <ion-item [color]="darkMode ? 'dark' : ''">
-      <ion-label floating [color]="darkMode ? 'light' : ''">Description</ion-label>
+    <ion-item>
+      <ion-label floating>Description</ion-label>
       <ion-textarea formControlName="taskDescription"></ion-textarea>
+    </ion-item>
+
+    <ion-item>
+      <ion-label floating>Due Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY" formControlName="taskDueDate"></ion-datetime>
     </ion-item>
 
     <div padding>

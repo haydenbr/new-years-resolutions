@@ -32,11 +32,15 @@ ion-menu {
 
   .list-md {
     background-color: $dark;
+  }
 
-    .item-md {
-      background-color: $dark;
-      color: $light;
-    }
+  .item-md {
+    background-color: $dark;
+    color: $light;
+  }
+
+  .label-md {
+    color: $light;
   }
 }
 
