@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
 
 import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
@@ -10,7 +10,8 @@ import { Settings } from '../../../settings/models';
 
 @Component({
 	selector: 'navbar',
-	templateUrl: 'navbar.component.html'
+	templateUrl: 'navbar.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class NavbarComponent implements OnInit {
 	settings: Observable<Settings>;

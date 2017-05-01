@@ -1,4 +1,4 @@
-import { Component, Input, Output } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
 import { ItemSliding } from 'ionic-angular'
 
 import { Subject } from 'rxjs/Subject';
@@ -7,7 +7,8 @@ import { Task } from '../../models';
 
 @Component({
 	selector: 'task-list',
-	templateUrl: './task-list.component.html'
+	templateUrl: './task-list.component.html',
+	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent {
 	@Input() reorderMode: boolean;
