@@ -3,10 +3,12 @@ import { FormControl } from '@angular/forms';
 import { NavController, ModalController } from 'ionic-angular';
 
 import { Store } from '@ngrx/store';
+import { Actions } from '@ngrx/effects';
 import { Subject } from 'rxjs';
 
 import * as resolutionActions from '../../../actions/resolution.actions';
 import * as settingsActions from '../../../actions/settings.actions';
+import { LoadingService } from '../../../core/services';
 import { AppState } from '../../../reducers/app.state';
 import { getResolutions, searchResolutions } from '../../../reducers/resolution.reducer';
 import { getDarkMode, getReorderMode } from '../../../reducers/settings.reducer';
@@ -30,6 +32,8 @@ export class ResolutionPage {
   searchFormControl = new FormControl();
 
   constructor(
+    private actions: Actions,
+    private loadingService: LoadingService,
     private navCtrl: NavController, 
     private modalCtrl: ModalController, 
     private store: Store<AppState>,
@@ -62,7 +66,16 @@ export class ResolutionPage {
 
     taskModal.onDidDismiss(resolution => {
       if (resolution) {
+        this.loadingService.present('Adding resolution');
+
         this.store.dispatch(new resolutionActions.Create(resolution));
+
+        this.actions.ofType(
+          resolutionActions.actions.CREATE_SUCCESS,
+          resolutionActions.actions.CREATE_FAIL
+        )
+          .take(1)
+          .subscribe(() => this.loadingService.dismiss());
       }
     });
 
