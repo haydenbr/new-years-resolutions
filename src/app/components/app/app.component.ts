@@ -30,10 +30,11 @@ export class AppComponent {
   ) {
     this.loadingService.present('Loading');
 
-    platform.ready().then(() => {
-      StatusBar.styleDefault();
-      Splashscreen.hide();
-    });
+    platform.ready()
+      .then(() => {
+        StatusBar.styleDefault();
+        Splashscreen.hide();
+      });
 
     this.settings = this.store.select(getSettingsState);
 
@@ -57,7 +58,7 @@ export class AppComponent {
             message: 'It\'s time to resolve to do things better!'
           }).present();
         }
-      })
+      });
   }
 
   onClearData() {
