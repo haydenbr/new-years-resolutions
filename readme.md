@@ -10,5 +10,5 @@
 
 3. Run the app in the browser
   ```
-  ionic serve
+  npm start
   ```
