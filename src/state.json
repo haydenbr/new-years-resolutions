@@ -1,0 +1,321 @@
+{
+   "monitorState":null,
+   "nextActionId":7,
+   "stagedActionIds":[
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6
+   ],
+   "skippedActionIds":[
+
+   ],
+   "currentStateIndex":6,
+   "actionsById":{
+      "0":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "type":"@ngrx/store/init"
+         },
+         "timestamp":1493743266578
+      },
+      "1":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "payload":{
+               "darkMode":true
+            },
+            "type":"[Settings] Get Settings Success"
+         },
+         "timestamp":1493743266759
+      },
+      "2":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "payload":true,
+            "type":"[Settings] Toggle Dark Mode"
+         },
+         "timestamp":1493743266761
+      },
+      "3":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "payload":true,
+            "type":"[Settings] Toggle Dark Mode Success"
+         },
+         "timestamp":1493743266834
+      },
+      "4":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "payload":[
+               {
+                  "name":"asd",
+                  "description":"asd",
+                  "isComplete":false,
+                  "dueDate":null,
+                  "id":"099c9a5c-893a-476e-a713-c55b68ea7983",
+                  "milestones":[
+
+                  ]
+               },
+               {
+                  "name":"hey man",
+                  "description":"bob is cool",
+                  "isComplete":false,
+                  "dueDate":null,
+                  "id":"d43a96db-f206-4efd-a850-c456afe0c3e7",
+                  "milestones":[
+
+                  ]
+               }
+            ],
+            "type":"[Resolution] Get All Success"
+         },
+         "timestamp":1493743268256
+      },
+      "5":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "payload":{
+               "name":"hey man",
+               "description":"bob is cool",
+               "isComplete":false,
+               "dueDate":null,
+               "id":"d43a96db-f206-4efd-a850-c456afe0c3e7",
+               "milestones":[
+
+               ]
+            },
+            "type":"[Resolution] Set Current"
+         },
+         "timestamp":1493743270090
+      },
+      "6":{
+         "type":"PERFORM_ACTION",
+         "action":{
+            "payload":{
+               "name":"asd",
+               "description":"asd",
+               "isComplete":false,
+               "dueDate":null,
+               "id":"099c9a5c-893a-476e-a713-c55b68ea7983",
+               "milestones":[
+
+               ]
+            },
+            "type":"[Resolution] Set Current"
+         },
+         "timestamp":1493743273116
+      }
+   },
+   "computedStates":[
+      {
+         "state":{
+            "settings":{
+               "darkMode":false,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":false,
+               "loading":false,
+               "resolutions":{
+
+               },
+               "resolutionIds":[
+
+               ]
+            }
+         }
+      },
+      {
+         "state":{
+            "settings":{
+               "darkMode":true,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":false,
+               "loading":false,
+               "resolutions":{
+
+               },
+               "resolutionIds":[
+
+               ]
+            }
+         }
+      },
+      {
+         "state":{
+            "settings":{
+               "darkMode":true,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":false,
+               "loading":false,
+               "resolutions":{
+
+               },
+               "resolutionIds":[
+
+               ]
+            }
+         }
+      },
+      {
+         "state":{
+            "settings":{
+               "darkMode":true,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":false,
+               "loading":false,
+               "resolutions":{
+
+               },
+               "resolutionIds":[
+
+               ]
+            }
+         }
+      },
+      {
+         "state":{
+            "settings":{
+               "darkMode":true,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":true,
+               "loading":false,
+               "resolutions":{
+                  "099c9a5c-893a-476e-a713-c55b68ea7983":{
+                     "name":"asd",
+                     "description":"asd",
+                     "isComplete":false,
+                     "dueDate":null,
+                     "id":"099c9a5c-893a-476e-a713-c55b68ea7983",
+                     "milestones":[
+
+                     ]
+                  },
+                  "d43a96db-f206-4efd-a850-c456afe0c3e7":{
+                     "name":"hey man",
+                     "description":"bob is cool",
+                     "isComplete":false,
+                     "dueDate":null,
+                     "id":"d43a96db-f206-4efd-a850-c456afe0c3e7",
+                     "milestones":[
+
+                     ]
+                  }
+               },
+               "resolutionIds":[
+                  "099c9a5c-893a-476e-a713-c55b68ea7983",
+                  "d43a96db-f206-4efd-a850-c456afe0c3e7"
+               ]
+            }
+         }
+      },
+      {
+         "state":{
+            "settings":{
+               "darkMode":true,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":true,
+               "loading":false,
+               "resolutions":{
+                  "099c9a5c-893a-476e-a713-c55b68ea7983":{
+                     "name":"asd",
+                     "description":"asd",
+                     "isComplete":false,
+                     "dueDate":null,
+                     "id":"099c9a5c-893a-476e-a713-c55b68ea7983",
+                     "milestones":[
+
+                     ]
+                  },
+                  "d43a96db-f206-4efd-a850-c456afe0c3e7":{
+                     "name":"hey man",
+                     "description":"bob is cool",
+                     "isComplete":false,
+                     "dueDate":null,
+                     "id":"d43a96db-f206-4efd-a850-c456afe0c3e7",
+                     "milestones":[
+
+                     ]
+                  }
+               },
+               "resolutionIds":[
+                  "099c9a5c-893a-476e-a713-c55b68ea7983",
+                  "d43a96db-f206-4efd-a850-c456afe0c3e7"
+               ],
+               "currentResolutionId":"d43a96db-f206-4efd-a850-c456afe0c3e7"
+            }
+         }
+      },
+      {
+         "state":{
+            "settings":{
+               "darkMode":true,
+               "reorderMode":false
+            },
+            "resolutions":{
+               "loaded":true,
+               "loading":false,
+               "resolutions":{
+                  "099c9a5c-893a-476e-a713-c55b68ea7983":{
+                     "name":"asd",
+                     "description":"asd",
+                     "isComplete":false,
+                     "dueDate":null,
+                     "id":"099c9a5c-893a-476e-a713-c55b68ea7983",
+                     "milestones":[
+
+                     ]
+                  },
+                  "d43a96db-f206-4efd-a850-c456afe0c3e7":{
+                     "name":"hey man",
+                     "description":"bob is cool",
+                     "isComplete":false,
+                     "dueDate":null,
+                     "id":"d43a96db-f206-4efd-a850-c456afe0c3e7",
+                     "milestones":[
+
+                     ]
+                  }
+               },
+               "resolutionIds":[
+                  "099c9a5c-893a-476e-a713-c55b68ea7983",
+                  "d43a96db-f206-4efd-a850-c456afe0c3e7"
+               ],
+               "currentResolutionId":"099c9a5c-893a-476e-a713-c55b68ea7983"
+            }
+         }
+      }
+   ],
+   "committedState":{
+      "settings":{
+         "darkMode":false,
+         "reorderMode":false
+      },
+      "resolutions":{
+         "loaded":false,
+         "loading":false,
+         "resolutions":{
+
+         },
+         "resolutionIds":[
+
+         ]
+      }
+   }
+}

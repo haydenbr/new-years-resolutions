@@ -30,8 +30,7 @@ export class ResolutionService {
 
 	getResolutions(): Observable<Task[]> {
 		return Observable.fromPromise(this.storage.get(this.DATA_KEY))
-			.take(1)
-			.delay(1500); // delay added to mimick requesting data over the wire
+			.take(1);
 	}
 
 	getResolution(id: string): Observable<Task> {
