@@ -2,13 +2,14 @@ const { spawn } = require('child_process');
 const path = require('path');
 
 const revHash = require('rev-hash');
+const dockerScript = path.resolve(__dirname, 'docker-dependency-check.sh');
 
 function getLocalPackageJson() {
   return require('../package.json');
 }
 
 function getLocalPackageJsonHash() {
-  return revHash(JSON.stringify(getLocalPackageJson()));
+  return revHash(JSON.stringify(getLocalPackageJson().dependencies));
 }
 
 function utfFromBuffer(buf) {
@@ -16,8 +17,9 @@ function utfFromBuffer(buf) {
 }
 
 function getContainerPackageJson() {
+
   return new Promise((resolve, reject) => {
-    let dockerCheck = spawn('./docker-dependency-check.sh', []);
+    let dockerCheck = spawn('sh', [ dockerScript ]);
     let containerId = '';
     let jsonString = '';
 
@@ -47,7 +49,7 @@ function getContainerPackageJson() {
 
 function dockerDependencyCheck() {
   return getContainerPackageJson()
-    .then(packageJson => JSON.stringify(packageJson))
+    .then(packageJson => JSON.stringify(packageJson.dependencies))
     .then(jsonString => revHash(jsonString))
     .then(containerHash => containerHash === getLocalPackageJsonHash());
 }
