@@ -4,7 +4,8 @@
   "homepage": "http://unboxedtechnology.com/",
   "private": true,
   "scripts": {
-    "start": "ionic-app-scripts serve --iscordovaserve --sourceMap source-map  --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build",
+    "start": "docker run -it -p 8100:8100 -p 35729:35729 -p 53703:53703 -v $(pwd)/src:/app/src unboxedtechnology/new-years-resolutions",
+    "browser": "ionic-app-scripts serve --iscordovaserve --sourceMap source-map  --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build",
     "build": "ionic-app-scripts build",
     "ionic:build": "ionic-app-scripts build  --release --prod",
     "build_www": "ionic-app-scripts build browser --release --prod  --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build",
