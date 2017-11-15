@@ -1,10 +1,9 @@
 #!/bin/bash
+ID=$(docker create unboxedtechnology/new-years-resolutions:$PREVIOUS_VERSION)
+docker cp $ID:/app/package.json ./temp-package.json
+docker rm -v $ID
 
-id=$(docker create unboxedtechnology/new-years-resolutions)
-docker cp $id:/app/package.json ./temp-package.json
-docker rm -v $id
-
-value=$(<./temp-package.json)
-echo "$value"
+VALUE=$(<./temp-package.json)
+echo "$VALUE"
 
 rm ./temp-package.json

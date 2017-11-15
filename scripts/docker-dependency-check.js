@@ -17,7 +17,6 @@ function utfFromBuffer(buf) {
 }
 
 function getContainerPackageJson() {
-
   return new Promise((resolve, reject) => {
     let dockerCheck = spawn('sh', [ dockerScript ]);
     let containerId = '';
