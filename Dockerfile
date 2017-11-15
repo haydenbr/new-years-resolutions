@@ -21,6 +21,7 @@ ADD ionic.config.json /app/ionic.config.json
 ADD docker/config.xml /app/config.xml
 
 # files needed for angular/ionic dev environment
+# ADD webpack /app/webpack
 ADD tslint.json /app/tslint.json
 ADD tsconfig.json /app/tsconfig.json
 
