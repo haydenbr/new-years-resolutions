@@ -50,7 +50,7 @@ function dockerDependencyCheck() {
   return getContainerPackageJson()
     .then(packageJson => JSON.stringify(packageJson.dependencies))
     .then(jsonString => revHash(jsonString))
-    .then(containerHash => containerHash === getLocalPackageJsonHash());
+    .then(containerHash => containerHash !== getLocalPackageJsonHash());
 }
 
 module.exports = dockerDependencyCheck;
