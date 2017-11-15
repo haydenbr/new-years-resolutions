@@ -3,7 +3,7 @@
   "author": "Unboxed Technology",
   "homepage": "http://unboxedtechnology.com/",
   "private": true,
-  "version": "0.0.1",
+  "version": "0.0.2",
   "scripts": {
     "start": "./scripts/docker-start.sh",
     "add-browser": "ionic cordova platform add browser --no-interactive",
