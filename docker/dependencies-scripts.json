@@ -65,6 +65,8 @@
         }
     ],
     "scripts": {
-        "add-platforms": "npm run rm-browser && npm run add-browser"
+        "add-platforms": "npm run rm-browser && npm run add-browser",
+        "add-browser": "ionic cordova platform add browser --no-interactive",
+        "rm-browser": "ionic cordova platform rm browser --no-interactive"
     }
 }
