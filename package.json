@@ -8,7 +8,7 @@
     "start": "./scripts/docker-start.sh",
     "add-browser": "ionic cordova platform add browser --no-interactive",
     "add-platforms": "npm run rm-browser && npm run add-browser",
-    "browser": "ionic-app-scripts serve --iscordovaserve --sourceMap source-map  --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build",
+    "browser": "ionic-app-scripts serve",
     "build": "ionic-app-scripts build",
     "build-browser": "ionic cordova build browser --release --prod --no-interactive",
     "build-image": "docker build -t unboxedtechnology/new-years-resolutions .",
