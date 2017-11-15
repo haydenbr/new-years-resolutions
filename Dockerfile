@@ -19,7 +19,6 @@ RUN npm i -g ionic@3.9.1 cordova@7.0.1
 ADD docker/dependencies-scripts.json /app/package.json
 ADD ionic.config.json /app/ionic.config.json
 ADD docker/config.xml /app/config.xml
-RUN npm run add-platforms
 
 # files needed for angular/ionic dev environment
 ADD tslint.json /app/tslint.json
