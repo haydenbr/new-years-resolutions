@@ -6,15 +6,24 @@
   "private": true,
   "scripts": {
     "start": "docker run -it -p 8100:8100 -p 35729:35729 -p 53703:53703 -v $(pwd)/src:/app/src unboxedtechnology/new-years-resolutions",
+    "add-browser": "ionic cordova platform add browser --no-interactive",
+    "add-platforms": "npm run rm-browser && npm run add-browser",
     "browser": "ionic-app-scripts serve --iscordovaserve --sourceMap source-map  --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build",
     "build": "ionic-app-scripts build",
-    "build-image": "docker build -t unboxedtechnology/new-years-resolutions .",
     "build-browser": "ionic cordova build browser --release --prod --no-interactive",
+    "build-image": "docker build -t unboxedtechnology/new-years-resolutions .",
+    "bump": "./scripts/bump.sh ",
+    "copy-dependencies": "./scripts/copy-dependencies.js",
+    "docker-version": "./scripts/docker-version.js",
+    "docker-pull": "./scripts/docker-pull.sh",
+    "major": "npm run bump major",
+    "minor": "npm run bump minor",
     "package": "ionic package build ios --profile prod --release --noresources",
     "package-dev": "ionic package build ios --profile dev --debug  --noresources",
-    "add-browser": "ionic cordova platform add browser --no-interactive",
+    "patch": "npm run bump patch",
     "rm-browser": "ionic cordova platform rm browser --no-interactive",
-    "add-platforms": "npm run rm-browser && npm run add-browser"
+    "sync-config": "./build-scripts/sync-configxml-version.js",
+    "sync-pipeline": "./scripts/sync-pipeline-image-version.js"
   },
   "config": {
     "ionic_webpack": "./webpack/webpack.config.js"
@@ -51,6 +60,7 @@
   "devDependencies": {
     "@ionic/app-scripts": "1.3.4",
     "cordova": "^6.5.0",
+    "js-yaml": "^3.10.0",
     "md5-file": "^3.2.3",
     "rev-hash": "^2.0.0",
     "typescript": "~2.2.1",

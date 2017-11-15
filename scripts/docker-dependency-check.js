@@ -1,7 +1,7 @@
 const { spawn } = require('child_process');
 const path = require('path');
-
 const revHash = require('rev-hash');
+
 const dockerScript = path.resolve(__dirname, 'docker-dependency-check.sh');
 
 function getLocalPackageJson() {

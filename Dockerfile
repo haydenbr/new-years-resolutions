@@ -11,13 +11,14 @@ RUN apt-get install ncftp
 # node_modules
 RUN mkdir /app
 WORKDIR /app
-ADD package.json /app/package.json
+ADD docker/dependencies.json /app/package.json
 RUN npm i
 RUN npm i -g ionic@3.9.1 cordova@7.0.1
 
 # platform dependency
+ADD docker/dependencies-scripts.json /app/package.json
 ADD ionic.config.json /app/ionic.config.json
-ADD config.xml /app/config.xml
+ADD docker/config.xml /app/config.xml
 RUN npm run add-platforms
 
 # files needed for angular/ionic dev environment
