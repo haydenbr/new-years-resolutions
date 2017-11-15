@@ -1,4 +1,4 @@
-<ion-menu [content]="main">
+<ion-menu class="side-menu" [content]="main">
   <ion-content>
     <ion-list>
 	    <ion-item>
@@ -6,6 +6,8 @@
 			  <ion-toggle [(ngModel)]="settings.darkMode" (ionChange)="updateSettings()"></ion-toggle>
 			</ion-item>
     </ion-list>
+
+    <img class="banana" src="assets/img/banana.gif">
   </ion-content>
 </ion-menu>
 
