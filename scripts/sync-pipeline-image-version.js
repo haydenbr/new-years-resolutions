@@ -5,7 +5,7 @@ const path = require('path');
 const yaml = require('js-yaml');
 const packageJson = require('../package.json');
 
-var newVersion = package.version;
+var newVersion = packageJson.version;
 
 // update bitbucket-pipelines.yml with new image tag
 var pipelinesYamlPath = path.resolve(__dirname, '../', 'bitbucket-pipelines.yml');

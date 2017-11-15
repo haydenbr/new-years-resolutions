@@ -1,7 +1,7 @@
 {
   "name": "new-years-resolutions",
   "author": "Unboxed Technology",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "homepage": "http://unboxedtechnology.com/",
   "private": true,
   "scripts": {
@@ -22,7 +22,7 @@
     "package-dev": "ionic package build ios --profile dev --debug  --noresources",
     "patch": "npm run bump patch",
     "rm-browser": "ionic cordova platform rm browser --no-interactive",
-    "sync-config": "./build-scripts/sync-configxml-version.js",
+    "sync-config": "./scripts/sync-configxml-version.js",
     "sync-pipeline": "./scripts/sync-pipeline-image-version.js"
   },
   "config": {
