@@ -16,7 +16,11 @@ var newPackageJson = {
   cordova: packageJson.cordova
 };
 
-var packageWithScripts = Object.assign({}, newPackageJson, { scripts: { 'add-platforms': packageJson.scripts['add-platforms'] } });
+var packageWithScripts = Object.assign({}, newPackageJson, { scripts: {
+  'add-platforms': packageJson.scripts['add-platforms'],
+  'add-browser': packageJson.scripts['add-browser'],
+  'rm-browser': packageJson.scripts['rm-browser']
+} });
 
 var root = path.resolve(__dirname, '../');
 var dependencies = path.join(root, 'docker', 'dependencies.json');
