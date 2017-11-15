@@ -1,4 +1,4 @@
-let packageJson = require('../package.json');
+const packageJson = require('../package.json');
 
 function getCurrentVersion() {
   return packageJson.version;

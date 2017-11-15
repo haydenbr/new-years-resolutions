@@ -1,14 +1,13 @@
-1. Make sure you have the latest version of Cordova and Ionic:
-  ```
-  npm install -g cordova ionic
-  ```
+1. Believe it or not, don't `npm i`
 
-2. Install the dependencies
-  ```
-  npm install
-  ```
+2. Do you have Docker? If not, go a head and install it
 
-3. Run the app in the browser
-  ```
-  npm start
-  ```
+Mac: https://docs.docker.com/docker-for-mac/install/
+Windows: https://docs.docker.com/docker-for-windows/install/
+Ubuntu: https://docs.docker.com/engine/installation/linux/docker-ce/ubuntu/
+
+3. `npm run docker-pull`
+
+4. `npm start`
+
+Questions? Contact haydenbraxton@unboxedtechnology.com

@@ -11,10 +11,13 @@
     "build-image": "docker build -t unboxedtechnology/new-years-resolutions .",
     "build-browser": "ionic cordova build browser --release --prod --no-interactive",
     "package": "ionic package build ios --profile prod --release --noresources",
-    "package-dev": "ionic package build ios --profile dev --debug  --noresources"
+    "package-dev": "ionic package build ios --profile dev --debug  --noresources",
+    "add-browser": "ionic cordova platform add browser --no-interactive",
+    "rm-browser": "ionic cordova platform rm browser --no-interactive",
+    "add-platforms": "npm run rm-browser && npm run add-browser"
   },
   "config": {
-    "ionic_webpack": "./webpack.config.js"
+    "ionic_webpack": "./webpack/webpack.config.js"
   },
   "dependencies": {
     "@angular/common": "4.0.2",
@@ -34,8 +37,6 @@
     "@ngrx/effects": "2.0.3",
     "@ngrx/store": "2.2.2",
     "@ngrx/store-devtools": "^3.2.2",
-    "angular2-highcharts": "^0.5.5",
-    "angular2-moment": "^1.1.0",
     "ionic-angular": "3.1.1",
     "ionic-native": "^2.9.0",
     "ionic-plugin-keyboard": "^2.2.1",
@@ -53,7 +54,11 @@
     "md5-file": "^3.2.3",
     "rev-hash": "^2.0.0",
     "typescript": "~2.2.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.4.1",
+    "webpack-bundle-analyzer": "^2.9.1",
+    "webpack-bundle-size-analyzer": "^2.7.0",
+    "webpack-merge": "^4.1.1",
+    "xml2js": "^0.4.19"
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",
