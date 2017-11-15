@@ -8,4 +8,8 @@ const reducers = {
 	resolutions: resolutionReducer
 }
 
-export const reducer = combineReducers(reducers);
+let stateReducer = combineReducers(reducers);
+
+export function reducer(state, action) {
+	return stateReducer(state, action);
+}
