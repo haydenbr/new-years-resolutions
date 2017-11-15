@@ -1,0 +1,20 @@
+image: 'unboxedtechnology/new-years-resolutions:1.3.0'
+clone:
+  depth: 1
+pipelines:
+  branches:
+    dev:
+      - step:
+          script:
+            - source ./scripts/bitbucket-dev.sh
+            - ./scripts/bitbucket-build.sh
+    test:
+      - step:
+          script:
+            - source ./scripts/bitbucket-test.sh
+            - ./scripts/bitbucket-build.sh
+    master:
+      - step:
+          script:
+            - source ./scripts/bitbucket-prod.sh
+            - ./scripts/bitbucket-build.sh

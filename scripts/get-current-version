@@ -1,0 +1,5 @@
+#!/usr/bin/env node
+
+const getCurrentVersion = require('./get-current-version.js');
+
+console.log(getCurrentVersion());
