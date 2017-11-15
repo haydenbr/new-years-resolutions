@@ -15,4 +15,4 @@ git tag "$VERSION"
 
 npm run docker-version
 
-# unset PREVIOUS_VERSION
+unset PREVIOUS_VERSION
