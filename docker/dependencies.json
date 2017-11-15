@@ -20,6 +20,9 @@
     },
     "devDependencies": {
         "@ionic/app-scripts": "0.0.46",
-        "typescript": "2.0.9"
+        "js-yaml": "^3.10.0",
+        "rev-hash": "^2.0.0",
+        "typescript": "2.0.9",
+        "xml2js": "^0.4.19"
     }
 }
