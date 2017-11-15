@@ -12,7 +12,7 @@
     "build": "ionic-app-scripts build",
     "build-browser": "ionic cordova build browser --release --prod --no-interactive",
     "build-image": "docker build -t unboxedtechnology/new-years-resolutions .",
-    "bump": "./scripts/bump.sh ",
+    "bump": "./scripts/bump.sh",
     "copy-dependencies": "./scripts/copy-dependencies.js",
     "docker-version": "./scripts/docker-version.js",
     "docker-pull": "./scripts/docker-pull.sh",
