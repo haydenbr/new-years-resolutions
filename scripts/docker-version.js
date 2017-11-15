@@ -34,15 +34,18 @@ function execScript(script) {
 }
 
 function dockerBuild() {
-  console.log(`Change in dependencies detected. Builing new image tagged with version ${version}`);
+  console.log(`Builing new image tagged with version ${version}`);
   return execScript(dockerBuildScript);
 }
 
 function dockerTag() {
-  console.log(`No change in dependencies detected. Tagging previous image with version ${version}`);
+  console.log(`Tagging previous image with version ${version}`);
   return execScript(dockerTagScript);
 }
 
-dockerDependencyCheck()
-  .then(hasChanges => (hasChanges) ? dockerBuild() : dockerTag())
-  .catch(err => console.error(`error: ${err}`));
+// I dont think I like this:
+// dockerDependencyCheck()
+//   .then(hasChanges => (hasChanges) ? dockerBuild() : dockerTag())
+//   .catch(err => console.error(`error: ${err}`));
+
+dockerBuild();
