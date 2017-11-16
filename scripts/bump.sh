@@ -3,6 +3,7 @@
 export PREVIOUS_VERSION=$(./scripts/get-current-version)
 
 npm version $@ --no-git-tag-version
+
 npm run sync-config
 npm run sync-pipeline
 npm run copy-dependencies
