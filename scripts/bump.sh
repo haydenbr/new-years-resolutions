@@ -13,6 +13,6 @@ git add .
 git commit -m "$VERSION"
 git tag "$VERSION"
 
-npm run docker-version
+npm run docker-build
 
 unset PREVIOUS_VERSION

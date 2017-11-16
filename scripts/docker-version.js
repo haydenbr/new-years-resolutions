@@ -44,8 +44,6 @@ function dockerTag() {
 }
 
 // I dont think I like this:
-// dockerDependencyCheck()
-//   .then(hasChanges => (hasChanges) ? dockerBuild() : dockerTag())
-//   .catch(err => console.error(`error: ${err}`));
-
-dockerBuild();
+dockerDependencyCheck()
+  .then(hasChanges => (hasChanges) ? dockerBuild() : dockerTag())
+  .catch(err => console.error(`error: ${err}`));

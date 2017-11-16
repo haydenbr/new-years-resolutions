@@ -14,6 +14,7 @@
     "build-image": "docker build -t unboxedtechnology/new-years-resolutions .",
     "bump": "./scripts/bump.sh",
     "copy-dependencies": "./scripts/copy-dependencies.js",
+    "docker-build": "./scripts/docker-build.sh",
     "docker-version": "./scripts/docker-version.js",
     "docker-pull": "./scripts/docker-pull.sh",
     "major": "npm run bump major",
