@@ -22,9 +22,12 @@ ADD docker/config.xml /app/config.xml
 RUN npm run add-platforms
 
 # files needed for angular/ionic dev environment
+ADD /scripts /app/scripts
 ADD /webpack /app/webpack
 ADD tslint.json /app/tslint.json
 ADD tsconfig.json /app/tsconfig.json
+ADD package.json /app/package.json
+ADD config.xml /app/config.xml
 
 # for live reload
 EXPOSE 8100 35729 53703
