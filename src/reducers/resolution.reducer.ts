@@ -45,8 +45,8 @@ reducerCases[resolutionActions.actions.GET_ALL] =
 
 reducerCases[resolutionActions.actions.GET_ALL_SUCCESS] =
 	function (state: ResolutionState, action: Action) {
-		let resolutionsArray = action.payload, resolutions = {}, resolutionIds = [];
-				
+		let resolutionsArray = action.payload || [], resolutions = {}, resolutionIds = [];
+
 		resolutionsArray.forEach((r) => {
 			resolutions[r.id] = r;
 			resolutionIds.push(r.id);
