@@ -5,7 +5,7 @@
   "homepage": "http://unboxedtechnology.com/",
   "private": true,
   "scripts": {
-    "start": "./scripts/docker-start.sh",
+    "start": "docker-compose up",
     "add-browser": "ionic cordova platform add browser --no-interactive",
     "add-platforms": "npm run rm-browser && npm run add-browser",
     "browser": "ionic-app-scripts serve --iscordovaserve --sourceMap source-map  --wwwDir platforms/browser/www/ --buildDir platforms/browser/www/build",
