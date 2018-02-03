@@ -1,4 +1,4 @@
-FROM node:8.5.0-slim
+FROM node:8.5.0
 LABEL maintainer="Unboxed Technology LLC, https://unboxedtechnology.com"
 LABEL author="Hayden Braxton, haydenbraxton@unboxedtechnology.com"
 
@@ -24,7 +24,7 @@ WORKDIR app
 # 
 # TL;DR they do the same thing, except ADD can pull from remote resources
 ADD docker/package.json package.json
-RUN yarn
+RUN yarn && yarn cache clean
 
 # expose ports to serve app from inside container
 EXPOSE 8100 35729 53703
