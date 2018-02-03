@@ -6,15 +6,15 @@ pipelines:
     dev:
       - step:
           script:
-            - source ./scripts/bitbucket-dev.sh
+            - source ./scripts/bitbucket-dev-env.sh
             - ./scripts/bitbucket-build.sh
     test:
       - step:
           script:
-            - source ./scripts/bitbucket-test.sh
+            - source ./scripts/bitbucket-test-env.sh
             - ./scripts/bitbucket-build.sh
     master:
       - step:
           script:
-            - source ./scripts/bitbucket-prod.sh
+            - source ./scripts/bitbucket-prod-env.sh
             - ./scripts/bitbucket-build.sh
