@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, Output } from '@angular/core';
-import { ItemSliding } from 'ionic-angular'
+import { ItemSliding } from 'ionic-angular';
 
 import { Subject } from 'rxjs/Subject';
 
@@ -8,7 +8,6 @@ import { Task } from '../../models';
 @Component({
 	selector: 'task-list',
 	templateUrl: './task-list.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class TaskListComponent {
 	@Input() reorderMode: boolean;
@@ -19,28 +18,24 @@ export class TaskListComponent {
 	@Output() reorder = new Subject();
 	@Output() select = new Subject();
 
-	ngOnChanges(changes) {
-		if (changes.reorderMode) {
-			this.reorderMode = changes.reorderMode.currentValue;
-		}
-	}
+	constructor() {}
 
 	toggleTask(task: Task, slidingItem: ItemSliding): void {
 		this.toggle.next(task);
-    slidingItem.close();
-  }
+		slidingItem.close();
+	}
 
-  editTask(task: Task, slidingItem: ItemSliding): void {
+	editTask(task: Task, slidingItem: ItemSliding): void {
 		this.edit.next(task);
-    slidingItem.close();
-  }
+		slidingItem.close();
+	}
 
-  deleteTask(task: Task, slidingItem: ItemSliding): void {
-    this.delete.next(task);
-    slidingItem.close();
-  }
+	deleteTask(task: Task, slidingItem: ItemSliding): void {
+		this.delete.next(task);
+		slidingItem.close();
+	}
 
-	reorderTasks(index: { from: number, to: number }): void {
+	reorderTasks(index: { from: number; to: number }): void {
 		this.reorder.next(index);
 	}
 
@@ -49,8 +44,8 @@ export class TaskListComponent {
 	}
 
 	countIncompleteMilestones(resolution: Task) {
-    return resolution.milestones.filter((milestone: Task) => {
-      return !milestone.isComplete;
-    }).length;
-  }
+		return resolution.milestones.filter((milestone: Task) => {
+			return !milestone.isComplete;
+		}).length;
+	}
 }
