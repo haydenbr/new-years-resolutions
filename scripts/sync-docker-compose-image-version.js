@@ -9,10 +9,10 @@ module.exports = () => {
 		.readFile(dockerComposePath)
 		.then(dockerCompose => util.convertYamlToJson(dockerCompose))
 		.then(dockerComposeConfig => {
-			let oldImageName = dockerComposeConfig.services['pnc-dev-environment'].image;
+			let oldImageName = dockerComposeConfig.services['new-years-dev'].image;
 			let newImageName = oldImageName.split(':')[0] + ':' + version;
 
-			dockerComposeConfig.services['pnc-dev-environment'].image = newImageName;
+			dockerComposeConfig.services['new-years-dev'].image = newImageName;
 
 			return util.convertJsonToYaml(dockerComposeConfig);
 		})
