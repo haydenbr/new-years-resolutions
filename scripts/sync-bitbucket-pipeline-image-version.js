@@ -12,7 +12,11 @@ module.exports = () => {
 			let oldImageName = pipelineObject.image.name || pipelineObject.image;
 			let newImageName = oldImageName.split(':')[0] + ':' + version;
 
-			pipelineObject.image.name = newImageName;
+			if (pipelineObject.image.name) {
+				pipelineObject.image.name = newImageName;
+			} else {
+				pipelineObject.image = newImageName;
+			}
 
 			return util.convertJsonToYaml(pipelineObject);
 		})
