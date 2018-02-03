@@ -1,17 +1,16 @@
 version: '3.1'
-
 services:
   new-years-dev:
-    image: 'unboxedtechnology/new-years-resolutions:latest'
+    image: 'unboxedtechnology/new-years-resolutions:1.4.3'
     ports:
-      - 8100:8100
-      - 35729:35729
-      - 53703:53703
+      - '8100:8100'
+      - '35729:35729'
+      - '53703:53703'
     volumes:
-      - ./src:/app/src
-      - ./webpack:/app/webpack
-      - ./tslint.json:/app/tslint.json
-      - ./tsconfig.json:/app/tsconfig.json
-      - ./package.json:/app/package.json
-      - ./app.config.js:/app/app.config.js
-      - ./ionic.config.json:/app/ionic.config.json
+      - './src:/app/src'
+      - './webpack:/app/webpack'
+      - './tslint.json:/app/tslint.json'
+      - './tsconfig.json:/app/tsconfig.json'
+      - './package.json:/app/package.json'
+      - './app.config.js:/app/app.config.js'
+      - './ionic.config.json:/app/ionic.config.json'
