@@ -9,7 +9,7 @@ module.exports = () => {
 		.readFile(pipelinesFilepath)
 		.then(pipeline => util.convertYamlToJson(pipeline))
 		.then(pipelineObject => {
-			let oldImageName = pipelineObject.image.name;
+			let oldImageName = pipelineObject.image.name || pipelineObject.image;
 			let newImageName = oldImageName.split(':')[0] + ':' + version;
 
 			pipelineObject.image.name = newImageName;
