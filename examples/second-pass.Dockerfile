@@ -1,4 +1,6 @@
-FROM node:7.4.0
+# This is for example purposes. I don't guaruntee this actually works anymore
+
+FROM node:8.5.0
 LABEL maintainer="Unboxed Technology LLC, https://unboxedtechnology.com"
 
 ENV NODE_ENV=development

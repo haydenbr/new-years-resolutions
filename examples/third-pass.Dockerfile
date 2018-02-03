@@ -1,4 +1,4 @@
-FROM node:7.4.0
+FROM node:8.5.0
 LABEL maintainer="Unboxed Technology LLC, https://unboxedtechnology.com"
 
 # ENV or ARG?
