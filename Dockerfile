@@ -1,4 +1,4 @@
-FROM node:8.5.0-slim
+FROM node:8.9.4-alpine
 LABEL maintainer="Unboxed Technology LLC, https://unboxedtechnology.com"
 LABEL author="Hayden Braxton, haydenbraxton@unboxedtechnology.com"
 
@@ -12,8 +12,9 @@ ENV NODE_ENV=development
 
 # update system level tools I need
 RUN mkdir app && \
-		apt-get update && \
-		apt-get install ncftp
+		apk update && \
+		apk add --no-cache ncftp && \
+		rm -r /var/cache/apk
 WORKDIR app
 
 # install dependencies
