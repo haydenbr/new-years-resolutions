@@ -9,7 +9,7 @@
 	"dockerHubRepository": "unboxedtechnology/new-years-resolutions",
 	"scripts": {
 		"start": "docker-compose run --rm --service-ports new-years-dev",
-		"build:browser": "ionic-app-scripts build",
+		"build:browser": "ionic-app-scripts build --aot --minifyjs --minifycss  --optimizejs --prod --enableLint false",
 		"bump": "./scripts/bump.js",
 		"foo": "./scripts/foo.js",
 		"major": "npm run bump major",
