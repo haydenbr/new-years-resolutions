@@ -5,26 +5,26 @@ import { Task } from '../resolution/models';
 import { actionType } from './action-type';
 
 export const actions = {
-	CREATE:           	actionType('[Resolution] Create'),
-  CREATE_SUCCESS:   	actionType('[Resolution] Create Success'),
-  CREATE_FAIL:      	actionType('[Resolution] Create Fail'),
-  DELETE:          		actionType('[Resolution] Delete'),
-  DELETE_SUCCESS:  		actionType('[Resolution] Delete Success'),
-  DELETE_FAIL:     		actionType('[Resolution] Delete Fail'),
-	DELETE_ALL:					actionType('[Resolution] Delete All'),
-	DELETE_ALL_FAIL:		actionType('[Resolution] Delete All Fail'),
-	DELETE_ALL_SUCCESS:	actionType('[Resolution] Delete All Success'),
-  GET_ALL:          	actionType('[Resolution] Get All'),
-  GET_ALL_SUCCESS:  	actionType('[Resolution] Get All Success'),
-  GET_ALL_FAIL:     	actionType('[Resolution] Get All Fail'),
-	REORDER:						actionType('[Resolution] Reorder'),
-	REORDER_SUCCESS:		actionType('[Resolution] Reorder Success'),
-	REORDER_FAIL:				actionType('[Resolution] Reorder Fail'),
-	SET_CURRENT:				actionType('[Resolution] Set Current'),
-	UPDATE:          		actionType('[Resolution] Update'),
-  UPDATE_SUCCESS:  		actionType('[Resolution] Update Success'),
-  UPDATE_FAIL:     		actionType('[Resolution] Update Fail'),
-}
+	CREATE: actionType('[Resolution] Create'),
+	CREATE_SUCCESS: actionType('[Resolution] Create Success'),
+	CREATE_FAIL: actionType('[Resolution] Create Fail'),
+	DELETE: actionType('[Resolution] Delete'),
+	DELETE_SUCCESS: actionType('[Resolution] Delete Success'),
+	DELETE_FAIL: actionType('[Resolution] Delete Fail'),
+	DELETE_ALL: actionType('[Resolution] Delete All'),
+	DELETE_ALL_FAIL: actionType('[Resolution] Delete All Fail'),
+	DELETE_ALL_SUCCESS: actionType('[Resolution] Delete All Success'),
+	GET_ALL: actionType('[Resolution] Get All'),
+	GET_ALL_SUCCESS: actionType('[Resolution] Get All Success'),
+	GET_ALL_FAIL: actionType('[Resolution] Get All Fail'),
+	REORDER: actionType('[Resolution] Reorder'),
+	REORDER_SUCCESS: actionType('[Resolution] Reorder Success'),
+	REORDER_FAIL: actionType('[Resolution] Reorder Fail'),
+	SET_CURRENT: actionType('[Resolution] Set Current'),
+	UPDATE: actionType('[Resolution] Update'),
+	UPDATE_SUCCESS: actionType('[Resolution] Update Success'),
+	UPDATE_FAIL: actionType('[Resolution] Update Fail'),
+};
 
 export class Create implements Action {
 	type = actions.CREATE;
@@ -101,19 +101,19 @@ export class UpdateFail implements Action {
 export class Reorder implements Action {
 	type = actions.REORDER;
 
-	constructor(public payload: { to: number, from: number }) {}
+	constructor(public payload: { to: number; from: number }) {}
 }
 
 export class ReorderSuccess implements Action {
 	type = actions.REORDER_SUCCESS;
 
-	constructor(public payload: { to: number, from: number }) {}
+	constructor(public payload: { to: number; from: number }) {}
 }
 
 export class ReorderFail implements Action {
 	type = actions.REORDER_FAIL;
 
-	constructor(public payload: { to: number, from: number }) {}
+	constructor(public payload: { to: number; from: number }) {}
 }
 
 export class GetAll implements Action {
@@ -139,3 +139,21 @@ export class SetCurrent implements Action {
 
 	constructor(public payload: Task) {}
 }
+
+export type ResolutionAction =
+	| Create
+	| CreateFail
+	| CreateSuccess
+	| Delete
+	| DeleteFail
+	| DeleteSuccess
+	| DeleteAll
+	| DeleteAllFail
+	| DeleteAllSuccess
+	| Update
+	| UpdateFail
+	| UpdateSuccess
+	| Reorder
+	| ReorderFail
+	| ReorderSuccess
+	| SetCurrent;

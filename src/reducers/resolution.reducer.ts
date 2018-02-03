@@ -1,118 +1,95 @@
 import { Action } from '@ngrx/store';
 import omit from 'lodash/omit';
-import { createSelector } from 'reselect';
 
-import { AppState } from './app.state';
-import * as resolutionActions from '../actions/resolution.actions';
+import * as fromMilestoneActions from '../actions/milestone.actions';
+import * as fromActions from '../actions/resolution.actions';
 import { Task } from '../resolution/models';
 import { reorder } from '../util';
-import { milstoneReducer } from './milestone.reducer';
+import * as fromMilestone from './milestone.reducer';
 
-export interface ResolutionState {
+export interface State {
 	loaded: boolean;
 	loading: boolean;
-	resolutions: { [id: string]: Task },
-	resolutionIds: string[],
-	currentResolutionId: string
+	resolutions: { [id: string]: Task };
+	resolutionIds: string[];
+	currentResolutionId: string;
 }
 
-const initialState: ResolutionState = {
+export const initialState: State = {
 	loaded: false,
 	loading: false,
 	resolutions: {},
 	resolutionIds: [],
-	currentResolutionId: undefined
-}
+	currentResolutionId: undefined,
+};
 
 // ============= REDUCER =============
 
-export function resolutionReducer(state: ResolutionState = initialState, action: Action): ResolutionState {
+export function reducer(
+	state: State = initialState,
+	action: fromActions.ResolutionAction & fromMilestoneActions.MilestoneAction
+): State {
 	let reducerHandle = reducerCases[action.type];
 
 	if (reducerHandle) {
 		return reducerHandle(state, action);
 	}
 
-	return milstoneReducer(state, action);
+	return fromMilestone.reducer(state, action);
 }
 
 let reducerCases = {};
 
-reducerCases[resolutionActions.actions.GET_ALL] =
-	function (state: ResolutionState, action: Action) {
-		return Object.assign({}, state, { loading: true });
-	};
+reducerCases[fromActions.actions.GET_ALL] = function(state: State, action: Action) {
+	return Object.assign({}, state, { loading: true });
+};
 
-reducerCases[resolutionActions.actions.GET_ALL_SUCCESS] =
-	function (state: ResolutionState, action: Action) {
-		let resolutionsArray = action.payload || [], resolutions = {}, resolutionIds = [];
+reducerCases[fromActions.actions.GET_ALL_SUCCESS] = function(state: State, action: fromActions.GetAllSuccess) {
+	let resolutionsArray = action.payload || [],
+		resolutions = {},
+		resolutionIds = [];
 
-		resolutionsArray.forEach((r) => {
-			resolutions[r.id] = r;
-			resolutionIds.push(r.id);
-		});
-
-		return Object.assign({}, state, { loading: false, loaded: true, resolutions, resolutionIds });
-	};
-
-reducerCases[resolutionActions.actions.CREATE_SUCCESS] =
-	function (state: ResolutionState, action: Action) {
-		let newResolution = action.payload as Task;
-		return Object.assign({}, state, {
-			resolutions: Object.assign({}, state.resolutions, { [newResolution.id]: newResolution, }),
-			resolutionIds: state.resolutionIds.concat(newResolution.id)
-		});
-	};
-
-reducerCases[resolutionActions.actions.DELETE_SUCCESS] =
-	function (state: ResolutionState, action: Action) {
-		let removedResolution = action.payload as Task;
-		return Object.assign({}, state, {
-			resolutions: omit(state.resolutions, removedResolution.id),
-			resolutionIds: state.resolutionIds.filter((id) => { return id !== removedResolution.id })
-		});
-	};
-
-reducerCases[resolutionActions.actions.UPDATE_SUCCESS] =
-	function (state: ResolutionState, action: Action) {
-		let editedResolution = action.payload as Task;
-		return Object.assign({}, state, {
-			resolutions: Object.assign({}, state.resolutions, { [editedResolution.id]: editedResolution })
-		});
-	};
-
-reducerCases[resolutionActions.actions.REORDER_SUCCESS] =
-	function (state: ResolutionState, action: Action) {
-		return Object.assign({}, state, { resolutionIds: reorder(state.resolutionIds, action.payload) });
-	};
-
-reducerCases[resolutionActions.actions.SET_CURRENT] =
-	function (state: ResolutionState, action: Action) {
-		return Object.assign({}, state, { currentResolutionId: action.payload.id });
-	};
-
-reducerCases[resolutionActions.actions.DELETE_ALL_SUCCESS] = 
-	function (state: ResolutionState, action: Action) {
-		return Object.assign({}, initialState);
-	};
-
-// ============= SELECTORS =============
-
-export const getResolutionsState = (state: AppState) => state.resolutions;
-export const getLoaded = createSelector(getResolutionsState, state => state.loaded);
-export const getLoading = createSelector(getResolutionsState, state => state.loading);
-export const getResolutionsMap = createSelector(getResolutionsState, state => state.resolutions);
-export const getResolutionIds = createSelector(getResolutionsState, state => state.resolutionIds);
-export const getCurrentResolutionId = createSelector(getResolutionsState, state => state.currentResolutionId);
-export const getResolutions = createSelector(getResolutionsMap, getResolutionIds, (resolutions, ids) => {
-	return ids.map((id) => { return resolutions[id] });
-});
-export const getCurrentResolution = createSelector(getResolutionsMap, getCurrentResolutionId, (resolutions, id) => {
-	return resolutions[id];
-});
-export const getMilestones = createSelector(getCurrentResolution, (r) => { return r.milestones });
-export const searchResolutions = (searchTerm: string = '') => {
-	return createSelector(getResolutions, (resolutions) => {
-		return resolutions.filter(r => r.name.includes(searchTerm));
+	resolutionsArray.forEach(r => {
+		resolutions[r.id] = r;
+		resolutionIds.push(r.id);
 	});
+
+	return Object.assign({}, state, { loading: false, loaded: true, resolutions, resolutionIds });
+};
+
+reducerCases[fromActions.actions.CREATE_SUCCESS] = function(state: State, action: fromActions.CreateSuccess) {
+	let newResolution = action.payload as Task;
+	return Object.assign({}, state, {
+		resolutions: Object.assign({}, state.resolutions, { [newResolution.id]: newResolution }),
+		resolutionIds: state.resolutionIds.concat(newResolution.id),
+	});
+};
+
+reducerCases[fromActions.actions.DELETE_SUCCESS] = function(state: State, action: fromActions.DeleteSuccess) {
+	let removedResolution = action.payload as Task;
+	return Object.assign({}, state, {
+		resolutions: omit(state.resolutions, removedResolution.id),
+		resolutionIds: state.resolutionIds.filter(id => {
+			return id !== removedResolution.id;
+		}),
+	});
+};
+
+reducerCases[fromActions.actions.UPDATE_SUCCESS] = function(state: State, action: fromActions.UpdateSuccess) {
+	let editedResolution = action.payload as Task;
+	return Object.assign({}, state, {
+		resolutions: Object.assign({}, state.resolutions, { [editedResolution.id]: editedResolution }),
+	});
+};
+
+reducerCases[fromActions.actions.REORDER_SUCCESS] = function(state: State, action: fromActions.ReorderSuccess) {
+	return Object.assign({}, state, { resolutionIds: reorder(state.resolutionIds, action.payload) });
+};
+
+reducerCases[fromActions.actions.SET_CURRENT] = function(state: State, action: fromActions.SetCurrent) {
+	return Object.assign({}, state, { currentResolutionId: action.payload.id });
+};
+
+reducerCases[fromActions.actions.DELETE_ALL_SUCCESS] = function(state: State, action: fromActions.DeleteAllSuccess) {
+	return Object.assign({}, initialState);
 };

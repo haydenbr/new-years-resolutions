@@ -4,25 +4,22 @@ import { Observable } from 'rxjs';
 import { Store } from '@ngrx/store';
 
 import * as settingsActions from '../../../actions/settings.actions';
-import { AppState } from '../../../reducers/app.state';
-import { getSettingsState } from '../../../reducers/settings.reducer';
+import * as reducers from '../../../reducers';
 import { Settings } from '../../../settings/models';
 
 @Component({
 	selector: 'navbar',
 	templateUrl: 'navbar.component.html',
-	changeDetection: ChangeDetectionStrategy.OnPush
+	changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class NavbarComponent implements OnInit {
 	settings: Observable<Settings>;
 	@Input() title: string = 'New Years Resolutions';
 
-	constructor(
-		private store: Store<AppState>
-	) {}
+	constructor(private store: Store<reducers.State>) {}
 
 	ngOnInit() {
-		this.settings = this.store.select(getSettingsState);
+		this.settings = this.store.select(reducers.getSettingsState);
 	}
 
 	toggleReorderMode() {

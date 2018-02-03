@@ -38,7 +38,7 @@ function bustTheCache() {
 	return util
 		.readFile(indexPath)
 		.then(data => ($ = cheerio.load(data)))
-		.then(() => Promise.all([hashFile('main', 'css'), hashFile('main', 'js')]))
+		.then(() => Promise.all([hashFile('main', 'css'), hashFile('main', 'js'), hashFile('vendor', 'js')]))
 		.then(newFileNames => newFileNames.forEach(data => $(data.fileRefSelector).attr(data.attr, data.newFileName)))
 		.then(() => util.writeFile(indexPath, $.html()));
 }

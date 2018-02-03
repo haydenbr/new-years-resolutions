@@ -5,13 +5,13 @@ import { Settings } from '../settings/models';
 import { actionType } from './action-type';
 
 export const actions = {
-	GET_SETTINGS:							actionType('[Settings] Get Settings'),
-	GET_SETTINGS_SUCCESS:			actionType('[Settings] Get Settings Success'),
-	GET_SETTINGS_FAIL:				actionType('[Settings] Get Settings Fail'),
-	TOGGLE_DARK_MODE: 				actionType('[Settings] Toggle Dark Mode'),
+	GET_SETTINGS: actionType('[Settings] Get Settings'),
+	GET_SETTINGS_SUCCESS: actionType('[Settings] Get Settings Success'),
+	GET_SETTINGS_FAIL: actionType('[Settings] Get Settings Fail'),
+	TOGGLE_DARK_MODE: actionType('[Settings] Toggle Dark Mode'),
 	TOGGLE_DARK_MODE_SUCCESS: actionType('[Settings] Toggle Dark Mode Success'),
-	TOGGLE_DARK_MODE_FAIL: 		actionType('[Settings] Toggle Dark Mode Fail'),
-	TOGGLE_REORDER_MODE: 			actionType('[Settings] Toggle Reorder Mode')
+	TOGGLE_DARK_MODE_FAIL: actionType('[Settings] Toggle Dark Mode Fail'),
+	TOGGLE_REORDER_MODE: actionType('[Settings] Toggle Reorder Mode'),
 };
 
 export class GetSettings implements Action {
@@ -55,3 +55,12 @@ export class ToggleReorderMode implements Action {
 
 	constructor(public payload?: any) {}
 }
+
+export type SettingsAction =
+	| GetSettings
+	| GetSettingsSuccess
+	| GetSettingsFail
+	| ToggleDarkMode
+	| ToggleDarkModeFail
+	| ToggleDarkModeSuccess
+	| ToggleReorderMode;

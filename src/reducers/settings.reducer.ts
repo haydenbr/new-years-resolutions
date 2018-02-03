@@ -1,22 +1,41 @@
 import { Action } from '@ngrx/store';
 import { createSelector } from 'reselect';
 
-import { AppState } from './app.state';
-import * as settings from '../actions/settings.actions';
+import * as fromActions from '../actions/settings.actions';
 
-export interface SettingsState {
-	darkMode: boolean,
-	reorderMode: boolean
+export interface State {
+	darkMode: boolean;
+	reorderMode: boolean;
 }
 
-const initialState: SettingsState = {
+export const initialState: State = {
 	darkMode: false,
-	reorderMode: false
-}
+	reorderMode: false,
+};
+
+let reducerCases = {};
+
+reducerCases[fromActions.actions.GET_SETTINGS_SUCCESS] = function(
+	state: State,
+	action: fromActions.GetSettingsSuccess
+) {
+	return Object.assign({}, state, action.payload);
+};
+
+reducerCases[fromActions.actions.TOGGLE_DARK_MODE_SUCCESS] = function(
+	state: State,
+	action: fromActions.ToggleDarkModeSuccess
+) {
+	return Object.assign({}, state, { darkMode: action.payload });
+};
+
+reducerCases[fromActions.actions.TOGGLE_REORDER_MODE] = function(state: State, action: fromActions.ToggleReorderMode) {
+	return Object.assign({}, state, { reorderMode: !state.reorderMode });
+};
 
 // ============= REDUCER =============
 
-export function settingsReducer(state: SettingsState = initialState, action: Action) {
+export function reducer(state: State = initialState, action: fromActions.SettingsAction) {
 	let reducerHandle = reducerCases[action.type];
 
 	if (reducerHandle) {
@@ -25,26 +44,3 @@ export function settingsReducer(state: SettingsState = initialState, action: Act
 
 	return state;
 }
-
-let reducerCases = {};
-
-reducerCases[settings.actions.GET_SETTINGS_SUCCESS] =
-	function (state: SettingsState, action: Action) {
-		return Object.assign({}, state, action.payload);
-	};
-
-reducerCases[settings.actions.TOGGLE_DARK_MODE_SUCCESS] =
-	function (state: SettingsState, action: Action) {
-		return Object.assign({}, state, { darkMode: action.payload });
-	};
-
-reducerCases[settings.actions.TOGGLE_REORDER_MODE] =
-	function (state: SettingsState, action: Action) {
-		return Object.assign({}, state, { reorderMode: !state.reorderMode });
-	};
-
-// ============= SELECTORS =============
-
-export const getSettingsState = (state: AppState) => state.settings;
-export const getDarkMode = createSelector(getSettingsState, state => state.darkMode);
-export const getReorderMode = createSelector(getSettingsState, state => state.reorderMode);
