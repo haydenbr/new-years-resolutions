@@ -1,4 +1,4 @@
-FROM node:8.5.0
+FROM node:8.5.0-slim
 LABEL maintainer="Unboxed Technology LLC, https://unboxedtechnology.com"
 LABEL author="Hayden Braxton, haydenbraxton@unboxedtechnology.com"
 
