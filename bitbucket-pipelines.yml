@@ -1,4 +1,4 @@
-image: 'unboxedtechnology/new-years-resolutions:2.1.1'
+image: 'unboxedtechnology/new-years-resolutions:2.1.2'
 clone:
   depth: 1
 pipelines:
