@@ -41,6 +41,7 @@
 		"webpack-bundle-analyzer": "^2.9.1",
 		"webpack-bundle-size-analyzer": "^2.7.0",
 		"webpack-merge": "^4.1.1",
-		"xml2js": "^0.4.19"
+		"xml2js": "^0.4.19",
+		"yn": "^2.0.0"
 	}
 }
