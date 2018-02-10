@@ -94,6 +94,14 @@ function spawnPromise(command, args) {
 	});
 }
 
+function stringifyObjectValues(obj) {
+	let configStrings = {};
+
+	Object.keys(obj).forEach(key => (configStrings[key] = JSON.stringify(obj[key])));
+
+	return configStrings;
+}
+
 function writeFile(filepath, data) {
 	return new Promise((resolve, reject) => {
 		fs.writeFile(filepath, data, (err, data) => (err ? reject(err) : resolve(data)));
@@ -114,5 +122,6 @@ module.exports = {
 	readFile,
 	rename,
 	spawnPromise,
+	stringifyObjectValues,
 	writeFile,
 };

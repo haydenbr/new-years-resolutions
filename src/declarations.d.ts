@@ -11,4 +11,10 @@
   For more info on type definition files, check out the Typescript docs here:
   https://www.typescriptlang.org/docs/handbook/declaration-files/introduction.html
 */
+
 declare module '*';
+
+// these are constants defined in app.config.js that will be replaced with
+declare const PROD_MODE: boolean;
+declare const REDUX_DEVTOOLS: boolean;
+declare const VERSION: string;

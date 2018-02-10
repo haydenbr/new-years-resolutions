@@ -1,8 +1,8 @@
 {
-  "name": "New Years Resolutions",
-  "app_id": "",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
+	"name": "New Years Resolutions",
+	"app_id": "",
+	"type": "ionic-angular",
+	"integrations": {
+		"cordova": {}
+	}
 }

@@ -14,3 +14,5 @@ services:
       - './package.json:/app/package.json'
       - './app.config.js:/app/app.config.js'
       - './ionic.config.json:/app/ionic.config.json'
+    environment:
+      - PROFILE

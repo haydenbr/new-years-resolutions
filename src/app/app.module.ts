@@ -27,13 +27,9 @@ import { AppComponent, COMPONENTS } from './components';
 		HttpModule,
 		IonicModule.forRoot(AppComponent),
 		IonicStorageModule.forRoot(),
-		StoreModule.forRoot(reducers, {
-			initialState,
-		}),
+		StoreModule.forRoot(reducers, { initialState }),
 		EffectsModule.forRoot([fromEffects.MilestoneEffects, fromEffects.ResolutionEffects, fromEffects.SettingsEffects]),
-		StoreDevtoolsModule.instrument({
-			maxAge: 50,
-		}),
+		REDUX_DEVTOOLS ? StoreDevtoolsModule.instrument({ maxAge: 50 }) : [],
 		CoreModule,
 		ResolutionModule,
 		SettingsModule,
