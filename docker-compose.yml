@@ -15,4 +15,11 @@ services:
       - './app.config.js:/app/app.config.js'
       - './ionic.config.json:/app/ionic.config.json'
     environment:
+      - API_SERVER
+      - APP_ID
+      - APP_URL_SCHEME
+      - LOCAL_DEV
       - PROFILE
+      - REDUX_DEVTOOLS
+      - VERSION
+      - PROD_MODE
