@@ -7,13 +7,13 @@ services:
       - '35729:35729'
       - '53703:53703'
     volumes:
-      - './src:/app/src'
-      - './webpack:/app/webpack'
-      - './tslint.json:/app/tslint.json'
-      - './tsconfig.json:/app/tsconfig.json'
-      - './package.json:/app/package.json'
-      - './app.config.js:/app/app.config.js'
-      - './ionic.config.json:/app/ionic.config.json'
+      - './src:/opt/app/src'
+      - './webpack:/opt/app/webpack'
+      - './tslint.json:/opt/app/tslint.json'
+      - './tsconfig.json:/opt/app/tsconfig.json'
+      - './package.json:/opt/app/package.json'
+      - './app.config.js:/opt/app/app.config.js'
+      - './ionic.config.json:/opt/app/ionic.config.json'
     environment:
       - API_SERVER
       - APP_ID
