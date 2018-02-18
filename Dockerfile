@@ -13,7 +13,7 @@ ENV NODE_ENV=development
 # update system level tools I need
 RUN mkdir app && \
 		apk update && \
-		apk add --no-cache ncftp && \
+		apk add --no-cache ncftp=3.2.6-r1 && \
 		rm -r /var/cache/apk
 WORKDIR app
 
