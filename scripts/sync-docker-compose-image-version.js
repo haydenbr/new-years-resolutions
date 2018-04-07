@@ -1,7 +1,7 @@
 const path = require('path');
 const util = require('./script-utilities');
 
-module.exports = versionTag => {
+module.exports = () => {
 	let dockerComposePath = path.resolve(__dirname, '..', 'docker-compose.yml');
 	let version = versionTag || util.getCurrentVersion();
 
@@ -13,6 +13,7 @@ module.exports = versionTag => {
 			let newImageName = oldImageName.split(':')[0] + ':' + version;
 
 			dockerComposeConfig.services['new-years-dev'].image = newImageName;
+			dockerComposeConfig.services['new-years-dev'].build = undefined;
 
 			return util.convertJsonToYaml(dockerComposeConfig);
 		})
