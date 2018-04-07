@@ -2,7 +2,7 @@
 	"name": "new-years-resolutions",
 	"description": "Plan and keep track of your New Years Resolutions",
 	"author": "Unboxed Technology",
-	"version": "2.1.7",
+	"version": "2.1.8",
 	"homepage": "http://unboxedtechnology.com/",
 	"private": false,
 	"license": "MIT",
@@ -12,14 +12,18 @@
 		"start": "docker-compose up new-years-dev",
 		"build:browser": "ionic-app-scripts build --aot --minifyjs --minifycss  --optimizejs --prod --enableLint false",
 		"bump": "./scripts/bump.js",
+		"dep:add": "yarn task-container yarn add",
+		"commit-latest": "",
 		"foo": "./scripts/foo.js",
 		"major": "npm run bump major",
 		"minor": "npm run bump minor",
 		"patch": "npm run bump patch",
 		"postbuild:browser": "./scripts/cache-busting.js",
+		"postdep:add": "",
 		"precommit": "pretty-quick --staged",
 		"serve": "ionic-app-scripts serve --consolelogs",
-		"build": "ionic-app-scripts build --watch"
+		"task-container": "docker-compose run --name new-years-task --no-deps new-years-dev",
+		"posttask-container": "docker container rm -v new-years-task"
 	},
 	"config": {
 		"ionic_webpack": "./webpack/webpack.config.js"
