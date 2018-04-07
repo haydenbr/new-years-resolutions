@@ -13,7 +13,7 @@ function syncLatestVersionNumber() {
 			let newImageName = oldImageName.split(':')[0] + ':' + version;
 
 			dockerComposeConfig.services['new-years-dev'].image = newImageName;
-			dockerComposeConfig.services['new-years-dev'].build = undefined;
+			delete dockerComposeConfig.services['new-years-dev'].build;
 
 			return util.convertJsonToYaml(dockerComposeConfig);
 		})
