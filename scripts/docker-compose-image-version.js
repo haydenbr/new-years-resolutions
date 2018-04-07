@@ -1,7 +1,7 @@
 const path = require('path');
 const util = require('./script-utilities');
 
-module.exports = () => {
+function syncLatestVersionNumber() {
 	let dockerComposePath = path.resolve(__dirname, '..', 'docker-compose.yml');
 	let version = util.getCurrentVersion();
 
@@ -19,4 +19,8 @@ module.exports = () => {
 		})
 		.then(updatedDockerCompose => util.writeFile(dockerComposePath, updatedDockerCompose))
 		.then(() => console.log(`updated docker compose image version to ${version}`));
+}
+
+module.exports = {
+	syncLatestVersionNumber,
 };
