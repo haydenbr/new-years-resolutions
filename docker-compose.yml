@@ -1,4 +1,5 @@
 version: '3.1'
+
 services:
   new-years-dev:
     image: 'unboxedtechnology/new-years-resolutions:2.1.7'
@@ -12,6 +13,7 @@ services:
       - './tslint.json:/opt/app/tslint.json'
       - './tsconfig.json:/opt/app/tsconfig.json'
       - './package.json:/opt/app/package.json'
+      - './yarn.lock:/opt/app/yarn.lock'
       - './app.config.js:/opt/app/app.config.js'
       - './ionic.config.json:/opt/app/ionic.config.json'
     environment:
