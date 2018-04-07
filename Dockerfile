@@ -32,4 +32,4 @@ RUN yarn
 EXPOSE 8100 35729 53703
 # default command to run when starting the container
 # can overwrite with --entrypoint or pass additional args
-CMD [ "npm", "run", "serve" ]
+CMD [ "yarn", "serve" ]
