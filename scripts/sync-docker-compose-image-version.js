@@ -3,7 +3,7 @@ const util = require('./script-utilities');
 
 module.exports = () => {
 	let dockerComposePath = path.resolve(__dirname, '..', 'docker-compose.yml');
-	let version = versionTag || util.getCurrentVersion();
+	let version = util.getCurrentVersion();
 
 	return util
 		.readFile(dockerComposePath)
