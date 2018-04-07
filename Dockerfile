@@ -25,6 +25,7 @@ WORKDIR /opt/app
 # 
 # TL;DR they do the same thing, except ADD can pull from remote resources
 ADD docker/package.json package.json
+ADD yarn.lock yarn.lock
 RUN yarn
 
 # expose ports to serve app from inside container
