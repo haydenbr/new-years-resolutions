@@ -10,20 +10,21 @@
 	"dockerHubRepository": "unboxedtechnology/new-years-resolutions",
 	"scripts": {
 		"start": "docker-compose up new-years-dev",
+		"build": "",
 		"build:browser": "ionic-app-scripts build --aot --minifyjs --minifycss  --optimizejs --prod --enableLint false",
 		"bump": "./scripts/bump.js",
-		"dep:add": "yarn task-container yarn add",
-		"commit-latest": "",
-		"foo": "./scripts/foo.js",
-		"major": "npm run bump major",
-		"minor": "npm run bump minor",
-		"patch": "npm run bump patch",
+		"commit-latest": "docker container commit new-years-task unboxedtechnology/new-years-resolutions:latest",
+		"dep:add": "yarn task yarn add",
+		"major": "yarn bump major",
+		"minor": "yarn bump minor",
+		"patch": "yarn bump patch",
 		"postbuild:browser": "./scripts/cache-busting.js",
-		"postdep:add": "",
+		"postcommit-latest": "yarn task ./scripts/docker-compose-latest.js",
+		"postdep:add": "yarn commit-latest",
 		"precommit": "pretty-quick --staged",
+		"pretask": "docker container rm -v new-years-task",
 		"serve": "ionic-app-scripts serve --consolelogs",
-		"task-container": "docker-compose run --name new-years-task --no-deps new-years-dev",
-		"posttask-container": "docker container rm -v new-years-task"
+		"task": "docker-compose run --name new-years-task --no-deps new-years-dev"
 	},
 	"config": {
 		"ionic_webpack": "./webpack/webpack.config.js"
