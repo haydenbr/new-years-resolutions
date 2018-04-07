@@ -1,7 +1,7 @@
 version: '3.1'
 services:
   new-years-dev:
-    image: 'unboxedtechnology/new-years-resolutions:2.1.8'
+    image: 'unboxedtechnology/new-years-resolutions:2.2.0'
     ports:
       - '8100:8100'
       - '35729:35729'
