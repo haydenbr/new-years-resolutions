@@ -16,6 +16,7 @@ services:
       - './tsconfig.json:/opt/app/tsconfig.json'
       - './tslint.json:/opt/app/tslint.json'
       - './webpack:/opt/app/webpack'
+      - './www:/opt/app/www'
       - './yarn.lock:/opt/app/yarn.lock'
     environment:
       - API_SERVER
