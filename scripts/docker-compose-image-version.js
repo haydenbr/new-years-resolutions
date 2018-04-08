@@ -1,26 +1,43 @@
 const path = require('path');
 const util = require('./script-utilities');
+const dockerComposePath = path.resolve(__dirname, '..', 'docker-compose.yml');
 
-function syncLatestVersionNumber() {
-	let dockerComposePath = path.resolve(__dirname, '..', 'docker-compose.yml');
-	let version = util.getCurrentVersion();
+function setComposeLatestImage() {
+	const version = 'latest';
 
+	return getComposeData().then(dockerComposeConfig => {
+		dockerComposeConfig.services['new-years-dev'].image = getUpdatedImageTag(version);
+		dockerComposeConfig.services['new-years-dev'].build = '.';
+		return saveComposeData(dockerComposeConfig, version);
+	});
+}
+
+function syncComposeImageVersion() {
+	const version = util.getCurrentVersion();
+
+	return getComposeData().then(dockerComposeConfig => {
+		dockerComposeConfig.services['new-years-dev'].image = getUpdatedImageTag(version);
+		delete dockerComposeConfig.services['new-years-dev'].build;
+		return saveComposeData(dockerComposeConfig, version);
+	});
+}
+
+function getComposeData() {
+	return util.readFile(dockerComposePath).then(dockerCompose => util.convertYamlToJson(dockerCompose));
+}
+
+function getUpdatedImageTag(version) {
+	return util.getDockerHubRepository() + ':' + version;
+}
+
+function saveComposeData(updatedComposeData, version) {
+	let composeData = util.convertJsonToYaml(dockerComposeConfig);
 	return util
-		.readFile(dockerComposePath)
-		.then(dockerCompose => util.convertYamlToJson(dockerCompose))
-		.then(dockerComposeConfig => {
-			let oldImageName = dockerComposeConfig.services['new-years-dev'].image;
-			let newImageName = oldImageName.split(':')[0] + ':' + version;
-
-			dockerComposeConfig.services['new-years-dev'].image = newImageName;
-			delete dockerComposeConfig.services['new-years-dev'].build;
-
-			return util.convertJsonToYaml(dockerComposeConfig);
-		})
-		.then(updatedDockerCompose => util.writeFile(dockerComposePath, updatedDockerCompose))
+		.writeFile(dockerComposePath, composeData)
 		.then(() => console.log(`updated docker compose image version to ${version}`));
 }
 
 module.exports = {
-	syncLatestVersionNumber,
+	setComposeLatestImage,
+	syncComposeImageVersion,
 };
