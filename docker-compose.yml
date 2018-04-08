@@ -1,4 +1,5 @@
-version: '3.1'
+version: '2.3'
+
 services:
   new-years-dev:
     image: 'unboxedtechnology/new-years-resolutions:2.2.4'
@@ -6,18 +7,6 @@ services:
       - '8100:8100'
       - '35729:35729'
       - '53703:53703'
-    volumes:
-      - './app.config.js:/opt/app/app.config.js'
-      - './docker-compose.yml:/opt/app/docker-compose.yml'
-      - './ionic.config.json:/opt/app/ionic.config.json'
-      - './package.json:/opt/app/package.json'
-      - './scripts:/opt/app/scripts'
-      - './src:/opt/app/src'
-      - './tsconfig.json:/opt/app/tsconfig.json'
-      - './tslint.json:/opt/app/tslint.json'
-      - './webpack:/opt/app/webpack'
-      - './www:/opt/app/www'
-      - './yarn.lock:/opt/app/yarn.lock'
     environment:
       - API_SERVER
       - APP_ID
@@ -27,6 +16,22 @@ services:
       - REDUX_DEVTOOLS
       - VERSION
       - PROD_MODE
+    volumes:
+      - './app.config.js:/opt/app/app.config.js'
+      - './ionic.config.json:/opt/app/ionic.config.json'
+      - './package.json:/opt/app/package.json'
+      - './src:/opt/app/src'
+      - './tsconfig.json:/opt/app/tsconfig.json'
+      - './tslint.json:/opt/app/tslint.json'
+      - './webpack:/opt/app/webpack'
     command:
       - yarn
       - serve
+
+  new-years-task:
+    extends: 'new-years-dev'
+    volumes:
+      - './docker-compose.yml:/opt/app/docker-compose.yml'
+      - './scripts:/opt/app/scripts'
+      - './www:/opt/app/www'
+      - './yarn.lock:/opt/app/yarn.lock'

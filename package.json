@@ -26,7 +26,7 @@
 		"precommit": "pretty-quick --staged",
 		"pretask": "docker container rm -v new-years-task",
 		"serve": "ionic-app-scripts serve --consolelogs",
-		"task": "docker-compose run --name new-years-task --no-deps new-years-dev"
+		"task": "docker-compose run --name new-years-task --no-deps new-years-task"
 	},
 	"config": {
 		"ionic_webpack": "./webpack/webpack.config.js"
