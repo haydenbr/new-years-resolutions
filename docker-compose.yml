@@ -1,8 +1,7 @@
 version: '2.3'
-
 services:
   new-years-dev:
-    image: 'unboxedtechnology/new-years-resolutions:2.2.4'
+    image: 'unboxedtechnology/new-years-resolutions:2.2.5'
     ports:
       - '8100:8100'
       - '35729:35729'
@@ -27,9 +26,8 @@ services:
     command:
       - yarn
       - serve
-
   new-years-task:
-    extends: 'new-years-dev'
+    extends: new-years-dev
     volumes:
       - './docker-compose.yml:/opt/app/docker-compose.yml'
       - './scripts:/opt/app/scripts'
