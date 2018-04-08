@@ -31,7 +31,7 @@ function getUpdatedImageTag(version) {
 }
 
 function saveComposeData(updatedComposeData, version) {
-	let composeData = util.convertJsonToYaml(dockerComposeConfig);
+	let composeData = util.convertJsonToYaml(updatedComposeData);
 	return util
 		.writeFile(dockerComposePath, composeData)
 		.then(() => console.log(`updated docker compose image version to ${version}`));
