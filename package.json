@@ -14,9 +14,10 @@
 		"build:browser": "ionic-app-scripts build --aot --minifyjs --minifycss  --optimizejs --prod --enableLint false",
 		"bump": "./scripts/bump.js",
 		"commit-latest": "docker container commit new-years-task unboxedtechnology/new-years-resolutions:latest",
-		"current-version": "./scripts/current-version.js",
 		"dep:add": "yarn task yarn add",
 		"dep:rm": "yarn task yarn rm",
+		"docker-build": "docker build -t $(./scripts/current-tag.js) .",
+		"docker-push": "docker push $(./scripts/current-tag.js)",
 		"major": "yarn bump major",
 		"minor": "yarn bump minor",
 		"patch": "yarn bump patch",
@@ -24,11 +25,11 @@
 		"postcommit-latest": "yarn task ./scripts/docker-compose-latest.js",
 		"postdep:add": "yarn commit-latest",
 		"postdep:rm": "yarn commit-latest",
+		"postdocker-build": "yarn docker-push",
 		"precommit": "pretty-quick --staged",
 		"pretask": "docker container rm -v new-years-task",
 		"serve": "ionic-app-scripts serve --consolelogs",
-		"task": "docker-compose run --name new-years-task --no-deps new-years-task",
-		"v": "yarn current-version"
+		"task": "docker-compose run --name new-years-task --no-deps new-years-task"
 	},
 	"config": {
 		"ionic_webpack": "./webpack/webpack.config.js"

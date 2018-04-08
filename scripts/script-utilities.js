@@ -42,6 +42,10 @@ function getDockerHubRepository() {
 	return getPackageJson().dockerHubRepository;
 }
 
+function getCurrentDockerImageTag() {
+	return `${getDockerHubRepository()}:${getCurrentVersion()}`;
+}
+
 function getNextVersion(versionBump) {
 	let versionBumpOptions = ['major', 'minor', 'patch'];
 
@@ -107,6 +111,7 @@ module.exports = {
 	convertYamlToJson,
 	execFile,
 	getCurrentVersion,
+	getCurrentDockerImageTag,
 	getDockerHubRepository,
 	getNextVersion,
 	getPackageJson,
