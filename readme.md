@@ -1,9 +1,9 @@
-### Happy New Year!
+![don't npm install](readme/dont-npm-install.jpg)
 
-1. Believe it or not, DON'T `npm i`.
+1. DON'T `npm install`.
 
 2. Do you have Docker? If not, go a head and install it. Go [here](https://docs.docker.com/engine/installation/) for details.
 
-3. do this at the root level of the project `npm start`
+3. Get the dev server running with `yarn start` (or `npm start`).
 
-###### Questions? Contact haydenbraxton@unboxedtechnology.com
+###### Questions? Contact hayden.braxton.dev@gmail.com
