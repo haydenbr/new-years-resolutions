@@ -27,7 +27,7 @@
 		"postdep:rm": "yarn commit-latest",
 		"postdocker-build": "yarn docker-push",
 		"precommit": "pretty-quick --staged",
-		"pretask": "docker container rm -v new-years-task",
+		"pretask": "docker container rm -v new-years-task || true",
 		"serve": "ionic-app-scripts serve --consolelogs",
 		"task": "docker-compose run --name new-years-task --no-deps new-years-task"
 	},
